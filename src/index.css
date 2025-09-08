@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+:root {
+  --font-family: system-ui, -apple-system, sans-serif;
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --button-bg: #007bff;
+  --button-text-color: #ffffff;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html,
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+.btn {
+  background-color: var(--button-bg);
+  color: var(--button-text-color);
+}
