@@ -49,7 +49,7 @@ function Settings() {
             d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
           />
         </svg>
-        <span className="text-sm font-medium">Settings</span>
+        {/* <span className="text-sm font-medium">Settings</span> */}
       </button>
 
       {/* Settings Popup */}
@@ -59,7 +59,7 @@ function Settings() {
           <div className="fixed inset-0 z-40" onClick={closeSettings}></div>
 
           {/* Settings Panel */}
-          <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50 max-h-96 overflow-y-auto settings-popup">
+          <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50 max-h-96 overflow-y-auto settings-popup p-4">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-800">
                 Theme Settings

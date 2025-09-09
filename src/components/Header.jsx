@@ -64,7 +64,7 @@ function Header() {
               to="/"
               style={{
                 color: headerTextColor || "#111111",
-                margin: "0 1rem",
+                margin: "0 1rem 0 0",
                 textDecoration: "none",
               }}
             >
@@ -184,7 +184,7 @@ function Header() {
             </svg>
           </button>
         </div>
-        <nav className="flex flex-col p-4 gap-2">
+        <nav className="flex flex-col p-4 gap-2 items-start">
           <Link
             to="/"
             className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"

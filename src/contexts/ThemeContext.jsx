@@ -17,7 +17,7 @@ export function ThemeProvider({ children, theme = {} }) {
     buttonBackgroundColor: "#007bff",
     topHeaderBackgroundColor: "#111111",
     headerBackgroundColor: "#FFFFFF",
-    footerBackgroundColor: "#1f2937",
+    footerBackgroundColor: "#111111",
     ...theme,
   });
 
