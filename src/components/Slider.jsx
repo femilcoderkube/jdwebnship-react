@@ -18,14 +18,14 @@ export default function Slider() {
   const goToSlide = (idx) => setCurrent(idx);
 
   // Auto-slide effect
-  useEffect(() => {
-    if (!isPaused) {
-      const interval = setInterval(() => {
-        nextSlide();
-      }, autoSlideInterval);
-      return () => clearInterval(interval); // Cleanup on unmount or pause
-    }
-  }, [isPaused, current]); // Re-run if isPaused or current changes
+  //   useEffect(() => {
+  //     if (!isPaused) {
+  //       const interval = setInterval(() => {
+  //         nextSlide();
+  //       }, autoSlideInterval);
+  //       return () => clearInterval(interval); // Cleanup on unmount or pause
+  //     }
+  //   }, [isPaused, current]); // Re-run if isPaused or current changes
 
   return (
     <div
