@@ -5,6 +5,7 @@ import TopHeader from "./components/TopHeader";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.css";
+import BottomFooter from "./components/BottomFooter";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         </Routes>
         {/* Note: Outlet is not needed if using Routes directly; this setup uses Routes for simplicity */}
       </main>
+      <BottomFooter />
       <Footer />
     </div>
   );

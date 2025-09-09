@@ -18,6 +18,7 @@ export function ThemeProvider({ children, theme = {} }) {
     topHeaderBackgroundColor: "#111111",
     headerBackgroundColor: "#FFFFFF",
     footerBackgroundColor: "#111111",
+    bottomFooterBackgroundColor: "#374151",
     ...theme,
   });
 
@@ -41,6 +42,10 @@ export function ThemeProvider({ children, theme = {} }) {
     () => getContrastingColor(currentTheme.footerBackgroundColor),
     [currentTheme.footerBackgroundColor]
   );
+  const bottomFooterTextColor = useMemo(
+    () => getContrastingColor(currentTheme.bottomFooterBackgroundColor),
+    [currentTheme.bottomFooterBackgroundColor]
+  );
 
   useEffect(() => {
     const root = document.documentElement;
@@ -58,6 +63,11 @@ export function ThemeProvider({ children, theme = {} }) {
     root.style.setProperty("--header-text-color", headerTextColor);
     root.style.setProperty("--footer-bg", currentTheme.footerBackgroundColor);
     root.style.setProperty("--footer-text-color", footerTextColor);
+    root.style.setProperty(
+      "--bottom-footer-bg",
+      currentTheme.bottomFooterBackgroundColor
+    );
+    root.style.setProperty("--bottom-footer-text-color", bottomFooterTextColor);
   }, [
     currentTheme,
     textColor,
@@ -65,6 +75,7 @@ export function ThemeProvider({ children, theme = {} }) {
     topHeaderTextColor,
     headerTextColor,
     footerTextColor,
+    bottomFooterTextColor,
   ]);
 
   const value = useMemo(
@@ -75,6 +86,7 @@ export function ThemeProvider({ children, theme = {} }) {
       topHeaderTextColor,
       headerTextColor,
       footerTextColor,
+      bottomFooterTextColor,
       setTheme: setCurrentTheme,
       setFontFamily: (fontFamily) =>
         setCurrentTheme((prev) => ({ ...prev, fontFamily })),
@@ -88,6 +100,8 @@ export function ThemeProvider({ children, theme = {} }) {
         setCurrentTheme((prev) => ({ ...prev, headerBackgroundColor })),
       setFooterBackgroundColor: (footerBackgroundColor) =>
         setCurrentTheme((prev) => ({ ...prev, footerBackgroundColor })),
+      setBottomFooterBackgroundColor: (bottomFooterBackgroundColor) =>
+        setCurrentTheme((prev) => ({ ...prev, bottomFooterBackgroundColor })),
     }),
     [
       currentTheme,
@@ -96,6 +110,7 @@ export function ThemeProvider({ children, theme = {} }) {
       topHeaderTextColor,
       headerTextColor,
       footerTextColor,
+      bottomFooterTextColor,
     ]
   );
 

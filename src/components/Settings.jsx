@@ -10,6 +10,7 @@ function Settings() {
     setTopHeaderBackgroundColor,
     setHeaderBackgroundColor,
     setFooterBackgroundColor,
+    setBottomFooterBackgroundColor,
   } = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -208,6 +209,25 @@ function Settings() {
                   </span>
                 </div>
               </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Bottom Footer Color
+                </label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="color"
+                    value={theme?.bottomFooterBackgroundColor || "#1f2937"}
+                    onChange={(e) =>
+                      setBottomFooterBackgroundColor(e.target.value)
+                    }
+                    className="w-12 h-10 border border-gray-300 rounded cursor-pointer"
+                    aria-label="Select footer background color"
+                  />
+                  <span className="text-sm text-gray-600 font-mono">
+                    {theme?.bottomFooterBackgroundColor || "#1f2937"}
+                  </span>
+                </div>
+              </div>
 
               {/* Preview Section */}
               <div className="pt-4 border-t border-gray-200">
@@ -279,6 +299,19 @@ function Settings() {
                       }}
                     >
                       Footer
+                    </div>
+                    <div
+                      className="p-2 rounded text-xs flex-1"
+                      style={{
+                        backgroundColor:
+                          theme?.bottomFooterBackgroundColor || "#1f2937",
+                        color: theme?.bottomFooterTextColor || "#ffffff",
+                        fontFamily:
+                          theme?.fontFamily ||
+                          "system-ui, -apple-system, sans-serif",
+                      }}
+                    >
+                      Bottom Footer
                     </div>
                   </div>
                 </div>
