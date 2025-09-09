@@ -15,6 +15,7 @@ export function ThemeProvider({ children, theme = {} }) {
     fontFamily: "system-ui, -apple-system, sans-serif",
     backgroundColor: "#ffffff",
     buttonBackgroundColor: "#007bff",
+    topHeaderBackgroundColor: "#f8f9fa",
     ...theme,
   });
 
@@ -26,6 +27,10 @@ export function ThemeProvider({ children, theme = {} }) {
     () => getContrastingColor(currentTheme.buttonBackgroundColor),
     [currentTheme.buttonBackgroundColor]
   );
+  const topHeaderTextColor = useMemo(
+    () => getContrastingColor(currentTheme.topHeaderBackgroundColor),
+    [currentTheme.topHeaderBackgroundColor]
+  );
 
   useEffect(() => {
     const root = document.documentElement;
@@ -34,11 +39,19 @@ export function ThemeProvider({ children, theme = {} }) {
     root.style.setProperty("--text-color", textColor);
     root.style.setProperty("--button-bg", currentTheme.buttonBackgroundColor);
     root.style.setProperty("--button-text-color", buttonTextColor);
-  }, [currentTheme, textColor, buttonTextColor]);
+    root.style.setProperty(
+      "--top-header-bg",
+      currentTheme.topHeaderBackgroundColor
+    );
+    root.style.setProperty("--top-header-text-color", topHeaderTextColor);
+  }, [currentTheme, textColor, buttonTextColor, topHeaderTextColor]);
 
   const value = useMemo(
     () => ({
       theme: currentTheme,
+      textColor,
+      buttonTextColor,
+      topHeaderTextColor,
       setTheme: setCurrentTheme,
       setFontFamily: (fontFamily) =>
         setCurrentTheme((prev) => ({ ...prev, fontFamily })),
@@ -46,8 +59,10 @@ export function ThemeProvider({ children, theme = {} }) {
         setCurrentTheme((prev) => ({ ...prev, backgroundColor })),
       setButtonBackgroundColor: (buttonBackgroundColor) =>
         setCurrentTheme((prev) => ({ ...prev, buttonBackgroundColor })),
+      setTopHeaderBackgroundColor: (topHeaderBackgroundColor) =>
+        setCurrentTheme((prev) => ({ ...prev, topHeaderBackgroundColor })),
     }),
-    [currentTheme]
+    [currentTheme, textColor, buttonTextColor, topHeaderTextColor]
   );
 
   return (
