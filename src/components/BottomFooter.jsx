@@ -6,7 +6,7 @@ function BottomFooter({}) {
   const { theme, bottomFooterTextColor } = useTheme();
 
   return (
-    <div
+    <section
       className="text-center lg:py-[70px] rounded-t-none rounded-3xl -mb-[70px] z-1"
       style={{
         backgroundColor: theme?.bottomFooterBackgroundColor || "#1f2937",
@@ -43,7 +43,7 @@ function BottomFooter({}) {
           </button> */}
         </div>
       </form>
-    </div>
+    </section>
   );
 }
 

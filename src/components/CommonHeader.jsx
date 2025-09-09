@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../contexts/ThemeContext";
 
-function CommonHeader({ className = "", ...props }) {
+function CommonHeader({ className = "py-[40px] lg:py-[60px]", ...props }) {
   const { theme, bottomFooterTextColor } = useTheme();
   const location = useLocation();
 
@@ -9,13 +9,35 @@ function CommonHeader({ className = "", ...props }) {
   let innerContent;
   if (location.pathname === "/") {
     innerContent = (
-      <div className="flex items-center justify-between w-full">
-        <h1 className="text-2xl font-bold">Home Page Header</h1>
-        <nav className="flex gap-4">
-          <Link to="/about" className="hover:underline">
-            About
-          </Link>
-        </nav>
+      <div className="flex items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-[60px] py-[12px] lg:py-[15px]">
+        <div className="grid md:grid-cols-3 lg:px-[248px]">
+          <div className="px-[40px] lg:px-[60px] py-[20px] lg:py-[30px] md:border-0 md:border-r">
+            <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
+              Free Shipping
+            </h1>
+            <p className="text-lg font-normal">
+              Upgrade your style today and get FREE shipping on all orders!
+              Don't miss out.
+            </p>
+          </div>
+          <div className="px-[40px] lg:px-[60px] py-[20px] lg:py-[30px] md:border-0 md:border-r">
+            <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
+              Secure Payment
+            </h1>
+            <p className="text-lg font-normal">
+              Your security is our priority. Your payments are secure with us.
+            </p>
+          </div>
+          <div className="px-[40px] lg:px-[60px] py-[20px] lg:py-[30px]">
+            <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
+              Satisfaction Guarantee
+            </h1>
+            <p className="text-lg font-normal">
+              Shop confidently with our Satisfaction Guarantee: Love it or get a
+              refund.
+            </p>
+          </div>
+        </div>
       </div>
     );
   } else if (location.pathname === "/about") {
@@ -46,7 +68,7 @@ function CommonHeader({ className = "", ...props }) {
   }
 
   return (
-    <header
+    <section
       className={`${className}`}
       style={{
         backgroundColor: theme?.bottomFooterBackgroundColor || "#ffffff",
@@ -56,7 +78,7 @@ function CommonHeader({ className = "", ...props }) {
       {...props}
     >
       {innerContent}
-    </header>
+    </section>
   );
 }
 
