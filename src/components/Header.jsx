@@ -25,7 +25,7 @@ function Header() {
   return (
     <header>
       <nav
-        className="flex items-center justify-between px-4 sm:px-6 md:px-10 lg:px-[60px] py-[12px] md:py-[15px]"
+        className="flex items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-[60px] py-[12px] lg:py-[15px]"
         style={{
           backgroundColor: theme?.headerBackgroundColor || "#ffffff",
           color: headerTextColor || "#ffffff",
@@ -33,11 +33,11 @@ function Header() {
             theme?.fontFamily || "system-ui, -apple-system, sans-serif",
         }}
       >
-        <div className="flex items-center gap-3 md:gap-4">
+        <div className="flex items-center gap-3 lg:gap-4">
           {/* Hamburger for mobile */}
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-md bg-black/10 hover:bg-black/15 transition"
+            className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md bg-black/10 hover:bg-black/15 transition"
             aria-label="Open menu"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-drawer"
@@ -58,9 +58,9 @@ function Header() {
             </svg>
           </button>
 
-          <div className="left-nav hidden md:flex items-center">
+          <div className="left-nav hidden lg:flex items-center">
             <Link
-              className="text-[14px] lg:text-[16px] font-medium uppercase"
+              className="text-[14px] xl:text-[16px] font-medium uppercase"
               to="/"
               style={{
                 color: headerTextColor || "#111111",
@@ -71,7 +71,7 @@ function Header() {
               Home
             </Link>
             <Link
-              className="text-[14px] lg:text-[16px] font-medium uppercase"
+              className="text-[14px] xl:text-[16px] font-medium uppercase"
               to="/Category"
               style={{
                 color: headerTextColor || "#111111",
@@ -82,7 +82,7 @@ function Header() {
               Category
             </Link>
             <Link
-              className="text-[14px] lg:text-[16px] font-medium uppercase"
+              className="text-[14px] xl:text-[16px] font-medium uppercase"
               to="/shop"
               style={{
                 color: headerTextColor || "#111111",
@@ -97,16 +97,16 @@ function Header() {
 
         <div className="center-nav flex-1 flex items-center justify-center">
           <h1
-            className="uppercase text-[18px] sm:text-[20px] md:text-[24px] lg:text-[32px] font-medium text-center"
+            className="uppercase text-[18px] sm:text-[20px] lg:text-[24px] xl:text-[32px] font-medium text-center"
             style={{ color: headerTextColor || "#111111" }}
           >
             Store name
           </h1>
         </div>
         <div className="right-nav flex items-center gap-3 sm:gap-4">
-          <div className="hidden md:flex items-center">
+          <div className="hidden lg:flex items-center">
             <Link
-              className="text-[14px] lg:text-[16px] font-medium uppercase"
+              className="text-[14px] xl:text-[16px] font-medium uppercase"
               to="/shop"
               style={{
                 color: headerTextColor || "#111111",
@@ -117,7 +117,7 @@ function Header() {
               About Us
             </Link>
             <Link
-              className="text-[14px] lg:text-[16px] font-medium uppercase"
+              className="text-[14px] xl:text-[16px] font-medium uppercase"
               to="/about"
               style={{
                 color: headerTextColor || "#111111",
@@ -140,7 +140,7 @@ function Header() {
       {isMenuOpen && (
         <button
           type="button"
-          className="fixed inset-0 bg-black/40 z-40 md:hidden"
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
           aria-label="Close menu"
           onClick={() => setIsMenuOpen(false)}
         />
@@ -151,7 +151,7 @@ function Header() {
         id="mobile-drawer"
         role="dialog"
         aria-modal="true"
-        className={`fixed top-0 left-0 h-full w-72 max-w-[80%] z-50 md:hidden transform transition-transform duration-300 ease-out border-r border-black/10`}
+        className={`fixed top-0 left-0 h-full w-72 max-w-[80%] z-50 lg:hidden transform transition-transform duration-300 ease-out border-r border-black/10`}
         style={{
           backgroundColor: theme?.headerBackgroundColor || "#ffffff",
           color: headerTextColor || "#111111",
