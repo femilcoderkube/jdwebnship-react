@@ -19,6 +19,8 @@ export function ThemeProvider({ children, theme = {} }) {
     headerBackgroundColor: "#FFFFFF",
     footerBackgroundColor: "#111111",
     bottomFooterBackgroundColor: "#FFF7F2",
+    // Add bannerType default
+    bannerType: "slider",
     ...theme,
   });
 
@@ -102,6 +104,9 @@ export function ThemeProvider({ children, theme = {} }) {
         setCurrentTheme((prev) => ({ ...prev, footerBackgroundColor })),
       setBottomFooterBackgroundColor: (bottomFooterBackgroundColor) =>
         setCurrentTheme((prev) => ({ ...prev, bottomFooterBackgroundColor })),
+      // Add setBannerType
+      setBannerType: (bannerType) =>
+        setCurrentTheme((prev) => ({ ...prev, bannerType })),
     }),
     [
       currentTheme,

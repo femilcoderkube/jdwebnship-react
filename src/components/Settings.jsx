@@ -11,6 +11,7 @@ function Settings() {
     setHeaderBackgroundColor,
     setFooterBackgroundColor,
     setBottomFooterBackgroundColor,
+    setBannerType, // <-- add this
   } = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -211,7 +212,7 @@ function Settings() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Header/Footer Color
+                  Section Header / Footer
                 </label>
                 <div className="flex items-center gap-3">
                   <input
@@ -227,6 +228,22 @@ function Settings() {
                     {theme?.bottomFooterBackgroundColor || "#1f2937"}
                   </span>
                 </div>
+              </div>
+
+              {/* Banner Type */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Banner Type
+                </label>
+                <select
+                  value={theme?.bannerType || "slider"}
+                  onChange={(e) => setBannerType(e.target.value)}
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="slider">Slider</option>
+                  <option value="image">Image</option>
+                  <option value="video">Video</option>
+                </select>
               </div>
 
               {/* Preview Section */}
@@ -311,7 +328,7 @@ function Settings() {
                           "system-ui, -apple-system, sans-serif",
                       }}
                     >
-                      Bottom Footer
+                      Section Header / Footer
                     </div>
                   </div>
                 </div>
