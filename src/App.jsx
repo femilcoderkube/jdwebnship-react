@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import BottomFooter from "./components/BottomFooter";
 import CommonHeader from "./components/CommonHeader";
+import Product from "./pages/Product";
+import ProductDetail from "./pages/ProductDetail";
 import "./App.css";
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
           {/* NEW: Define routes here */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
           {/* Add more routes as needed, e.g., <Route path="/contact" element={<Contact />} /> */}
         </Routes>
         {/* Note: Outlet is not needed if using Routes directly; this setup uses Routes for simplicity */}
