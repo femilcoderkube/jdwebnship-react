@@ -161,7 +161,7 @@ function Header() {
         }}
       >
         <div className="flex items-center justify-between px-4 py-3 border-b border-black/10">
-          <span className="uppercase font-semibold">Menu</span>
+          <span className="uppercase font-semibold">Store name</span>
           <button
             type="button"
             className="inline-flex items-center justify-center w-9 h-9 rounded-md bg-black/10 hover:bg-black/15 transition"
