@@ -77,3 +77,46 @@ input[type="color"]::-webkit-color-swatch {
   height: 100%;
   width: 100%;
 }
+
+.category-title{
+  background: rgba(17, 17, 17, 0.3);
+  width: 100%;
+  backdrop-filter: blur(15px);
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after{
+  display: none;
+  /* background-image: url(../src/assets/chevron-left.svg);
+  background-position: center;
+  background-repeat: no-repeat; */
+}
+
+.swiper-button-prev::before,
+.swiper-button-next:before{
+  position: absolute;
+  content: " ";
+  background-image: url(../src/assets/chevron-left.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+}
+
+.swiper-button-prev::before{
+  background-image: url(../src/assets/chevron-left.svg);
+}
+
+.swiper-button-next::before{
+  background-image: url(../src/assets/chevron-right.svg);
+}
+
+
+
+.swiper-button-prev,
+.swiper-button-next{
+  width: 42px !important;
+  height: 42px !important;
+  background: #fff;
+  border-radius: 10px;
+}
