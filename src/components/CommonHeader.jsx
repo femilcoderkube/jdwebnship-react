@@ -68,6 +68,19 @@ function CommonHeader({ className = "", ...props }) {
         </div>
       </div>
     );
+  } else if (location.pathname === "/shop") {
+    innerContent = (
+      <div className="xxl:px-[248px]">
+        <div className="px-[40px] lg:px-[60px] py-[20px] lg:py-[30px] md:border-0 md:border-r">
+          <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
+            Shop By Category
+          </h1>
+          <p className="text-lg font-normal">
+            Elevate your look with precision and class.
+          </p>
+        </div>
+      </div>
+    );
   } else if (location.pathname === `/product/${id}`) {
     innerContent = (
       <div className="xxl:px-[248px]">
