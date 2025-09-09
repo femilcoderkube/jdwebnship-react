@@ -1,17 +1,31 @@
 import { Link } from "react-router-dom"; // For navigation links
 import { useTheme } from "../contexts/ThemeContext";
 import Settings from "./Settings";
-import Search from "./search";
+import Search from "./Search";
 import Profile from "./Profile";
 import Cart from "./Cart";
+import { useState, useEffect } from "react";
 
 function Header() {
   const { theme, headerTextColor } = useTheme();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Prevent background scroll when drawer is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   return (
     <header>
       <nav
-        className="flex items-center justify-between px-[60px] py-[15px]"
+        className="flex items-center justify-between px-4 sm:px-6 md:px-10 lg:px-[60px] py-[12px] md:py-[15px]"
         style={{
           backgroundColor: theme?.headerBackgroundColor || "#ffffff",
           color: headerTextColor || "#ffffff",
@@ -19,73 +33,101 @@ function Header() {
             theme?.fontFamily || "system-ui, -apple-system, sans-serif",
         }}
       >
-        <div className="left-nav">
-          <Link
-            className="text-[16px] font-medium uppercase"
-            to="/"
-            style={{
-              color: headerTextColor || "#111111",
-              margin: "0 1rem",
-              textDecoration: "none",
-            }}
+        <div className="flex items-center gap-3 md:gap-4">
+          {/* Hamburger for mobile */}
+          <button
+            type="button"
+            className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-md bg-black/10 hover:bg-black/15 transition"
+            aria-label="Open menu"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-drawer"
+            onClick={() => setIsMenuOpen(true)}
           >
-            Home
-          </Link>
-          <Link
-            className="text-[16px] font-medium uppercase"
-            to="/Category"
-            style={{
-              color: headerTextColor || "#111111",
-              margin: "0 1rem",
-              textDecoration: "none",
-            }}
-          >
-            Category
-          </Link>
-          <Link
-            className="text-[16px] font-medium uppercase"
-            to="/shop"
-            style={{
-              color: headerTextColor || "#111111",
-              margin: "0 1rem",
-              textDecoration: "none",
-            }}
-          >
-            Shop
-          </Link>
+            <svg
+              className="w-6 h-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4 7h16M4 12h16M4 17h16"
+                stroke={headerTextColor || "#111111"}
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+
+          <div className="left-nav hidden md:flex items-center">
+            <Link
+              className="text-[14px] lg:text-[16px] font-medium uppercase"
+              to="/"
+              style={{
+                color: headerTextColor || "#111111",
+                margin: "0 1rem",
+                textDecoration: "none",
+              }}
+            >
+              Home
+            </Link>
+            <Link
+              className="text-[14px] lg:text-[16px] font-medium uppercase"
+              to="/Category"
+              style={{
+                color: headerTextColor || "#111111",
+                margin: "0 1rem",
+                textDecoration: "none",
+              }}
+            >
+              Category
+            </Link>
+            <Link
+              className="text-[14px] lg:text-[16px] font-medium uppercase"
+              to="/shop"
+              style={{
+                color: headerTextColor || "#111111",
+                margin: "0 1rem",
+                textDecoration: "none",
+              }}
+            >
+              Shop
+            </Link>
+          </div>
         </div>
-        <div className="center-nav">
+
+        <div className="center-nav flex-1 flex items-center justify-center">
           <h1
-            className="uppercase lg:text-[32px] font-medium"
+            className="uppercase text-[18px] sm:text-[20px] md:text-[24px] lg:text-[32px] font-medium text-center"
             style={{ color: headerTextColor || "#111111" }}
           >
             Store name
           </h1>
-          <img src=""></img>
         </div>
-        <div className="right-nav flex items-center gap-4">
-          <Link
-            className="text-[16px] font-medium uppercase"
-            to="/shop"
-            style={{
-              color: headerTextColor || "#111111",
-              margin: "0 1rem",
-              textDecoration: "none",
-            }}
-          >
-            About Us
-          </Link>
-          <Link
-            className="text-[16px] font-medium uppercase"
-            to="/about"
-            style={{
-              color: headerTextColor || "#111111",
-              margin: "0 1rem",
-              textDecoration: "none",
-            }}
-          >
-            Contact Us
-          </Link>
+        <div className="right-nav flex items-center gap-3 sm:gap-4">
+          <div className="hidden md:flex items-center">
+            <Link
+              className="text-[14px] lg:text-[16px] font-medium uppercase"
+              to="/shop"
+              style={{
+                color: headerTextColor || "#111111",
+                margin: "0 1rem",
+                textDecoration: "none",
+              }}
+            >
+              About Us
+            </Link>
+            <Link
+              className="text-[14px] lg:text-[16px] font-medium uppercase"
+              to="/about"
+              style={{
+                color: headerTextColor || "#111111",
+                margin: "0 1rem",
+                textDecoration: "none",
+              }}
+            >
+              Contact Us
+            </Link>
+          </div>
           <Search />
           <Profile />
           <Cart />
@@ -93,6 +135,98 @@ function Header() {
         </div>
         {/* Add more links as needed */}
       </nav>
+
+      {/* Overlay */}
+      {isMenuOpen && (
+        <button
+          type="button"
+          className="fixed inset-0 bg-black/40 z-40 md:hidden"
+          aria-label="Close menu"
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
+
+      {/* Drawer */}
+      <aside
+        id="mobile-drawer"
+        role="dialog"
+        aria-modal="true"
+        className={`fixed top-0 left-0 h-full w-72 max-w-[80%] z-50 md:hidden transform transition-transform duration-300 ease-out border-r border-black/10`}
+        style={{
+          backgroundColor: theme?.headerBackgroundColor || "#ffffff",
+          color: headerTextColor || "#111111",
+          fontFamily:
+            theme?.fontFamily || "system-ui, -apple-system, sans-serif",
+          transform: isMenuOpen ? "translateX(0)" : "translateX(-100%)",
+        }}
+      >
+        <div className="flex items-center justify-between px-4 py-3 border-b border-black/10">
+          <span className="uppercase font-semibold">Menu</span>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center w-9 h-9 rounded-md bg-black/10 hover:bg-black/15 transition"
+            aria-label="Close menu"
+            onClick={() => setIsMenuOpen(false)}
+            autoFocus
+          >
+            <svg
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke={headerTextColor || "#111111"}
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <nav className="flex flex-col p-4 gap-2">
+          <Link
+            to="/"
+            className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
+            style={{ color: headerTextColor || "#111111" }}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            to="/Category"
+            className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
+            style={{ color: headerTextColor || "#111111" }}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Category
+          </Link>
+          <Link
+            to="/shop"
+            className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
+            style={{ color: headerTextColor || "#111111" }}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Shop
+          </Link>
+          <Link
+            to="/shop"
+            className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
+            style={{ color: headerTextColor || "#111111" }}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            About Us
+          </Link>
+          <Link
+            to="/about"
+            className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
+            style={{ color: headerTextColor || "#111111" }}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Contact Us
+          </Link>
+        </nav>
+      </aside>
     </header>
   );
 }

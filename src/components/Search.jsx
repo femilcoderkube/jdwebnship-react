@@ -8,8 +8,7 @@ function Search() {
       {/* Settings Button */}
 
       <svg
-        width="26"
-        height="26"
+        className="w-5 h-5 sm:w-6 sm:h-6 md:w-[26px] md:h-[26px]"
         viewBox="0 0 26 26"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -17,9 +16,9 @@ function Search() {
         <path
           d="M17.8141 17.8141L22.75 22.75M11.7813 20.3125C16.4929 20.3125 20.3125 16.4929 20.3125 11.7813C20.3125 7.06956 16.4929 3.25 11.7813 3.25C7.06956 3.25 3.25 7.06956 3.25 11.7813C3.25 16.4929 7.06956 20.3125 11.7813 20.3125Z"
           stroke={headerTextColor || "#111111"}
-          stroke-width="1.625"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.625"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </div>
