@@ -1,5 +1,6 @@
 import Banner from "../components/Banner";
 import CommonHeader from "../components/CommonHeader";
+import ShopCategory from "../components/ShopCategory";
 
 function Home() {
   return (
@@ -8,6 +9,8 @@ function Home() {
         <Banner />
       </div>
       <CommonHeader />
+      <Banner />
+      <ShopCategory />
     </div>
   );
 }
