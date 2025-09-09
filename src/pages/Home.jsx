@@ -9,7 +9,6 @@ function Home() {
         <Banner />
       </div>
       <CommonHeader />
-
       <ShopCategory />
     </div>
   );
