@@ -15,8 +15,8 @@ export function ThemeProvider({ children, theme = {} }) {
     fontFamily: "system-ui, -apple-system, sans-serif",
     backgroundColor: "#ffffff",
     buttonBackgroundColor: "#007bff",
-    topHeaderBackgroundColor: "#f8f9fa",
-    headerBackgroundColor: "#3b82f6",
+    topHeaderBackgroundColor: "#111111",
+    headerBackgroundColor: "#FFFFFF",
     footerBackgroundColor: "#1f2937",
     ...theme,
   });

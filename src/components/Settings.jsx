@@ -27,7 +27,7 @@ function Settings() {
       {/* Settings Button */}
       <button
         onClick={toggleSettings}
-        className="flex items-center gap-2 px-3 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg transition-all duration-200 text-white"
+        className="flex items-center gap-2 px-3 py-2 bg-[#111111] bg-opacity-20 hover:bg-opacity-30 rounded-lg transition-all duration-200 text-white"
         aria-label="Open settings"
       >
         <svg
