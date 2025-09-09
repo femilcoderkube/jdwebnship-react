@@ -2,7 +2,9 @@ import Advertisment from "../components/Advertisment";
 import Banner from "../components/Banner";
 import CommonHeader from "../components/CommonHeader";
 import ProductSection from "../components/ProductSection";
+import SecondProductSection from "../components/SecondProductSection";
 import ShopCategory from "../components/ShopCategory";
+import SocialAdvertisementImage from "../components/SocialAdvertisementImage";
 
 function Home() {
   return (
@@ -14,6 +16,8 @@ function Home() {
       <ShopCategory />
       <Advertisment />
       <ProductSection />
+      <SecondProductSection />
+      <SocialAdvertisementImage />
     </div>
   );
 }
