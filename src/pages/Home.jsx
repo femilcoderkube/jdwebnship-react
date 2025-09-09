@@ -9,7 +9,7 @@ function Home() {
         <Banner />
       </div>
       <CommonHeader />
-      <Banner />
+
       <ShopCategory />
     </div>
   );
