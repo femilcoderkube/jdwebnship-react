@@ -14,11 +14,11 @@ export function ThemeProvider({ children, theme = {} }) {
   const [currentTheme, setCurrentTheme] = useState({
     fontFamily: "system-ui, -apple-system, sans-serif",
     backgroundColor: "#ffffff",
-    buttonBackgroundColor: "#007bff",
+    buttonBackgroundColor: "#111111",
     topHeaderBackgroundColor: "#111111",
     headerBackgroundColor: "#FFFFFF",
     footerBackgroundColor: "#111111",
-    bottomFooterBackgroundColor: "#374151",
+    bottomFooterBackgroundColor: "#FFF7F2",
     ...theme,
   });
 

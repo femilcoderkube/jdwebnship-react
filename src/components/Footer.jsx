@@ -11,15 +11,15 @@ function Footer() {
 
   return (
     <footer
-      className="pt-[30px] lg:py-[70px]"
+      className="pt-[30px] py-[30px] lg:py-[70px]"
       style={{
         backgroundColor: theme?.footerBackgroundColor || "#1f2937",
         color: footerTextColor || "#ffffff",
         fontFamily: theme?.fontFamily || "system-ui, -apple-system, sans-serif",
       }}
     >
-      <div className="px-4 sm:px-6 lg:px-10 xl:px-[60px]">
-        <div className="grid grid-cols-2 md:grid-cols-6 lg:pb-[60px]">
+      <div className="px-4 sm:px-6 lg:px-10 xl:px-[60px] pt-[70px]">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-6 pb-[30px] lg:pb-[60px] gap-4">
           <div className="text-left">
             <h2 className="uppercase mb-6 text-sm font-semibold text-[24px] lg:text[32px]">
               Store name
@@ -125,7 +125,7 @@ function Footer() {
       </div>
 
       <div className="pt-[15px]">
-        <p>&copy; 2025 My Vite App. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} My Vite App. All rights reserved.</p>
       </div>
     </footer>
   );
