@@ -49,14 +49,53 @@ function CardItem({ item }) {
 export default function CardSlider() {
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(true);
   const cardsPerSlide = 3; // Number of cards to show per slide
   const length = cardItems.length;
   const maxSlides = Math.ceil(length / cardsPerSlide); // Total number of slides
   const autoSlideInterval = 3000; // 3 seconds
 
-  const nextSlide = () => setCurrent((prev) => (prev + 1) % length);
-  const prevSlide = () => setCurrent((prev) => (prev - 1 + length) % length);
-  const goToSlide = (idx) => setCurrent(idx * cardsPerSlide);
+  // Duplicate cards for continuous scrolling
+  const extendedCardItems = [
+    ...cardItems.slice(-cardsPerSlide), // Cards from the end to prepend
+    ...cardItems,
+    ...cardItems.slice(0, cardsPerSlide), // Cards from the start to append
+  ];
+
+  const nextSlide = () => {
+    setCurrent((prev) => {
+      const next = prev + 1;
+      if (next >= length) {
+        setTimeout(() => {
+          setIsTransitioning(false);
+          setCurrent(0);
+        }, 700); // Match transition duration
+        return next;
+      }
+      return next;
+    });
+    setIsTransitioning(true);
+  };
+
+  const prevSlide = () => {
+    setCurrent((prev) => {
+      const next = prev - 1;
+      if (next < 0) {
+        setTimeout(() => {
+          setIsTransitioning(false);
+          setCurrent(length - 1);
+        }, 700); // Match transition duration
+        return next;
+      }
+      return next;
+    });
+    setIsTransitioning(true);
+  };
+
+  const goToSlide = (idx) => {
+    setIsTransitioning(true);
+    setCurrent(idx * cardsPerSlide);
+  };
 
   // Auto-slide effect
   useEffect(() => {
@@ -68,17 +107,19 @@ export default function CardSlider() {
     }
   }, [isPaused]);
 
-  // Calculate visible cards based on current index
-  const visibleCards = [];
-  for (let i = 0; i < cardsPerSlide; i++) {
-    const index = (current + i) % length;
-    visibleCards.push(cardItems[index]);
-  }
+  // Reset transition after jump
+  useEffect(() => {
+    if (!isTransitioning) {
+      setTimeout(() => {
+        setIsTransitioning(true);
+      }, 50); // Small delay to ensure DOM update
+    }
+  }, [isTransitioning]);
 
   return (
     <div
       id="card-carousel"
-      className="relative w-full max-w-5xl mx-auto"
+      className="relative w-full mx-auto lg:px-10 xl:px-[60px]"
       data-carousel="slide"
       onMouseEnter={() => setIsPaused(true)} // Pause on hover
       onMouseLeave={() => setIsPaused(false)} // Resume on leave
@@ -86,14 +127,19 @@ export default function CardSlider() {
       {/* Carousel wrapper */}
       <div className="relative h-[491px] overflow-hidden rounded-lg">
         <div
-          className="flex transition-transform duration-700 ease-in-out"
+          className={`flex ${
+            isTransitioning
+              ? "transition-transform duration-700 ease-in-out"
+              : ""
+          }`}
           style={{
             transform: `translateX(-${
-              (current % length) * (100 / cardsPerSlide)
+              ((current + cardsPerSlide) % (length + cardsPerSlide)) *
+              (100 / cardsPerSlide)
             }%)`,
           }}
         >
-          {cardItems.map((item, idx) => (
+          {extendedCardItems.map((item, idx) => (
             <div key={idx} className="w-[33.33%] flex justify-center">
               <CardItem item={item} />
             </div>
