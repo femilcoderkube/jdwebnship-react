@@ -211,7 +211,7 @@ function Settings() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Bottom Footer Color
+                  Bottom Header/Footer Color
                 </label>
                 <div className="flex items-center gap-3">
                   <input

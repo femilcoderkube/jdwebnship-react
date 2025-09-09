@@ -4,14 +4,16 @@ import About from "./pages/About";
 import TopHeader from "./components/TopHeader";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import "./App.css";
 import BottomFooter from "./components/BottomFooter";
+import CommonHeader from "./components/CommonHeader";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <TopHeader />
       <Header />
+      <CommonHeader />
       <main className="main-content">
         <Routes>
           {" "}
