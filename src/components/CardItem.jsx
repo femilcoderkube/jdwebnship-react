@@ -1,4 +1,4 @@
-function CardItem({ item }) {
+export function CardItem({ item }) {
   return (
     <div className="w-[334.8px] h-[491px] bg-white rounded-lg shadow-lg flex flex-col flex-shrink-0">
       <img
