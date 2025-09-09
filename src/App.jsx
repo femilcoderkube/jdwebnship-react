@@ -13,7 +13,6 @@ function App() {
     <div className="App">
       <TopHeader />
       <Header />
-      <CommonHeader />
       <main className="main-content">
         <Routes>
           {" "}

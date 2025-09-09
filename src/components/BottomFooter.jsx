@@ -7,7 +7,7 @@ function BottomFooter({}) {
 
   return (
     <section
-      className="text-center lg:py-[70px] rounded-t-none rounded-3xl -mb-[70px] z-1"
+      className="text-center py-[40px] lg:py-[70px] rounded-t-none rounded-3xl -mb-[70px] z-1"
       style={{
         backgroundColor: theme?.bottomFooterBackgroundColor || "#1f2937",
         color: bottomFooterTextColor || "#ffffff",
@@ -30,7 +30,7 @@ function BottomFooter({}) {
             className="px-[24px] py-[15px] md:w-[300px] rounded-l-lg bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-0"
           />
           <button
-            className="btn px-[24px] py-[15px] bg-black text-white  rounded-r-lg text-sm font-medium focus:outline-none"
+            className="btn px-[24px] py-[15px] rounded-r-lg text-sm font-medium focus:outline-none"
             type="submit"
           >
             SUBSCRIBE
