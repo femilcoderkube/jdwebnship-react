@@ -1,5 +1,6 @@
 import React from "react";
 import { useTheme } from "../contexts/ThemeContext";
+import Marquee from "react-fast-marquee";
 
 function Advertisment() {
   const { theme, bottomFooterTextColor } = useTheme();
@@ -11,7 +12,11 @@ function Advertisment() {
         fontFamily: theme?.fontFamily || "system-ui, -apple-system, sans-serif",
       }}
     >
-      <span>Advertisment</span>
+      <Marquee>
+        <div className="flex">
+          <span>Step into style </span> • <span> Empower your look</span>
+        </div>
+      </Marquee>
     </div>
   );
 }
