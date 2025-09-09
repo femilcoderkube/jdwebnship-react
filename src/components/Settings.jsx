@@ -8,6 +8,8 @@ function Settings() {
     setBackgroundColor,
     setButtonBackgroundColor,
     setTopHeaderBackgroundColor,
+    setHeaderBackgroundColor,
+    setFooterBackgroundColor,
   } = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -57,7 +59,7 @@ function Settings() {
           <div className="fixed inset-0 z-40" onClick={closeSettings}></div>
 
           {/* Settings Panel */}
-          <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50 p-6 settings-popup">
+          <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50 max-h-96 overflow-y-auto settings-popup">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-800">
                 Theme Settings
@@ -169,6 +171,44 @@ function Settings() {
                 </div>
               </div>
 
+              {/* Header Background Color */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Header Color
+                </label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="color"
+                    value={theme?.headerBackgroundColor || "#3b82f6"}
+                    onChange={(e) => setHeaderBackgroundColor(e.target.value)}
+                    className="w-12 h-10 border border-gray-300 rounded cursor-pointer"
+                    aria-label="Select header background color"
+                  />
+                  <span className="text-sm text-gray-600 font-mono">
+                    {theme?.headerBackgroundColor || "#3b82f6"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Footer Background Color */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Footer Color
+                </label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="color"
+                    value={theme?.footerBackgroundColor || "#1f2937"}
+                    onChange={(e) => setFooterBackgroundColor(e.target.value)}
+                    className="w-12 h-10 border border-gray-300 rounded cursor-pointer"
+                    aria-label="Select footer background color"
+                  />
+                  <span className="text-sm text-gray-600 font-mono">
+                    {theme?.footerBackgroundColor || "#1f2937"}
+                  </span>
+                </div>
+              </div>
+
               {/* Preview Section */}
               <div className="pt-4 border-t border-gray-200">
                 <h4 className="text-sm font-medium text-gray-700 mb-3">
@@ -200,6 +240,47 @@ function Settings() {
                   >
                     Sample Button
                   </button>
+                  <div className="flex gap-2">
+                    <div
+                      className="p-2 rounded text-xs flex-1"
+                      style={{
+                        backgroundColor:
+                          theme?.topHeaderBackgroundColor || "#f8f9fa",
+                        color: theme?.topHeaderTextColor || "#333",
+                        fontFamily:
+                          theme?.fontFamily ||
+                          "system-ui, -apple-system, sans-serif",
+                      }}
+                    >
+                      Top Header
+                    </div>
+                    <div
+                      className="p-2 rounded text-xs flex-1"
+                      style={{
+                        backgroundColor:
+                          theme?.headerBackgroundColor || "#3b82f6",
+                        color: theme?.headerTextColor || "#ffffff",
+                        fontFamily:
+                          theme?.fontFamily ||
+                          "system-ui, -apple-system, sans-serif",
+                      }}
+                    >
+                      Header
+                    </div>
+                    <div
+                      className="p-2 rounded text-xs flex-1"
+                      style={{
+                        backgroundColor:
+                          theme?.footerBackgroundColor || "#1f2937",
+                        color: theme?.footerTextColor || "#ffffff",
+                        fontFamily:
+                          theme?.fontFamily ||
+                          "system-ui, -apple-system, sans-serif",
+                      }}
+                    >
+                      Footer
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

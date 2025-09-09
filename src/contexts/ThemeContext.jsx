@@ -16,6 +16,8 @@ export function ThemeProvider({ children, theme = {} }) {
     backgroundColor: "#ffffff",
     buttonBackgroundColor: "#007bff",
     topHeaderBackgroundColor: "#f8f9fa",
+    headerBackgroundColor: "#3b82f6",
+    footerBackgroundColor: "#1f2937",
     ...theme,
   });
 
@@ -31,6 +33,14 @@ export function ThemeProvider({ children, theme = {} }) {
     () => getContrastingColor(currentTheme.topHeaderBackgroundColor),
     [currentTheme.topHeaderBackgroundColor]
   );
+  const headerTextColor = useMemo(
+    () => getContrastingColor(currentTheme.headerBackgroundColor),
+    [currentTheme.headerBackgroundColor]
+  );
+  const footerTextColor = useMemo(
+    () => getContrastingColor(currentTheme.footerBackgroundColor),
+    [currentTheme.footerBackgroundColor]
+  );
 
   useEffect(() => {
     const root = document.documentElement;
@@ -44,7 +54,18 @@ export function ThemeProvider({ children, theme = {} }) {
       currentTheme.topHeaderBackgroundColor
     );
     root.style.setProperty("--top-header-text-color", topHeaderTextColor);
-  }, [currentTheme, textColor, buttonTextColor, topHeaderTextColor]);
+    root.style.setProperty("--header-bg", currentTheme.headerBackgroundColor);
+    root.style.setProperty("--header-text-color", headerTextColor);
+    root.style.setProperty("--footer-bg", currentTheme.footerBackgroundColor);
+    root.style.setProperty("--footer-text-color", footerTextColor);
+  }, [
+    currentTheme,
+    textColor,
+    buttonTextColor,
+    topHeaderTextColor,
+    headerTextColor,
+    footerTextColor,
+  ]);
 
   const value = useMemo(
     () => ({
@@ -52,6 +73,8 @@ export function ThemeProvider({ children, theme = {} }) {
       textColor,
       buttonTextColor,
       topHeaderTextColor,
+      headerTextColor,
+      footerTextColor,
       setTheme: setCurrentTheme,
       setFontFamily: (fontFamily) =>
         setCurrentTheme((prev) => ({ ...prev, fontFamily })),
@@ -61,8 +84,19 @@ export function ThemeProvider({ children, theme = {} }) {
         setCurrentTheme((prev) => ({ ...prev, buttonBackgroundColor })),
       setTopHeaderBackgroundColor: (topHeaderBackgroundColor) =>
         setCurrentTheme((prev) => ({ ...prev, topHeaderBackgroundColor })),
+      setHeaderBackgroundColor: (headerBackgroundColor) =>
+        setCurrentTheme((prev) => ({ ...prev, headerBackgroundColor })),
+      setFooterBackgroundColor: (footerBackgroundColor) =>
+        setCurrentTheme((prev) => ({ ...prev, footerBackgroundColor })),
     }),
-    [currentTheme, textColor, buttonTextColor, topHeaderTextColor]
+    [
+      currentTheme,
+      textColor,
+      buttonTextColor,
+      topHeaderTextColor,
+      headerTextColor,
+      footerTextColor,
+    ]
   );
 
   return (
