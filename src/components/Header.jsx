@@ -71,7 +71,7 @@ function Header() {
             </Link>
             <Link
               className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
-              to="/shop"
+              to="/categories"
               style={{
                 color: headerTextColor || "#111111",
                 margin: "0 1rem",
@@ -81,7 +81,7 @@ function Header() {
             </Link>
             <Link
               className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
-              to="/product"
+              to="/shop"
               style={{
                 color: headerTextColor || "#111111",
                 margin: "0 1rem",
@@ -104,7 +104,7 @@ function Header() {
           <div className="hidden lg:flex items-center">
             <Link
               className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
-              to="/shop"
+              to="/categories"
               style={{
                 color: headerTextColor || "#111111",
                 margin: "0 1rem",
@@ -197,7 +197,7 @@ function Header() {
             Category
           </Link>
           <Link
-            to="/shop"
+            to="/categories"
             className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
             style={{ color: headerTextColor || "#111111" }}
             onClick={() => setIsMenuOpen(false)}
@@ -205,7 +205,7 @@ function Header() {
             Shop
           </Link>
           <Link
-            to="/shop"
+            to="/categories"
             className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
             style={{ color: headerTextColor || "#111111" }}
             onClick={() => setIsMenuOpen(false)}

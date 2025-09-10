@@ -4,164 +4,156 @@ import { useTheme } from "../contexts/ThemeContext";
 function CommonHeader({ className = "", ...props }) {
   const { theme, bottomFooterTextColor } = useTheme();
   const { id } = useParams();
-
   const location = useLocation();
 
-  // Dynamic content based on route
-  let innerContent;
-  if (location.pathname === "/") {
-    innerContent = (
-      <div className="py-[40px] lg:py-[60px] -mt-[70px] z-10 relative rounded-b-none rounded-3xl">
-        <div className="flex items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-[60px]">
-          <div className="grid md:grid-cols-3 xxl:px-[248px]">
-            <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
-              <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
-                Free Shipping
-              </h1>
-              <p className="text-lg font-normal">
-                Upgrade your style today and get FREE shipping on all orders!
-                Don't miss out.
-              </p>
-            </div>
-            <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
-              <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
-                Secure Payment
-              </h1>
-              <p className="text-lg font-normal">
-                Your security is our priority. Your payments are secure with us.
-              </p>
-            </div>
-            <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px]">
-              <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
-                Satisfaction Guarantee
-              </h1>
-              <p className="text-lg font-normal">
-                Shop confidently with our Satisfaction Guarantee: Love it or get
-                a refund.
-              </p>
+  // Define page titles and breadcrumb configurations
+  const routeConfigs = {
+    "/": {
+      content: (
+        <div className="py-[40px] lg:py-[60px] -mt-[70px] z-10 relative rounded-b-none rounded-3xl">
+          <div className="flex items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-[60px]">
+            <div className="grid md:grid-cols-3 xxl:px-[248px]">
+              <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
+                <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
+                  Free Shipping
+                </h1>
+                <p className="text-lg font-normal">
+                  Upgrade your style today and get FREE shipping on all orders!
+                  Don't miss out.
+                </p>
+              </div>
+              <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
+                <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
+                  Secure Payment
+                </h1>
+                <p className="text-lg font-normal">
+                  Your security is our priority. Your payments are secure with
+                  us.
+                </p>
+              </div>
+              <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px]">
+                <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
+                  Satisfaction Guarantee
+                </h1>
+                <p className="text-lg font-normal">
+                  Shop confidently with our Satisfaction Guarantee: Love it or
+                  get a refund.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
-  } else if (location.pathname === "/about") {
-    innerContent = (
-      <div className="flex items-center justify-between w-full">
-        <h1 className="text-2xl font-bold">About Page Header</h1>
-        <nav className="flex gap-4">
-          <Link to="/" className="hover:underline">
+      ),
+    },
+    "/about": {
+      content: (
+        <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-10 xl:px-[60px]">
+          <h1 className="text-2xl font-bold">About Page Header</h1>
+          <nav className="flex gap-4">
+            <Link to="/" className="hover:underline">
+              Home
+            </Link>
+          </nav>
+        </div>
+      ),
+    },
+    "/shop": {
+      title: "Shop",
+      breadcrumb: true,
+    },
+    "/categories": {
+      title: "Shop By Category",
+      breadcrumb: true,
+    },
+    "/my-account": {
+      title: "My Account",
+      breadcrumb: true,
+    },
+    "/signin": {
+      title: "Sign In",
+    },
+    "/signup": {
+      title: "Sign Up",
+    },
+    "/forgot-password": {
+      title: "Forgot Password",
+    },
+    "/reset-password": {
+      title: "Reset Password",
+    },
+    [`/shop/${id}`]: {
+      content: (
+        <div className="xxl:px-[248px]">
+          <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
+            <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
+              Women's Watch
+            </h1>
+            <p className="text-lg font-normal">
+              Elevate your look with precision and class.
+            </p>
+          </div>
+        </div>
+      ),
+    },
+  };
+
+  // Breadcrumb component for reusability
+  const Breadcrumb = ({ currentPage }) => (
+    <nav className="flex justify-center" aria-label="Breadcrumb">
+      <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+        <li className="inline-flex items-center font-medium me-4">
+          <Link to="/" className="inline-flex items-center">
             Home
           </Link>
-        </nav>
-      </div>
-    );
-  } else if (location.pathname === "/product") {
-    innerContent = (
+        </li>
+        <li aria-current="page">
+          <div className="flex items-center border-l opacity-35 font-medium ps-4">
+            <span className="ms-1 text-sm">{currentPage}</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+  );
+
+  // Default content for unmatched routes
+  const defaultContent = (
+    <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-10 xl:px-[60px]">
+      <h1 className="text-2xl font-bold">Default Header</h1>
+      <nav className="flex gap-4">
+        <Link to="/" className="hover:underline">
+          Home
+        </Link>
+        <Link to="/about" className="hover:underline">
+          About
+        </Link>
+      </nav>
+    </div>
+  );
+
+  // Determine content based on route
+  const routeConfig = routeConfigs[location.pathname] || {};
+  const innerContent =
+    routeConfig.content ||
+    (routeConfig.title ? (
       <div className="xxl:px-[248px]">
         <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
-          <nav class="flex justify-center" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-              <li class="inline-flex items-center font-medium me-4">
-                <a href="#" class="inline-flex items-center">
-                  Home
-                </a>
-              </li>
-              <li aria-current="page">
-                <div class="flex items-center border-l opacity-35 font-medium ps-4">
-                  <span class="ms-1 text-sm">Shop</span>
-                </div>
-              </li>
-            </ol>
-          </nav>
-
-          <h1 className="text-[30px] lg:text-[42px] font-bold">Shop</h1>
-        </div>
-      </div>
-    );
-  } else if (location.pathname === "/shop") {
-    innerContent = (
-      <div className="xxl:px-[248px]">
-        <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
-          <nav class="flex justify-center" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-              <li class="inline-flex items-center font-medium me-4">
-                <a href="#" class="inline-flex items-center">
-                  Home
-                </a>
-              </li>
-              <li aria-current="page">
-                <div class="flex items-center border-l opacity-35 font-medium ps-4">
-                  <span class="ms-1 text-sm">Categories</span>
-                </div>
-              </li>
-            </ol>
-          </nav>
-
+          {routeConfig.breadcrumb && (
+            <Breadcrumb currentPage={routeConfig.title} />
+          )}
           <h1 className="text-[30px] lg:text-[42px] font-bold">
-            Shop By Category
+            {routeConfig.title}
           </h1>
         </div>
       </div>
-    );
-  } else if (location.pathname === "/my-account") {
-    innerContent = (
-      <div className="xxl:px-[248px]">
-        <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
-          <nav class="flex justify-center" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-              <li class="inline-flex items-center font-medium me-4">
-                <a href="#" class="inline-flex items-center">
-                  Home
-                </a>
-              </li>
-              <li aria-current="page">
-                <div class="flex items-center border-l opacity-35 font-medium ps-4">
-                  <span class="ms-1 text-sm">My Account</span>
-                </div>
-              </li>
-            </ol>
-          </nav>
-
-          <h1 className="text-[30px] lg:text-[42px] font-bold">My Account</h1>
-        </div>
-      </div>
-    );
-  } else if (location.pathname === `/product/${id}`) {
-    innerContent = (
-      <div className="xxl:px-[248px]">
-        <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
-          <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
-            Women's Watch
-          </h1>
-          <p className="text-lg font-normal">
-            Elevate your look with precision and class.
-          </p>
-        </div>
-      </div>
-    );
-  } else {
-    innerContent = (
-      <div className="flex items-center justify-between w-full">
-        <h1 className="text-2xl font-bold">Default Header</h1>
-        <nav className="flex gap-4">
-          <Link to="/" className="hover:underline">
-            Home
-          </Link>
-          <Link to="/about" className="hover:underline">
-            About
-          </Link>
-        </nav>
-      </div>
-    );
-  }
+    ) : (
+      defaultContent
+    ));
 
   return (
     <section
-      className={`${
-        location.pathname === "/"
-          ? "z-10 relative rounded-b-none rounded-3xl"
-          : "z-10 relative"
-      }`}
+      className={`z-10 relative ${
+        location.pathname === "/" ? "rounded-b-none rounded-3xl" : ""
+      } ${className}`}
       style={{
         backgroundColor: theme?.bottomFooterBackgroundColor || "#ffffff",
         color: bottomFooterTextColor || "#111111",
