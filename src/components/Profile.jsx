@@ -10,7 +10,7 @@ function Profile() {
       className="relative cursor-pointer"
       onClick={(e) => {
         e.preventDefault();
-        navigate("/my-account");
+        navigate("/signin");
       }}
     >
       {/* Settings Button */}

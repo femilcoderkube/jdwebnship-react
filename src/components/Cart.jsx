@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { useTheme } from "../contexts/ThemeContext";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const { theme, headerTextColor } = useTheme();
+  const navigate = useNavigate();
   return (
-    <div className="relative">
+    <div
+      className="relative cursor-pointer"
+      onClick={(e) => {
+        e.preventDefault();
+        navigate("/cart");
+      }}
+    >
       {/* Settings Button */}
 
       <svg

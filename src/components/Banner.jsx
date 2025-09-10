@@ -3,13 +3,14 @@ import { useTheme } from "../contexts/ThemeContext";
 import Slider from "./Slider";
 import heroimg from "../assets/images/hero.jpg";
 import btnarrow from "../assets/btn-up-arrow.svg";
+import { Link } from "react-router-dom";
 
 function SingleImage() {
   const { theme, buttonTextColor } = useTheme();
   return (
     <div className="hero-overlay relative">
       <img src={heroimg} alt="" srcset="" />
-      <div className="w-100 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-1 w-100">
+      <div className="w-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-1 w-100">
         <p className="uppercase text-white mb-[8px]">Wardrobe Refresh</p>
         <h1 className="text-[32px] lg:text-[52px] xl:text-[62px] uppercase text-white mb-[8px]">
           New styles are here
@@ -18,8 +19,8 @@ function SingleImage() {
           Shine with our latest must-haves
         </p>
 
-        <a
-          href=""
+        <Link
+          to={"/shop"}
           className="inline-flex gap-2 btn px-[24px] py-[15px] rounded-lg text-sm font-medium focus:outline-none items-center"
         >
           View Collection
@@ -40,7 +41,7 @@ function SingleImage() {
               />
             </svg>
           </span>
-        </a>
+        </Link>
       </div>
     </div>
   );

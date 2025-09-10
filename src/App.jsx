@@ -18,6 +18,11 @@ import React, { useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger"; // Import ScrollTrigger
 import ScrollSmoother from "./gsap-bonus/ScrollSmoother"; // Local file import
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Payment from "./pages/Payment";
+import OrderSuccess from "./pages/OrderSuccess";
+import OrderFailure from "./pages/OrderFailure";
 import "./App.css";
 
 // Register plugins once at the module level
@@ -49,29 +54,29 @@ function App() {
   }, []); // Empty dependency array: run once after mount
 
   return (
-    <div id="smooth-wrapper">
-      <div id="smooth-content">
-        <div className="App">
-          <TopHeader />
-          <Header />
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/shop" element={<Product />} />
-              <Route path="/shop/:id" element={<ProductDetail />} />
-              <Route path="/categories" element={<Shop />} />
-              <Route path="/my-account" element={<MyAccount />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
-            </Routes>
-          </main>
-          <BottomFooter />
-          <Footer />
-        </div>
-      </div>
+    <div className="App">
+      <TopHeader />
+      <Header />
+      <main className="main-content">
+        <Routes>
+          {" "}
+          {/* NEW: Define routes here */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/shop" element={<Product />} />
+          <Route path="/shop/:id" element={<ProductDetail />} />
+          <Route path="/categories" element={<Shop />} />
+          <Route path="/my-account" element={<MyAccount />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          {/* Add more routes as needed, e.g., <Route path="/contact" element={<Contact />} /> */}
+        </Routes>
+        {/* Note: Outlet is not needed if using Routes directly; this setup uses Routes for simplicity */}
+      </main>
+      <BottomFooter />
+      <Footer />
     </div>
   );
 }

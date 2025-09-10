@@ -2,6 +2,7 @@ import React from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import AdvertismentImg from "../assets/images/Advertisment.png";
 import Marquee from "react-fast-marquee";
+import { Link } from "react-router-dom";
 
 function Advertisment() {
   const { theme, bottomFooterTextColor, buttonTextColor } = useTheme();
@@ -61,8 +62,8 @@ function Advertisment() {
               clothing categories.
             </p>
             <div>
-              <a
-                href=""
+              <Link
+                to={"/shop"}
                 className="inline-flex gap-2 btn px-[24px] py-[15px] rounded-lg text-sm font-medium focus:outline-none items-center w-max justify-center"
               >
                 View Collection
@@ -83,7 +84,7 @@ function Advertisment() {
                     />
                   </svg>
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
           {/* <p className="text-md text-gray-600">{item.price}</p> */}

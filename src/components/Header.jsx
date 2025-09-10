@@ -25,7 +25,7 @@ function Header() {
   return (
     <header>
       <nav
-        className="flex items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-[60px] py-[12px] lg:py-[15px]"
+        className="flex items-center relative justify-between px-4 sm:px-6 lg:px-10 xl:px-[60px] py-[12px] lg:py-[1.5rem]"
         style={{
           backgroundColor: theme?.headerBackgroundColor || "#ffffff",
           color: headerTextColor || "#ffffff",
@@ -92,7 +92,7 @@ function Header() {
           </div>
         </div>
 
-        <div className="center-nav flex-1 flex items-center justify-center">
+        <div className="center-nav flex-1 flex items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <h1
             className="uppercase text-[18px] sm:text-[20px] lg:text-[24px] xl:text-[32px] font-medium text-center"
             style={{ color: headerTextColor || "#111111" }}
@@ -104,7 +104,7 @@ function Header() {
           <div className="hidden lg:flex items-center">
             <Link
               className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
-              to="/categories"
+              to="/about"
               style={{
                 color: headerTextColor || "#111111",
                 margin: "0 1rem",
