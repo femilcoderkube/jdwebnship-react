@@ -59,12 +59,22 @@ function CommonHeader({ className = "", ...props }) {
     innerContent = (
       <div className="xxl:px-[248px]">
         <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
-          <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
-            Women's Watch
-          </h1>
-          <p className="text-lg font-normal">
-            Elevate your look with precision and class.
-          </p>
+          <nav class="flex justify-center" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+              <li class="inline-flex items-center font-medium me-4">
+                <a href="#" class="inline-flex items-center">
+                  Home
+                </a>
+              </li>
+              <li aria-current="page">
+                <div class="flex items-center border-l opacity-35 font-medium ps-4">
+                  <span class="ms-1 text-sm">Shop</span>
+                </div>
+              </li>
+            </ol>
+          </nav>
+
+          <h1 className="text-[30px] lg:text-[42px] font-bold">Shop</h1>
         </div>
       </div>
     );

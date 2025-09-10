@@ -71,7 +71,7 @@ function Header() {
             </Link>
             <Link
               className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
-              to="/Category"
+              to="/shop"
               style={{
                 color: headerTextColor || "#111111",
                 margin: "0 1rem",
@@ -81,7 +81,7 @@ function Header() {
             </Link>
             <Link
               className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
-              to="/shop"
+              to="/product"
               style={{
                 color: headerTextColor || "#111111",
                 margin: "0 1rem",
