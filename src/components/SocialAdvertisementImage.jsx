@@ -33,7 +33,7 @@ function SocialAdvertisementImage() {
         padding: 0,
       }}
     >
-      <h2 className="text-[32px] lg:text-[42px] font-bold mb-[20px] md-[30px] lg:mb-[50px]">
+      <h2 className="text-[2rem] lg:text-[2.625rem] font-bold mb-[1.25rem] lg:mb-[3.125rem]">
         Follow <span>@storename</span> on Instagram
       </h2>
       <Swiper

@@ -25,7 +25,7 @@ function Header() {
   return (
     <header>
       <nav
-        className="flex items-center relative justify-between px-4 sm:px-6 lg:px-10 xl:px-[60px] py-[12px] lg:py-[1.5rem]"
+        className="flex items-center relative justify-between px-4 sm:px-6 lg:px-10 xl:px-[3.75rem] py-[0.75] lg:py-[1.5rem]"
         style={{
           backgroundColor: theme?.headerBackgroundColor || "#ffffff",
           color: headerTextColor || "#ffffff",
@@ -60,7 +60,7 @@ function Header() {
 
           <div className="left-nav hidden lg:flex items-center">
             <Link
-              className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
+              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase hover:underline transition-all duration-300"
               to="/"
               style={{
                 color: headerTextColor || "#111111",
@@ -70,7 +70,7 @@ function Header() {
               Home
             </Link>
             <Link
-              className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
+              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase hover:underline transition-all duration-300"
               to="/categories"
               style={{
                 color: headerTextColor || "#111111",
@@ -80,7 +80,7 @@ function Header() {
               Category
             </Link>
             <Link
-              className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
+              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase hover:underline transition-all duration-300"
               to="/shop"
               style={{
                 color: headerTextColor || "#111111",
@@ -94,7 +94,7 @@ function Header() {
 
         <div className="center-nav flex-1 flex items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <h1
-            className="uppercase text-[18px] sm:text-[20px] lg:text-[24px] xl:text-[32px] font-medium text-center"
+            className="uppercase text-[1.125rem] sm:text-[20px] lg:text-[1.5rem] xl:text-[2rem] font-medium text-center"
             style={{ color: headerTextColor || "#111111" }}
           >
             Store name
@@ -103,7 +103,7 @@ function Header() {
         <div className="right-nav flex items-center gap-3 sm:gap-4">
           <div className="hidden lg:flex items-center">
             <Link
-              className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
+              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase hover:underline transition-all duration-300"
               to="/about"
               style={{
                 color: headerTextColor || "#111111",
@@ -113,7 +113,7 @@ function Header() {
               About Us
             </Link>
             <Link
-              className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
+              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase hover:underline transition-all duration-300"
               to="/about"
               style={{
                 color: headerTextColor || "#111111",

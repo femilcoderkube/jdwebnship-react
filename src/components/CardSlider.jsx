@@ -43,7 +43,7 @@ const cardItems = [
 
 export default function CardSlider() {
   return (
-    <div className="pl-6 sm:pl-6 lg:pl-10 xl:pl-[60px]">
+    <div className="px-6 sm:px-6 lg:px-10 xl:px-[3.75rem]">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={30}

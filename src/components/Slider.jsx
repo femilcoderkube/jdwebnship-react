@@ -55,16 +55,16 @@ export default function Slider() {
             />
             <div className="w-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-1">
               <p className="uppercase text-white mb-[8px]">Wardrobe Refresh</p>
-              <h1 className="text-[32px] lg:text-[52px] xl:text-[62px] uppercase text-white mb-[8px]">
+              <h1 className="text-[2rem] lg:text-[52px] xl:text-[62px] uppercase text-white mb-[8px]">
                 New styles are here
               </h1>
-              <p className="text-white text-2xl lg:text-[22px] mb-[15px]">
+              <p className="text-white text-2xl lg:text-[22px] mb-[0.9375rem]">
                 Shine with our latest must-haves
               </p>
 
               <Link
                 to={"/shop"}
-                className="inline-flex gap-2 btn px-[24px] py-[15px] rounded-lg text-sm font-medium focus:outline-none items-center"
+                className="inline-flex gap-2 btn px-[1.5rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none items-center"
               >
                 View Collection
                 <span>

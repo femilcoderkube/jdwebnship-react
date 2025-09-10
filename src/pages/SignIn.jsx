@@ -6,7 +6,7 @@ function SignIn() {
   return (
     <div>
       <CommonHeader />
-      <div className="px-4 sm:px-6 lg:px-10 xl:px-[60px] py-10">
+      <div className="px-4 sm:px-6 lg:px-10 xl:px-[3.75rem] py-10">
         <div className="max-w-md mx-auto">
           <form className="space-y-4">
             <div>

@@ -65,13 +65,13 @@ function ProductSection() {
   ];
 
   return (
-    <div className="py-[50px] lg:py-[100px]">
+    <div className="py-[3.125rem] lg:py-[100px]">
       <p className="uppercase">Explore</p>
-      <h2 className="text-[32px] lg:text-[42px] font-bold mb-[20px] md-[30px] lg:mb-[50px]">
+      <h2 className="text-[2rem] lg:text-[2.625rem] font-bold mb-[1.25rem] lg:mb-[3.125rem]">
         New Trending
       </h2>
-      <section className="px-4 sm:px-6 lg:px-10 xl:px-[60px]">
-        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 xxl:grid-cols-5  gap-4 gap-y-[4.375rem]">
+      <section className="px-4 sm:px-6 lg:px-10 xl:px-[3.75rem]">
+        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 xxl:grid-cols-5  gap-4 md:gap-y-[4.375rem]">
           {products.map((product, index) => (
             <CardComponent
               key={index}
@@ -81,10 +81,10 @@ function ProductSection() {
             />
           ))}
         </div>
-        <div className="mt-[30px] lg:mt-[50px]">
+        <div className="mt-[30px] lg:mt-[3.125rem]">
           <a
             href=""
-            className="inline-flex gap-2 btn px-[24px] py-[15px] rounded-lg text-sm font-medium focus:outline-none items-center"
+            className="inline-flex gap-2 btn px-[1.5rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none items-center"
           >
             Shop ALL New Trending
             <span>

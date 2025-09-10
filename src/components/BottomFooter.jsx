@@ -7,7 +7,7 @@ function BottomFooter({}) {
 
   return (
     <section
-      className="text-center py-[40px] lg:py-[70px] rounded-t-none rounded-3xl -mb-[70px] z-1"
+      className="text-center py-[2.5rem] lg:py-[70px] rounded-t-none rounded-3xl -mb-[70px] z-1"
       style={{
         backgroundColor: theme?.bottomFooterBackgroundColor || "#1f2937",
         color: bottomFooterTextColor || "#ffffff",
@@ -15,10 +15,10 @@ function BottomFooter({}) {
       }}
     >
       <form class="mx-auto flex flex-col items-center justify-center gap-4">
-        <h2 className="text-[32px] lg:text-[42px] font-bold">
+        <h2 className="text-[2rem] lg:text-[2.625rem] font-bold">
           Join Our Newsletter
         </h2>
-        <p className="text-[18px] lg:text-[22px]">
+        <p className="text-[1.125rem] lg:text-[22px]">
           We love to surprise our subscribers with occasional gifts.
         </p>
         <div className="flex justify-center items-stretch px-4">
@@ -27,17 +27,17 @@ function BottomFooter({}) {
             id="email"
             placeholder="Email Address"
             required
-            className="px-[24px] py-[15px] lg:w-[300px] rounded-l-lg bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-0"
+            className="px-[1.5rem] py-[0.9375rem] lg:w-[300px] rounded-l-lg bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-0"
           />
           <button
-            className="btn px-[24px] py-[15px] rounded-r-lg text-sm font-medium focus:outline-none"
+            className="btn px-[1.5rem] py-[0.9375rem] rounded-r-lg text-sm font-medium focus:outline-none"
             type="submit"
           >
             SUBSCRIBE
           </button>
           {/* <button
             type="submit"
-            className="px-[24px] py-[15px] rounded-r-lg bg-black text-white text-sm font-medium hover:bg-black focus:outline-none"
+            className="px-[1.5rem] py-[0.9375rem] rounded-r-lg bg-black text-white text-sm font-medium hover:bg-black focus:outline-none"
           >
             SUBSCRIBE
           </button> */}

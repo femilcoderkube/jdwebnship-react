@@ -18,7 +18,7 @@
 @keyframes slideInFromTop {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-0.625rem);
   }
   to {
     opacity: 1;
@@ -35,7 +35,7 @@ input[type="color"] {
   -webkit-appearance: none;
   border: none;
   width: 48px;
-  height: 40px;
+  height: 2.5rem;
   border-radius: 6px;
   cursor: pointer;
   border: 2px solid #e5e7eb;
@@ -81,7 +81,7 @@ input[type="color"]::-webkit-color-swatch {
 .category-title{
   background: rgba(17, 17, 17, 0.15);
   /* width: 100%; */
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(0.9375rem);
   white-space: nowrap;
   transition: all ease-in-out 0.5s;
 }
@@ -101,8 +101,8 @@ input[type="color"]::-webkit-color-swatch {
   background-image: url(../src/assets/chevron-left.svg);
   background-position: center;
   background-repeat: no-repeat;
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .swiper-button-prev::before{
@@ -117,10 +117,10 @@ input[type="color"]::-webkit-color-swatch {
 
 .swiper-button-prev,
 .swiper-button-next{
-  width: 42px !important;
-  height: 42px !important;
+  width: 2.625rem !important;
+  height: 2.625rem !important;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 0.625rem;
 }
 
 

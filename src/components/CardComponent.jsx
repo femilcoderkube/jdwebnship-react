@@ -13,12 +13,16 @@ const CardComponent = ({ productName, price, imageSrc }) => {
         height: "491px",
         display: "flex",
         flexDirection: "column",
-        gap: "10px",
+        gap: "0.625rem",
       }}
     >
       <div
-        className="bg-[#F8F8F8] rounded-[18px] flex flex-col align-items-center justify-center"
-        style={{ height: "418px", borderRadius: "18px", overflow: "hidden" }}
+        className="bg-[#F8F8F8] rounded-[1.125rem] flex flex-col align-items-center justify-center"
+        style={{
+          height: "41.125rem",
+          borderRadius: "1.125rem",
+          overflow: "hidden",
+        }}
       >
         <img
           src={imageSrc}
@@ -33,18 +37,18 @@ const CardComponent = ({ productName, price, imageSrc }) => {
       </div>
       <div className="hover-content absolute left-0 right-0 h-100">
         <div className="flex justify-between h-100">
-          <span className="bg-[#1111116b] uppercase text-[14px] px-[15px] py-[8px] rounded-[8px] absolute top-[15px] left-[8px] font-bold text-white">
+          <span className="bg-[#1111116b] uppercase text-[0.875rem] px-[0.9375rem] py-[8px] rounded-[8px] absolute top-[0.9375rem] left-[8px] font-bold text-white">
             Out Of Stock
           </span>
-          <div className="social-icon absolute top-[15px] flex flex-col gap-2 right-[15px]">
+          <div className="social-icon absolute top-[0.9375rem] flex flex-col gap-2 right-[0.9375rem]">
             <a
               href=""
-              className="bg-[#25D366] p-[9px] w-[42px] h-[42px] inline-block rounded-[8px]"
+              className="bg-[#25D366] p-[9px] w-[2.625rem] h-[2.625rem] inline-block rounded-[8px]"
             >
               <img src={whatsapp} alt="" srcset="" />
             </a>
 
-            <button className="bg-[#1111116b] p-[9px] w-[42px] h-[42px] inline-block rounded-[8px]">
+            <button className="bg-[#1111116b] p-[9px] w-[2.625rem] h-[2.625rem] inline-block rounded-[8px]">
               <img src={save} alt="" srcset="" />
             </button>
           </div>
@@ -53,20 +57,20 @@ const CardComponent = ({ productName, price, imageSrc }) => {
       <div>
         <h3
           className="line-clamp-1 mb-[6px]"
-          style={{ margin: 0, fontSize: "18px" }}
+          style={{ margin: 0, fontSize: "1.125rem" }}
         >
           <a href="">{productName}</a>
         </h3>
         <div className="flex gap-2">
           <p
             className="font-bold"
-            style={{ margin: 0, fontSize: "18px", color: textColor }}
+            style={{ margin: 0, fontSize: "1.125rem", color: textColor }}
           >
             ₹{price}
           </p>
           <p
             className="font-regular line-through"
-            style={{ margin: 0, fontSize: "18px", color: "#555" }}
+            style={{ margin: 0, fontSize: "1.125rem", color: "#555" }}
           >
             ₹19,999
           </p>

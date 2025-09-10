@@ -24,7 +24,7 @@ function Payment() {
   return (
     <div>
       <CommonHeader />
-      <div className="px-4 sm:px-6 lg:px-10 xl:px-[60px] py-10">
+      <div className="px-4 sm:px-6 lg:px-10 xl:px-[3.75rem] py-10">
         <h1 className="text-2xl font-semibold mb-6">Payment</h1>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <form onSubmit={placeOrder} className="lg:col-span-2 space-y-6">

@@ -79,7 +79,7 @@ const MyAccount = () => {
           flexDirection: "row",
           minHeight: "60vh",
           maxWidth: 1000,
-          margin: "32px auto",
+          margin: "2rem auto",
           borderRadius: 8,
           boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
           overflow: "hidden",
@@ -91,7 +91,7 @@ const MyAccount = () => {
             minWidth: 200,
             backgroundColor: theme.bottomFooterBackgroundColor,
             borderRight: "1px solid #eee",
-            padding: "24px 0",
+            padding: "1.5rem 0",
           }}
         >
           <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
@@ -102,7 +102,7 @@ const MyAccount = () => {
                   style={{
                     display: "block",
                     width: "100%",
-                    padding: "12px 24px",
+                    padding: "0.75 1.5rem",
                     // background:
                     //   selected === item.key ? "#e0e7ff" : "transparent",
                     border: "none",
@@ -121,7 +121,7 @@ const MyAccount = () => {
           </ul>
         </nav>
         {/* Right Content */}
-        <section style={{ flex: 1, padding: "32px 24px" }}>
+        <section style={{ flex: 1, padding: "2rem 1.5rem" }}>
           {renderContent(selected)}
         </section>
       </div>

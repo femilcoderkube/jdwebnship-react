@@ -58,12 +58,12 @@ function Product() {
   return (
     <div className="">
       <CommonHeader />
-      <div className="mx-auto py-[50px] lg:py-[100px]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 px-4 sm:px-6 lg:px-10 xl:px-[60px]">
+      <div className="mx-auto py-[3.125rem] lg:py-[100px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 px-4 sm:px-6 lg:px-10 xl:px-[3.75rem]">
           {/* Left Column: Filters */}
           <div className="lg:col-span-2 text-start">
             <div>
-              <h4 className="text-lg font-bold mb-2 uppercase text-[14px] text-[#111111]">
+              <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
                 Filter By <span>(2)</span>
               </h4>
               <span className="underline">Clear All</span>
@@ -73,10 +73,10 @@ function Product() {
 
             {/* Availability Filter */}
             <div className="mb-6">
-              <h4 className="text-lg font-bold mb-2 uppercase text-[14px] text-[#111111]">
+              <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
                 Availability
               </h4>
-              <label className="flex items-center mb-2 text-[14px]">
+              <label className="flex items-center mb-2 text-[0.875rem]">
                 <input type="checkbox" className="mr-2" defaultChecked />
                 In Stock
               </label>
@@ -88,14 +88,14 @@ function Product() {
 
             {/* Category Filter */}
             <div className="mb-6">
-              <h4 className="text-lg font-bold mb-2 uppercase text-[14px] text-[#111111]">
+              <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
                 Category
               </h4>
-              <label className="flex items-center mb-2 text-[14px]">
+              <label className="flex items-center mb-2 text-[0.875rem]">
                 <input type="checkbox" className="mr-2" />
                 Women's Watch
               </label>
-              <label className="flex items-center mb-2 text-[14px]">
+              <label className="flex items-center mb-2 text-[0.875rem]">
                 <input type="checkbox" className="mr-2" />
                 Perfumes for Men
               </label>
@@ -107,7 +107,7 @@ function Product() {
 
             {/* Price Range Slider */}
             <div>
-              <h4 className="text-lg font-bold mb-2 uppercase text-[14px] text-[#111111]">
+              <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
                 Price Range
               </h4>
               <div className="flex justify-between mb-2">

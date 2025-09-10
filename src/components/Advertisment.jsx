@@ -8,7 +8,7 @@ function Advertisment() {
   const { theme, bottomFooterTextColor, buttonTextColor } = useTheme();
   return (
     <div
-      className="py-[15px]"
+      className="py-[0.9375rem]"
       style={{
         backgroundColor: theme?.bottomFooterBackgroundColor || "#1f2937",
         color: bottomFooterTextColor || "#ffffff",
@@ -16,7 +16,7 @@ function Advertisment() {
       }}
     >
       <Marquee>
-        <div className="flex gap-4 text-[14px]">
+        <div className="flex gap-4 text-[0.875rem]">
           <span>Step into style </span> • <span> Empower your look</span> •
           <span>Step into style </span> • <span> Empower your look</span> •
           <span>Step into style </span> • <span> Empower your look</span> •
@@ -27,7 +27,7 @@ function Advertisment() {
         </div>
       </Marquee>
       <div
-        className="py-[24px] px-4 sm:px-6 lg:px-10 xl:px-[60px] rounded-[34px] relative"
+        className="py-[1.5rem] px-4 sm:px-6 lg:px-10 xl:px-[3.75rem] rounded-[2.125rem] relative"
         style={{
           width: "100%",
           height: "780px",
@@ -42,20 +42,20 @@ function Advertisment() {
           style={{
             width: "100%",
             height: "100%",
-            borderRadius: "34px",
+            borderRadius: "2.125rem",
             objectFit: "cover",
           }}
         />
-        <div className="absolute top-1/2 left-1/2 w-full max-w-[320px] sm:max-w-[730px] -translate-x-1/2 -translate-y-1/2 category-title p-[20px] sm:p-[40px] md:p-[60px] rounded-[34px] overflow-hidden">
-          <div className="flex flex-col gap-[15px]">
+        <div className="absolute top-1/2 left-1/2 w-full max-w-[20rem] sm:max-w-[45.625rem] -translate-x-1/2 -translate-y-1/2 category-title p-[20px] sm:p-[2.5rem] md:p-[3.75rem] rounded-[2.125rem] overflow-hidden">
+          <div className="flex flex-col gap-[0.9375rem]">
             <h2
-              className="text-lg font-bold text-[26px] lg:text-[42px] text-white"
+              className="text-lg font-bold text-[1.625rem] lg:text-[2.625rem] text-white"
               style={{ whiteSpace: "normal" }}
             >
               Browse Our Fashion Paradise!
             </h2>
             <p
-              className="text-[16px] lg:text-[22px] text-white"
+              className="text-[1rem] lg:text-[22px] text-white"
               style={{ whiteSpace: "normal" }}
             >
               Step into a world of style and explore our diverse collection of
@@ -64,7 +64,7 @@ function Advertisment() {
             <div>
               <Link
                 to={"/shop"}
-                className="inline-flex gap-2 btn px-[24px] py-[15px] rounded-lg text-sm font-medium focus:outline-none items-center w-max justify-center"
+                className="inline-flex gap-2 btn px-[1.5rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none items-center w-max justify-center"
               >
                 View Collection
                 <span>
@@ -91,7 +91,7 @@ function Advertisment() {
         </div>
       </div>
       <Marquee>
-        <div className="flex gap-4 text-[14px]">
+        <div className="flex gap-4 text-[0.875rem]">
           <span>Step into style </span> • <span> Empower your look</span> •
           <span>Step into style </span> • <span> Empower your look</span> •
           <span>Step into style </span> • <span> Empower your look</span> •

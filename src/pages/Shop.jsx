@@ -57,7 +57,7 @@ function Shop() {
   return (
     <div>
       <CommonHeader />
-      <section className="px-4 sm:px-6 lg:px-10 xl:px-[60px] py-[50px] lg:py-[100px]">
+      <section className="px-4 sm:px-6 lg:px-10 xl:px-[3.75rem] py-[3.125rem] lg:py-[100px]">
         <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5  gap-4">
           {cardItems.map((item, idx) => (
             <CardItem item={item} />

@@ -18,10 +18,10 @@ function Footer() {
         fontFamily: theme?.fontFamily || "system-ui, -apple-system, sans-serif",
       }}
     >
-      <div className="px-4 sm:px-6 lg:px-10 xl:px-[60px] pt-[70px]">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-6 pb-[30px] lg:pb-[60px] gap-4">
+      <div className="px-4 sm:px-6 lg:px-10 xl:px-[3.75rem] pt-[70px]">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-6 pb-[30px] lg:pb-[3.75rem] gap-4">
           <div className="text-left">
-            <h2 className="uppercase mb-6 text-sm font-semibold text-[24px] lg:text[32px]">
+            <h2 className="uppercase mb-6 text-sm font-semibold text-[1.5rem] lg:text[2rem]">
               Store name
             </h2>
           </div>
@@ -124,7 +124,7 @@ function Footer() {
         <div className="border opacity-5"></div>
       </div>
 
-      <div className="pt-[15px]">
+      <div className="pt-[0.9375rem]">
         <p>© {new Date().getFullYear()} My Vite App. All rights reserved.</p>
       </div>
     </footer>
