@@ -9,6 +9,7 @@ import CommonHeader from "./components/CommonHeader";
 import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
 import Shop from "./pages/Shop";
+import MyAccount from "./pages/MyAccount";
 import "./App.css";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/product" element={<Product />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/my-account" element={<MyAccount />} />
           {/* Add more routes as needed, e.g., <Route path="/contact" element={<Contact />} /> */}
         </Routes>
         {/* Note: Outlet is not needed if using Routes directly; this setup uses Routes for simplicity */}

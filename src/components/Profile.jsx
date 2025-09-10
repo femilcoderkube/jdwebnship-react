@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { useTheme } from "../contexts/ThemeContext";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
+  const navigate = useNavigate();
   const { theme, headerTextColor } = useTheme();
   return (
-    <div className="relative">
+    <div
+      className="relative cursor-pointer"
+      onClick={(e) => {
+        e.preventDefault();
+        navigate("/my-account");
+      }}
+    >
       {/* Settings Button */}
 
       <svg
