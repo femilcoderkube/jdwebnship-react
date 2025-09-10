@@ -45,12 +45,12 @@ function Advertisment() {
             objectFit: "cover",
           }}
         />
-        <div className="absolute top-1/2 left-1/2 w-full max-w-3xl -translate-x-1/2 -translate-y-1/2 category-title py-4 lg:p-[60px] rounded-[34px] overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 w-full max-w-[320px] sm:max-w-[730px] -translate-x-1/2 -translate-y-1/2 category-title p-[20px] sm:p-[40px] md:p-[60px] rounded-[34px] overflow-hidden">
           <div className="flex flex-col gap-[15px]">
-            <h2 className="text-lg font-bold text-[30px] lg:text-[42px] text-white">
+            <h2 className="text-lg font-bold text-[26px] lg:text-[42px] text-white">
               Browse Our Fashion Paradise!
             </h2>
-            <p className="text-[18px] lg:text-[22px] text-white">
+            <p className="text-[16px] lg:text-[22px] text-white">
               Step into a world of style and explore our diverse collection of
               clothing categories.
             </p>

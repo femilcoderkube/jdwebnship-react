@@ -16,7 +16,6 @@ function Home() {
       <ShopCategory />
       <Advertisment />
       <ProductSection />
-      <SecondProductSection />
       <SocialAdvertisementImage />
     </div>
   );
