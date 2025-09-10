@@ -4,11 +4,12 @@ import Settings from "./Settings";
 import Search from "./Search";
 import Profile from "./Profile";
 import Cart from "./Cart";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-function Header() {
+function Header({ offsetY = 0, onHeightChange }) {
   const { theme, headerTextColor } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const ref = useRef(null);
 
   // Prevent background scroll when drawer is open
   useEffect(() => {
@@ -22,8 +23,24 @@ function Header() {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    if (!ref.current) return;
+    const measure = () => {
+      const h = ref.current?.offsetHeight || 0;
+      onHeightChange && onHeightChange(h);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(ref.current);
+    return () => ro.disconnect();
+  }, [onHeightChange]);
+
   return (
-    <header>
+    <header
+      ref={ref}
+      className="fixed left-0 right-0 z-40 transition-transform duration-300 ease-out"
+      style={{ top: offsetY }}
+    >
       <nav
         className="flex items-center relative justify-between px-4 sm:px-6 lg:px-10 xl:px-[3.75rem] py-[0.75] lg:py-[1.5rem]"
         style={{
@@ -92,7 +109,10 @@ function Header() {
           </div>
         </div>
 
-        <Link className="center-nav flex-1 flex items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" to="/">
+        <Link
+          className="center-nav flex-1 flex items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          to="/"
+        >
           <h1
             className="uppercase text-[1.125rem] sm:text-[20px] lg:text-[1.5rem] xl:text-[2rem] font-medium text-center"
             style={{ color: headerTextColor || "#111111" }}

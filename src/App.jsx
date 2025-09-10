@@ -14,7 +14,7 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger"; // Import ScrollTrigger
 import ScrollSmoother from "./gsap-bonus/ScrollSmoother"; // Local file import
@@ -29,6 +29,43 @@ import "./App.css";
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 function App() {
+  const [showTopHeader, setShowTopHeader] = useState(true);
+  const [topHeaderHeight, setTopHeaderHeight] = useState(0);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const [contentPaddingTop, setContentPaddingTop] = useState(0);
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let ticking = false;
+    const threshold = 12; // pixels to avoid flicker
+
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastY;
+      lastY = currentY;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (currentY <= 0) {
+            setShowTopHeader(true);
+          } else if (delta > threshold) {
+            setShowTopHeader(false);
+          } else if (delta < -threshold) {
+            setShowTopHeader(true);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const total = (showTopHeader ? topHeaderHeight : 0) + headerHeight;
+    setContentPaddingTop(total);
+  }, [showTopHeader, topHeaderHeight, headerHeight]);
   useLayoutEffect(() => {
     // Verify elements exist
     const wrapper = document.querySelector("#smooth-wrapper");
@@ -55,11 +92,17 @@ function App() {
 
   return (
     <div id="smooth-wrapper">
+      <TopHeader visible={showTopHeader} onHeightChange={setTopHeaderHeight} />
+      <Header
+        offsetY={showTopHeader ? topHeaderHeight : 0}
+        onHeightChange={setHeaderHeight}
+      />
       <div id="smooth-content">
         <div className="App">
-          <TopHeader />
-          <Header />
-          <main className="main-content">
+          <main
+            className="main-content"
+            style={{ paddingTop: contentPaddingTop }}
+          >
             <Routes>
               {" "}
               {/* NEW: Define routes here */}
