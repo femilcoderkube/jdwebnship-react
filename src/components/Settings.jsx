@@ -109,6 +109,9 @@ function Settings() {
                   <option value='"Inter", system-ui, -apple-system, sans-serif'>
                     Inter
                   </option>
+                  <option value='"Satoshi", system-ui, -apple-system, sans-serif'>
+                    Satoshi
+                  </option>
                   <option value="Georgia, serif">Georgia</option>
                   <option value="Courier New, monospace">Courier New</option>
                 </select>

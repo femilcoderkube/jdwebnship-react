@@ -12,7 +12,7 @@ const ThemeContext = createContext();
 
 export function ThemeProvider({ children, theme = {} }) {
   const [currentTheme, setCurrentTheme] = useState({
-    fontFamily: "system-ui, -apple-system, sans-serif",
+    fontFamily: "Satoshi, -apple-system, sans-serif",
     backgroundColor: "#ffffff",
     buttonBackgroundColor: "#111111",
     topHeaderBackgroundColor: "#111111",
