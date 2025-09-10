@@ -60,34 +60,31 @@ function Header() {
 
           <div className="left-nav hidden lg:flex items-center">
             <Link
-              className="text-[14px] xl:text-[16px] font-medium uppercase"
+              className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
               to="/"
               style={{
                 color: headerTextColor || "#111111",
                 margin: "0 1rem 0 0",
-                textDecoration: "none",
               }}
             >
               Home
             </Link>
             <Link
-              className="text-[14px] xl:text-[16px] font-medium uppercase"
+              className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
               to="/Category"
               style={{
                 color: headerTextColor || "#111111",
                 margin: "0 1rem",
-                textDecoration: "none",
               }}
             >
               Category
             </Link>
             <Link
-              className="text-[14px] xl:text-[16px] font-medium uppercase"
+              className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
               to="/shop"
               style={{
                 color: headerTextColor || "#111111",
                 margin: "0 1rem",
-                textDecoration: "none",
               }}
             >
               Shop
@@ -106,23 +103,21 @@ function Header() {
         <div className="right-nav flex items-center gap-3 sm:gap-4">
           <div className="hidden lg:flex items-center">
             <Link
-              className="text-[14px] xl:text-[16px] font-medium uppercase"
+              className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
               to="/shop"
               style={{
                 color: headerTextColor || "#111111",
                 margin: "0 1rem",
-                textDecoration: "none",
               }}
             >
               About Us
             </Link>
             <Link
-              className="text-[14px] xl:text-[16px] font-medium uppercase"
+              className="text-[14px] xl:text-[16px] font-medium uppercase hover:underline transition-all duration-300"
               to="/about"
               style={{
                 color: headerTextColor || "#111111",
                 margin: "0 1rem",
-                textDecoration: "none",
               }}
             >
               Contact Us

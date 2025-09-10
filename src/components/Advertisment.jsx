@@ -14,8 +14,13 @@ function Advertisment() {
       }}
     >
       <Marquee>
-        <div className="flex">
-          <span>Step into style </span> • <span> Empower your look</span>
+        <div className="flex gap-3">
+          <span>Step into style </span> • <span> Empower your look</span> •
+          <span>Step into style </span> • <span> Empower your look</span> •
+          <span>Step into style </span> • <span> Empower your look</span> •
+          <span>Step into style </span> • <span> Empower your look</span> •
+          <span>Step into style </span> • <span> Empower your look</span> •
+          <span>Step into style </span> • <span> Empower your look</span> •
         </div>
       </Marquee>
       <div

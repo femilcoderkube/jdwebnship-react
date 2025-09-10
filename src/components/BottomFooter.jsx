@@ -21,13 +21,13 @@ function BottomFooter({}) {
         <p className="text-[18px] lg:text-[22px]">
           We love to surprise our subscribers with occasional gifts.
         </p>
-        <div className="flex justify-center items-stretch">
+        <div className="flex justify-center items-stretch px-4">
           <input
             type="email"
             id="email"
             placeholder="Email Address"
             required
-            className="px-[24px] py-[15px] md:w-[300px] rounded-l-lg bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-0"
+            className="px-[24px] py-[15px] lg:w-[300px] rounded-l-lg bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-0"
           />
           <button
             className="btn px-[24px] py-[15px] rounded-r-lg text-sm font-medium focus:outline-none"

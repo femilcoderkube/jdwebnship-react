@@ -14,7 +14,7 @@ function CommonHeader({ className = "", ...props }) {
       <div className="py-[40px] lg:py-[60px] -mt-[70px] z-10 relative rounded-b-none rounded-3xl">
         <div className="flex items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-[60px]">
           <div className="grid md:grid-cols-3 xxl:px-[248px]">
-            <div className="px-[40px] lg:px-[60px] py-[20px] lg:py-[30px] md:border-0 md:border-r">
+            <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
               <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
                 Free Shipping
               </h1>
@@ -23,7 +23,7 @@ function CommonHeader({ className = "", ...props }) {
                 Don't miss out.
               </p>
             </div>
-            <div className="px-[40px] lg:px-[60px] py-[20px] lg:py-[30px] md:border-0 md:border-r">
+            <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
               <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
                 Secure Payment
               </h1>
@@ -31,7 +31,7 @@ function CommonHeader({ className = "", ...props }) {
                 Your security is our priority. Your payments are secure with us.
               </p>
             </div>
-            <div className="px-[40px] lg:px-[60px] py-[20px] lg:py-[30px]">
+            <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px]">
               <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
                 Satisfaction Guarantee
               </h1>
@@ -58,7 +58,7 @@ function CommonHeader({ className = "", ...props }) {
   } else if (location.pathname === "/product") {
     innerContent = (
       <div className="xxl:px-[248px]">
-        <div className="px-[40px] lg:px-[60px] py-[20px] lg:py-[30px] md:border-0 md:border-r">
+        <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
           <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
             Women's Watch
           </h1>
@@ -71,20 +71,32 @@ function CommonHeader({ className = "", ...props }) {
   } else if (location.pathname === "/shop") {
     innerContent = (
       <div className="xxl:px-[248px]">
-        <div className="px-[40px] lg:px-[60px] py-[20px] lg:py-[30px] md:border-0 md:border-r">
-          <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
+        <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
+          <nav class="flex justify-center" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+              <li class="inline-flex items-center font-medium me-4">
+                <a href="#" class="inline-flex items-center">
+                  Home
+                </a>
+              </li>
+              <li aria-current="page">
+                <div class="flex items-center border-l opacity-35 font-medium ps-4">
+                  <span class="ms-1 text-sm">Categories</span>
+                </div>
+              </li>
+            </ol>
+          </nav>
+
+          <h1 className="text-[30px] lg:text-[42px] font-bold">
             Shop By Category
           </h1>
-          <p className="text-lg font-normal">
-            Elevate your look with precision and class.
-          </p>
         </div>
       </div>
     );
   } else if (location.pathname === `/product/${id}`) {
     innerContent = (
       <div className="xxl:px-[248px]">
-        <div className="px-[40px] lg:px-[60px] py-[20px] lg:py-[30px] md:border-0 md:border-r">
+        <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
           <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
             Women's Watch
           </h1>
