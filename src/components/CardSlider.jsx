@@ -6,35 +6,36 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { CardItem } from "./CardItem";
 
+import ct01 from "../assets/images/ct-01.jpg";
+import ct02 from "../assets/images/ct-02.jpg";
+import ct03 from "../assets/images/ct-03.jpg";
+import ct04 from "../assets/images/ct-04.jpg";
+import ct05 from "../assets/images/ct-01.jpg";
+
 // Sample card data
 const cardItems = [
   {
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=334.8&h=418&q=80",
+    image: ct01,
     name: "Mountain Retreat",
     // price: "$299.99",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=334.8&h=418&q=80",
+    image: ct02,
     name: "Beach Villa",
     // price: "$399.99",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=334.8&h=418&q=80",
+    image: ct03,
     name: "City Loft",
     // price: "$199.99",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=334.8&h=418&q=80",
+    image: ct04,
     name: "Forest Cabin",
     // price: "$249.99",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=334.8&h=418&q=80",
+    image: ct05,
     name: "Mountain Retreat",
     // price: "$299.99",
   },

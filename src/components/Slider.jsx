@@ -52,7 +52,7 @@ export default function Slider() {
               alt={`Slide ${idx + 1}`}
               className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 object-cover"
             />
-            <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-1">
+            <div className="w-100 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-1">
               <p className="uppercase text-white mb-[8px]">Wardrobe Refresh</p>
               <h1 className="text-[32px] lg:text-[52px] xl:text-[62px] uppercase text-white mb-[8px]">
                 New styles are here
@@ -63,7 +63,7 @@ export default function Slider() {
 
               <a
                 href=""
-                className="inline-flex gap-2 btn px-[24px] py-[15px] rounded-lg text-sm font-medium focus:outline-none"
+                className="inline-flex gap-2 btn px-[24px] py-[15px] rounded-lg text-sm font-medium focus:outline-none items-center"
               >
                 View Collection
                 <span>

@@ -38,4 +38,5 @@ textarea {
   background-color: var(--button-bg);
   color: var(--button-text-color);
   cursor: pointer;
+  text-transform: uppercase;
 }

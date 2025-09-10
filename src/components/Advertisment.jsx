@@ -47,17 +47,23 @@ function Advertisment() {
         />
         <div className="absolute top-1/2 left-1/2 w-full max-w-[320px] sm:max-w-[730px] -translate-x-1/2 -translate-y-1/2 category-title p-[20px] sm:p-[40px] md:p-[60px] rounded-[34px] overflow-hidden">
           <div className="flex flex-col gap-[15px]">
-            <h2 className="text-lg font-bold text-[26px] lg:text-[42px] text-white">
+            <h2
+              className="text-lg font-bold text-[26px] lg:text-[42px] text-white"
+              style={{ whiteSpace: "normal" }}
+            >
               Browse Our Fashion Paradise!
             </h2>
-            <p className="text-[16px] lg:text-[22px] text-white">
+            <p
+              className="text-[16px] lg:text-[22px] text-white"
+              style={{ whiteSpace: "normal" }}
+            >
               Step into a world of style and explore our diverse collection of
               clothing categories.
             </p>
             <div>
               <a
                 href=""
-                className="inline-flex gap-2 btn px-[24px] py-[15px] rounded-lg text-sm font-medium focus:outline-none w-max justify-center"
+                className="inline-flex gap-2 btn px-[24px] py-[15px] rounded-lg text-sm font-medium focus:outline-none items-center w-max justify-center"
               >
                 View Collection
                 <span>

@@ -80,8 +80,10 @@ input[type="color"]::-webkit-color-swatch {
 
 .category-title{
   background: rgba(17, 17, 17, 0.15);
-  width: 100%;
+  /* width: 100%; */
   backdrop-filter: blur(15px);
+  white-space: nowrap;
+  transition: all ease-in-out 0.5s;
 }
 
 .swiper-button-prev:after,
@@ -119,4 +121,14 @@ input[type="color"]::-webkit-color-swatch {
   height: 42px !important;
   background: #fff;
   border-radius: 10px;
+}
+
+
+.card-element .hover-content {
+  opacity: 0;
+  transition: all ease-in-out 0.5s;
+}
+
+.card-element:hover .hover-content {
+  opacity: 1;
 }

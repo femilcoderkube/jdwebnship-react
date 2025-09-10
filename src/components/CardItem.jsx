@@ -6,7 +6,7 @@ export function CardItem({ item }) {
         alt={item.name}
         className="w-full object-cover rounded-[18px]"
       />
-      <div className="absolute bottom-0 w-100 category-title py-[16px] lg:py-[34px] rounded-lg rounded-t-none overflow-hidden">
+      <div className="absolute bottom-0 category-title py-[16px] lg:py-[34px] rounded-lg rounded-t-none overflow-hidden left-0 right-0">
         <h3 className="text-lg font-bold text-[18px] lg:text-[24px] text-white">
           {item.name}
         </h3>

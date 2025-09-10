@@ -15,6 +15,13 @@ function SocialAdvertisementImage() {
     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=354&h=418&q=80",
     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=354&h=418&q=80",
     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=354&h=418&q=80",
+    "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=354&h=418&q=80",
+    "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=354&h=418&q=80",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=354&h=418&q=80",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=354&h=418&q=80",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=354&h=418&q=80",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=354&h=418&q=80",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=354&h=418&q=80",
   ];
 
   return (
@@ -23,33 +30,28 @@ function SocialAdvertisementImage() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        margin: "15px", // Maintaining gap from previous request
         padding: 0,
       }}
     >
-      <span
-        style={{
-          marginBottom: "10px",
-          fontFamily: "system-ui, -apple-system, sans-serif",
-          fontSize: "16px",
-        }}
-      >
-        Follow @storename on Instagram
-      </span>
+      <h2 className="text-[32px] lg:text-[42px] font-bold mb-[20px] md-[30px] lg:mb-[50px]">
+        Follow <span>@storename</span> on Instagram
+      </h2>
       <Swiper
         modules={[Navigation, Pagination]}
-        spaceBetween={15}
+        spaceBetween={0}
         slidesPerView={1.3} // Default for small screens
-        navigation
-        pagination={{ clickable: true }}
+        loop={true} // ✅ Enable infinite loop
+        centeredSlides={true} // ✅ Center the active slide
+        // navigation
+        // pagination={{ clickable: true }}
         breakpoints={{
-          320: { slidesPerView: 1.3 },
-          640: { slidesPerView: 2.3 },
-          1366: { slidesPerView: 3 }, // Show all 3 images on larger screens
+          0: { slidesPerView: 2.8 },
+          768: { slidesPerView: 4.8 },
+          1366: { slidesPerView: 5.8 }, // Show ~5 slides on large screens
         }}
         style={{
-          width: "100%", // Full width of container
-          maxWidth: "1200px", // Limit max width for large screens
+          width: "100%",
+          maxWidth: "100%",
         }}
       >
         {images.map((src, index) => (
@@ -61,8 +63,6 @@ function SocialAdvertisementImage() {
               src={src}
               alt={`Social Advertisement ${index + 1}`}
               style={{
-                width: "354px",
-                height: "418px",
                 transform: "rotate(0deg)",
                 opacity: 1,
                 objectFit: "cover",

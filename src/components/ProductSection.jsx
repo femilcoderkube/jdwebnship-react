@@ -2,51 +2,75 @@ import React from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import CardComponent from "./CardComponent";
 
+import s01 from "../assets/images/s-01.jpg";
+import s02 from "../assets/images/s-02.jpg";
+import s03 from "../assets/images/s-03.jpg";
+import s04 from "../assets/images/s-04.jpg";
+import s05 from "../assets/images/s-05.jpg";
+
 function ProductSection() {
+  const { theme, buttonTextColor } = useTheme();
+
   const products = [
     {
       productName: "Chanel Jumbo Paris Glossy bag with...",
       price: "3,298",
-      imageSrc:
-        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+      imageSrc: s01,
     },
     {
       productName: "Sample Product 2",
       price: "49.99",
-      imageSrc:
-        "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+      imageSrc: s02,
     },
     {
       productName: "Sample Product 3",
       price: "19.99",
-      imageSrc:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+      imageSrc: s03,
     },
     {
       productName: "Sample Product 1",
       price: "29.99",
-      imageSrc:
-        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+      imageSrc: s04,
     },
     {
       productName: "Sample Product 2",
       price: "49.99",
-      imageSrc:
-        "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+      imageSrc: s05,
+    },
+    {
+      productName: "Chanel Jumbo Paris Glossy bag with...",
+      price: "3,298",
+      imageSrc: s01,
+    },
+    {
+      productName: "Sample Product 2",
+      price: "49.99",
+      imageSrc: s02,
     },
     {
       productName: "Sample Product 3",
       price: "19.99",
-      imageSrc:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+      imageSrc: s03,
+    },
+    {
+      productName: "Sample Product 1",
+      price: "29.99",
+      imageSrc: s04,
+    },
+    {
+      productName: "Sample Product 2",
+      price: "49.99",
+      imageSrc: s05,
     },
   ];
 
   return (
-    <div>
-      <span>Explore</span>
-      <span>New Trending</span>
-      <section className="px-4 sm:px-6 lg:px-10 xl:px-[60px] py-[50px] lg:py-[100px]">
+    <div className="py-[50px] lg:py-[100px]">
+      <p className="uppercase">Explore</p>
+      <h2 className="text-[32px] lg:text-[42px] font-bold mb-[20px] md-[30px] lg:mb-[50px]">
+        New Trending
+      </h2>
+      <section className="px-4 sm:px-6 lg:px-10 xl:px-[60px]">
         <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 xxl:grid-cols-5  gap-4">
           {products.map((product, index) => (
             <CardComponent
@@ -56,6 +80,31 @@ function ProductSection() {
               imageSrc={product.imageSrc}
             />
           ))}
+        </div>
+        <div className="mt-[30px] lg:mt-[50px]">
+          <a
+            href=""
+            className="inline-flex gap-2 btn px-[24px] py-[15px] rounded-lg text-sm font-medium focus:outline-none items-center"
+          >
+            Shop ALL New Trending
+            <span>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 17L17 7M17 7H7M17 7V17"
+                  stroke={buttonTextColor}
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
         </div>
       </section>
     </div>
