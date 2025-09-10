@@ -12,6 +12,7 @@ function Settings() {
     setFooterBackgroundColor,
     setBottomFooterBackgroundColor,
     setBannerType, // <-- add this
+    setCategoryLayout,
   } = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -246,6 +247,21 @@ function Settings() {
                   <option value="slider">Slider</option>
                   <option value="image">Image</option>
                   <option value="video">Video</option>
+                </select>
+              </div>
+
+              {/* Category Layout */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Category Layout
+                </label>
+                <select
+                  value={theme?.categoryLayout || "swiper"}
+                  onChange={(e) => setCategoryLayout(e.target.value)}
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="swiper">Swiper</option>
+                  <option value="list">List</option>
                 </select>
               </div>
 

@@ -21,6 +21,8 @@ export function ThemeProvider({ children, theme = {} }) {
     bottomFooterBackgroundColor: "#FFF7F2",
     // Add bannerType default
     bannerType: "slider",
+    // Category layout: 'swiper' | 'list'
+    categoryLayout: "swiper",
     ...theme,
   });
 
@@ -107,6 +109,9 @@ export function ThemeProvider({ children, theme = {} }) {
       // Add setBannerType
       setBannerType: (bannerType) =>
         setCurrentTheme((prev) => ({ ...prev, bannerType })),
+      // Add category layout setter
+      setCategoryLayout: (categoryLayout) =>
+        setCurrentTheme((prev) => ({ ...prev, categoryLayout })),
     }),
     [
       currentTheme,
