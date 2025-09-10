@@ -4,9 +4,10 @@ import AdvertismentImg from "../assets/images/Advertisment.png";
 import Marquee from "react-fast-marquee";
 
 function Advertisment() {
-  const { theme, bottomFooterTextColor } = useTheme();
+  const { theme, bottomFooterTextColor, buttonTextColor } = useTheme();
   return (
     <div
+      className="py-[15px]"
       style={{
         backgroundColor: theme?.bottomFooterBackgroundColor || "#1f2937",
         color: bottomFooterTextColor || "#ffffff",
@@ -14,7 +15,8 @@ function Advertisment() {
       }}
     >
       <Marquee>
-        <div className="flex gap-3">
+        <div className="flex gap-4 text-[14px]">
+          <span>Step into style </span> • <span> Empower your look</span> •
           <span>Step into style </span> • <span> Empower your look</span> •
           <span>Step into style </span> • <span> Empower your look</span> •
           <span>Step into style </span> • <span> Empower your look</span> •
@@ -24,8 +26,9 @@ function Advertisment() {
         </div>
       </Marquee>
       <div
+        className="py-[24px] px-4 sm:px-6 lg:px-10 xl:px-[60px] rounded-[34px] relative"
         style={{
-          width: "1800px",
+          width: "100%",
           height: "780px",
           display: "flex",
           justifyContent: "center",
@@ -36,13 +39,61 @@ function Advertisment() {
           src={AdvertismentImg}
           alt="Advertisement"
           style={{
-            width: "1770px",
-            height: "780px",
+            width: "100%",
+            height: "100%",
             borderRadius: "34px",
             objectFit: "cover",
           }}
         />
+        <div className="absolute top-1/2 left-1/2 w-full max-w-3xl -translate-x-1/2 -translate-y-1/2 category-title py-4 lg:p-[60px] rounded-[34px] overflow-hidden">
+          <div className="flex flex-col gap-[15px]">
+            <h2 className="text-lg font-bold text-[30px] lg:text-[42px] text-white">
+              Browse Our Fashion Paradise!
+            </h2>
+            <p className="text-[18px] lg:text-[22px] text-white">
+              Step into a world of style and explore our diverse collection of
+              clothing categories.
+            </p>
+            <div>
+              <a
+                href=""
+                className="inline-flex gap-2 btn px-[24px] py-[15px] rounded-lg text-sm font-medium focus:outline-none w-max justify-center"
+              >
+                View Collection
+                <span>
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7 17L17 7M17 7H7M17 7V17"
+                      stroke={buttonTextColor}
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+          {/* <p className="text-md text-gray-600">{item.price}</p> */}
+        </div>
       </div>
+      <Marquee>
+        <div className="flex gap-4 text-[14px]">
+          <span>Step into style </span> • <span> Empower your look</span> •
+          <span>Step into style </span> • <span> Empower your look</span> •
+          <span>Step into style </span> • <span> Empower your look</span> •
+          <span>Step into style </span> • <span> Empower your look</span> •
+          <span>Step into style </span> • <span> Empower your look</span> •
+          <span>Step into style </span> • <span> Empower your look</span> •
+          <span>Step into style </span> • <span> Empower your look</span> •
+        </div>
+      </Marquee>
     </div>
   );
 }
