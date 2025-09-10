@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CommonHeader from "../components/CommonHeader";
+import { useTheme } from "../contexts/ThemeContext";
 
 const menuItems = [
   { key: "orders", label: "Orders" },
@@ -67,6 +68,8 @@ const renderContent = (selected) => {
 const MyAccount = () => {
   const [selected, setSelected] = useState("orders");
 
+  const { theme, bottomFooterTextColor } = useTheme();
+
   return (
     <div>
       <CommonHeader />
@@ -77,7 +80,6 @@ const MyAccount = () => {
           minHeight: "60vh",
           maxWidth: 1000,
           margin: "32px auto",
-          background: "#fff",
           borderRadius: 8,
           boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
           overflow: "hidden",
@@ -87,7 +89,7 @@ const MyAccount = () => {
         <nav
           style={{
             minWidth: 200,
-            background: "#f7f7f7",
+            backgroundColor: theme.bottomFooterBackgroundColor,
             borderRight: "1px solid #eee",
             padding: "24px 0",
           }}
@@ -101,12 +103,12 @@ const MyAccount = () => {
                     display: "block",
                     width: "100%",
                     padding: "12px 24px",
-                    background:
-                      selected === item.key ? "#e0e7ff" : "transparent",
+                    // background:
+                    //   selected === item.key ? "#e0e7ff" : "transparent",
                     border: "none",
                     textAlign: "left",
                     fontWeight: selected === item.key ? 600 : 400,
-                    color: selected === item.key ? "#1d4ed8" : "#222",
+                    color: bottomFooterTextColor,
                     cursor: "pointer",
                     outline: "none",
                     transition: "background 0.2s",
