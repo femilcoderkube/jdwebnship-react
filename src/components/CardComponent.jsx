@@ -37,7 +37,7 @@ const CardComponent = ({ productName, price, imageSrc }) => {
       </div>
       <div className="hover-content absolute left-0 right-0 h-100">
         <div className="flex justify-between h-100">
-          <span className="bg-[#1111116b] uppercase text-[0.875rem] px-[0.9375rem] py-[8px] rounded-[8px] absolute top-[0.9375rem] left-[8px] font-bold text-white">
+          <span className="bg-[#1111116b] uppercase text-[0.875rem] px-[0.9375rem] py-[8px] rounded-[8px] absolute top-[0.9375rem] left-[8px] font-bold text-white backdrop-blur-md transition-all duration-150 ease-in-out">
             Out Of Stock
           </span>
           <div className="social-icon absolute top-[0.9375rem] flex flex-col gap-2 right-[0.9375rem]">

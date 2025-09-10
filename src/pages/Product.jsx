@@ -59,7 +59,7 @@ function Product() {
     <div className="">
       <CommonHeader />
       <div className="mx-auto py-[3.125rem] lg:py-[100px]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 px-4 sm:px-6 lg:px-10 xl:px-[3.75rem]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-7.5 px-4 sm:px-6 lg:px-10 xl:px-[3.75rem]">
           {/* Left Column: Filters */}
           <div className="lg:col-span-2 text-start">
             <div>
@@ -139,7 +139,7 @@ function Product() {
 
           {/* Right Column: Product Display */}
           <div className="lg:col-span-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-y-[4.375rem] px-3.75">
               {products.map((product, index) => (
                 <CardComponent
                   key={index}

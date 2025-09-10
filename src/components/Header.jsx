@@ -92,14 +92,14 @@ function Header() {
           </div>
         </div>
 
-        <div className="center-nav flex-1 flex items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <Link className="center-nav flex-1 flex items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" to="/">
           <h1
             className="uppercase text-[1.125rem] sm:text-[20px] lg:text-[1.5rem] xl:text-[2rem] font-medium text-center"
             style={{ color: headerTextColor || "#111111" }}
           >
             Store name
           </h1>
-        </div>
+        </Link>
         <div className="right-nav flex items-center gap-3 sm:gap-4">
           <div className="hidden lg:flex items-center">
             <Link
