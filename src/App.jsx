@@ -54,34 +54,38 @@ function App() {
   }, []); // Empty dependency array: run once after mount
 
   return (
-    <div className="App">
-      <TopHeader />
-      <Header />
-      <main className="main-content">
-        <Routes>
-          {" "}
-          {/* NEW: Define routes here */}
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/shop" element={<Product />} />
-          <Route path="/shop/:id" element={<ProductDetail />} />
-          <Route path="/categories" element={<Shop />} />
-          <Route path="/my-account" element={<MyAccount />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/order-success" element={<OrderSuccess />} />
-          <Route path="/order-failure" element={<OrderFailure />} />
-          {/* Add more routes as needed, e.g., <Route path="/contact" element={<Contact />} /> */}
-        </Routes>
-        {/* Note: Outlet is not needed if using Routes directly; this setup uses Routes for simplicity */}
-      </main>
-      <BottomFooter />
-      <Footer />
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <div className="App">
+          <TopHeader />
+          <Header />
+          <main className="main-content">
+            <Routes>
+              {" "}
+              {/* NEW: Define routes here */}
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/shop" element={<Product />} />
+              <Route path="/shop/:id" element={<ProductDetail />} />
+              <Route path="/categories" element={<Shop />} />
+              <Route path="/my-account" element={<MyAccount />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/order-success" element={<OrderSuccess />} />
+              <Route path="/order-failure" element={<OrderFailure />} />
+              {/* Add more routes as needed, e.g., <Route path="/contact" element={<Contact />} /> */}
+            </Routes>
+            {/* Note: Outlet is not needed if using Routes directly; this setup uses Routes for simplicity */}
+          </main>
+          <BottomFooter />
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 }
