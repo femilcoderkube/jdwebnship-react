@@ -71,6 +71,11 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
+          <Route path="/order-failure" element={<OrderFailure />} />
           {/* Add more routes as needed, e.g., <Route path="/contact" element={<Contact />} /> */}
         </Routes>
         {/* Note: Outlet is not needed if using Routes directly; this setup uses Routes for simplicity */}
