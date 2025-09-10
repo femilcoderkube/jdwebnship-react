@@ -11,7 +11,7 @@ function CommonHeader({ className = "", ...props }) {
     "/": {
       content: (
         <div className="py-[40px] lg:py-[60px] -mt-[70px] z-10 relative rounded-b-none rounded-3xl">
-          <div className="flex items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-[60px]">
+          <div className="flex items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-[60px] max-w-[90rem] ml-auto mr-auto">
             <div className="grid md:grid-cols-3 xxl:px-[248px]">
               <div className="px-[40px] lg:px-[60px] py-[30px] lg:py-[60px] md:border-0 md:border-r">
                 <h1 className="mb-4 text-[18px] lg:text-[24px] font-bold">
