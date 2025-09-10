@@ -79,22 +79,13 @@ function CommonHeader({ className = "", ...props }) {
       title: "Forgot Password",
     },
     "/reset-password": {
-      title: "Reset Password",
+      title: "Reset Password"
     },
     [`/shop/${id}`]: {
-      content: (
-        <div className="xxl:px-[248px]">
-          <div className="px-[2.5rem] lg:px-[3.75rem] py-[30px] lg:py-[3.75rem] md:border-0 md:border-r">
-            <h1 className="mb-4 text-[1.125rem] lg:text-[1.5rem] font-bold">
-              Women's Watch
-            </h1>
-            <p className="text-lg font-normal">
-              Elevate your look with precision and class.
-            </p>
-          </div>
-        </div>
-      ),
-    },
+      title: "Women's Watch", 
+      breadcrumb: true,
+    }
+  
   };
 
   // Breadcrumb component for reusability

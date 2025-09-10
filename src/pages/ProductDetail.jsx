@@ -43,7 +43,6 @@ function ProductDetail() {
     <div className="min-h-screen">
       <CommonHeader />
       <div className="container mx-auto px-4 py-8">
-        <h2 className="text-3xl font-bold mb-6 text-center">Product Detail</h2>
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left Column: Vertical Swiper */}
           <div className="w-full lg:w-1/6 flex justify-center">

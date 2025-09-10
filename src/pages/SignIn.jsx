@@ -31,6 +31,14 @@ function SignIn() {
                 placeholder="••••••••"
               />
             </div>
+            <div className="mt-4 text-left">
+              <Link
+                to={"/forgot-password"}
+                className="text-sm hover:underline site-link"
+              >
+                Forgot Password?
+              </Link>
+            </div>
             <button
               type="submit"
               className="w-full bg-black text-white rounded-md py-2"
@@ -38,18 +46,10 @@ function SignIn() {
               Sign in
             </button>
           </form>
-          <div className="mt-4 text-center">
-            <Link
-              to={"/forgot-password"}
-              className="text-sm text-blue-600 hover:underline"
-            >
-              Forgot Password?
-            </Link>
-          </div>
-          <div className="mt-2 text-center">
-            <p className="text-sm">
+          <div className="mt-2 text-left">
+            <p className="text-sm text-uppercase">
               Don't have an account?{" "}
-              <Link to={"/signup"} className="text-blue-600 hover:underline">
+              <Link to={"/signup"} className="hover:underline site-link">
                 Sign up
               </Link>
             </p>
