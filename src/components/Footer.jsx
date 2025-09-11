@@ -12,7 +12,6 @@ function Footer() {
   const { theme, footerTextColor } = useTheme();
   const { storeInfo } = useSelector((state) => state.storeInfo);
 
-  console.log("storeInfo", storeInfo);
   return (
     <footer
       className="pt-[30px] py-[30px] lg:py-[70px]"

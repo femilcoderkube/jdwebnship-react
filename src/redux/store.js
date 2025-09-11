@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { clearState, loadState, saveState } from "../utils/sessionStorage";
 import authSlice from "../redux/slices/authSlice";
 import storeInfoSlice from "../redux/slices/storeInfoSlice";
+import productSlice from "../redux/slices/productSlice"
 // import cartReducer from "./slices/cartSlice";
 // import wishlistReducer from "./slices/wishlistSlice";
 // import storeReducer from "./slices/storeSlice";
@@ -11,19 +12,19 @@ import storeInfoSlice from "../redux/slices/storeInfoSlice";
 // import ordersReducer from "./slices/ordersSlice";
 // import accountDetailsReducer from "./slices/accountDetailsSlice";
 // import shippingAddressReducer from "./slices/shippingAddressSlice";
-// import { loadState, saveState, clearState } from "../utils/sessionStorage";
 
 // --- combine all slices
 const appReducer = combineReducers({
   auth: authSlice,
   storeInfo: storeInfoSlice,
+  products: productSlice,
+
   // cart: cartReducer,
   // orders: ordersReducer,
   // accountDetails: accountDetailsReducer,
   // shippingAddress: shippingAddressReducer,
   // wishlist: wishlistReducer,
   // store: storeReducer,
-  // products: productReducer,
   // checkout: checkoutReducer,
   // filters: filtersReducer,
 });
@@ -31,8 +32,13 @@ const appReducer = combineReducers({
 // --- root reducer with RESET_APP handling
 const rootReducer = (state, action) => {
   if (action.type === "RESET_APP") {
-    clearState(); // clear localStorage
-    state = undefined; // reset all slices to initialState
+    clearState();
+
+    const storeInfoState = state?.storeInfo;
+
+    state = {
+      storeInfo: storeInfoState
+    }
   }
   return appReducer(state, action);
 };
@@ -55,6 +61,7 @@ store.subscribe(() => {
     store: store.getState().store,
     products: store.getState().products,
     filters: store.getState().filters,
+    storeInfo: store.getState().storeInfo,
   });
 });
 

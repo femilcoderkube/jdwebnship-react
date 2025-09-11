@@ -18,7 +18,8 @@ export const registerUser = createAsyncThunk(
     try {
       const response = await axiosInstance.post("/customer/register", data);
       if (response?.data?.success || response?.status) {
-        navigate("/signup")
+        toast.success(response?.data?.message)
+        navigate("/signin")
       }
       return response.data;
     } catch (error) {
@@ -57,7 +58,7 @@ export const logoutUser = createAsyncThunk(
       if (response?.data?.success || response?.status) {
         dispatch(logout());
         dispatch({ type: "RESET_APP" });
-        navigate("/");
+        navigate("/signin");
       }
       return response.data;
     } catch (error) {
@@ -103,9 +104,10 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
+        console.log("action.payload",action.payload);
         state.loading = false;
         state.user = action.payload.data;
-        state.isAuthenticated = action.payload.data ? true : false;
+        state.isAuthenticated = action.payload.data.email_verification_token ? false : true;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
@@ -121,7 +123,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.data;
-        state.isAuthenticated = action.payload.data ? true : false;
+        state.isAuthenticated = action.payload.success ? true : false;
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
