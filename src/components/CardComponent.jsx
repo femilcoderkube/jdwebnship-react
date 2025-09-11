@@ -19,7 +19,7 @@ const CardComponent = ({ productName, price, imageSrc }) => {
       <div
         className="bg-[#F8F8F8] rounded-[1.125rem] flex flex-col align-items-center justify-center"
         style={{
-          height: "29.125rem",
+          height: "100%",
           borderRadius: "1.125rem",
           overflow: "hidden",
         }}

@@ -18,8 +18,8 @@ function Footer() {
         fontFamily: theme?.fontFamily || "system-ui, -apple-system, sans-serif",
       }}
     >
-      <div className="px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] pt-[70px]">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-6 pb-[30px] lg:pb-[4.6875rem] gap-4">
+      <div className="px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] pt-[4.375rem]">
+        <div className="grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6 pb-[1.875rem] lg:pb-[4.6875rem] gap-4">
           <div className="text-left">
             <h2 className="uppercase mb-6 text-sm font-semibold text-[1.5rem] lg:text[2rem]">
               Store name
