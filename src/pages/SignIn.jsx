@@ -33,11 +33,7 @@ function SignIn() {
         password: values.password,
       };
       try {
-        const resultAction = await dispatch(await dispatch(login({ credentials: payload, navigate })));
-        console.log("resultAction",resultAction);
-        // if (resultAction.payload?.success) {
-        //   navigate("/");
-        // }
+        await dispatch(login({ credentials: payload, navigate }));
       } catch (error) {
         console.error("Login failed:", error);
       }
