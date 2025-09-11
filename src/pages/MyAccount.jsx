@@ -40,8 +40,8 @@ const renderContent = (selected) => {
           <div className="flex flex-col mt-[1.875rem] text-start">
             <div className="rounded-2xl border border-[#AAAAAA] overflow-auto">
               <div className="top-card bg-[#fff7f2] p-[0.82rem]">
-                <div className="flex gap-[1.25rem] justify-between">
-                  <div className="flex gap-[1.25rem]">
+                <div className="flex flex-wrap gap-[1.25rem] justify-between">
+                  <div className="flex flex-wrap gap-[1.25rem]">
                     <div>
                       <span className="text-sm uppercase">Order Date:</span>
                       <p className="text-sm font-bold">08 September 2025</p>
@@ -63,15 +63,15 @@ const renderContent = (selected) => {
                 </div>
               </div>
               <div className="bottom-card p-[0.82rem]">
-                <div className="flex gap-[0.82rem]">
+                <div className="flex flex-wrap gap-[0.82rem]">
                   <div className="w-[5rem] h-[5rem] rounded-2xl overflow-hidden">
                     <img src={watch} alt="" />
                   </div>
                   <div>
-                    <h6 className="text-lg font-bold">
+                    <h6 className="sm:text-lg font-bold">
                       Longine_s Heritage Classic Copper-Black
                     </h6>
-                    <div className="flex gap-[0.82rem] items-center mt-[0.5rem]">
+                    <div className="flex flex-wrap gap-[0.82rem] items-center mt-[0.5rem]">
                       <a
                         href=""
                         className="inline-flex text-sm gap-2 btn px-[1.5rem] py-[0.5rem] rounded-lg font-medium focus:outline-none items-center"
@@ -87,106 +87,7 @@ const renderContent = (selected) => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col mt-[1.875rem] text-start">
-            <div className="rounded-2xl border border-[#AAAAAA] overflow-auto">
-              <div className="top-card bg-[#fff7f2] p-[0.82rem]">
-                <div className="flex gap-[1.25rem] justify-between">
-                  <div className="flex gap-[1.25rem]">
-                    <div>
-                      <span className="text-sm uppercase">Order Date:</span>
-                      <p className="text-sm font-bold">08 September 2025</p>
-                    </div>
-                    <div>
-                      <span className="text-sm uppercase">Total:</span>
-                      <p className="text-sm font-bold">₹9,894</p>
-                    </div>
-                    <div>
-                      <span className="text-sm uppercase">Status:</span>
-                      <p className="text-sm font-bold">Order Placed</p>
-                    </div>
-                  </div>
 
-                  <div>
-                    <span className="text-sm uppercase">Order Id:</span>
-                    <p className="text-sm font-bold">#80879571220</p>
-                  </div>
-                </div>
-              </div>
-              <div className="bottom-card p-[0.82rem]">
-                <div className="flex gap-[0.82rem]">
-                  <div className="w-[5rem] h-[5rem] rounded-2xl overflow-hidden">
-                    <img src={watch} alt="" />
-                  </div>
-                  <div>
-                    <h6 className="text-lg font-bold">
-                      Longine_s Heritage Classic Copper-Black
-                    </h6>
-                    <div className="flex gap-[0.82rem] items-center mt-[0.5rem]">
-                      <a
-                        href=""
-                        className="inline-flex text-sm gap-2 btn px-[1.5rem] py-[0.5rem] rounded-lg font-medium focus:outline-none items-center"
-                      >
-                        Buy it Again
-                      </a>
-                      <a href="" className="underline">
-                        View order details 
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col mt-[1.875rem] text-start">
-            <div className="rounded-2xl border border-[#AAAAAA] overflow-auto">
-              <div className="top-card bg-[#fff7f2] p-[0.82rem]">
-                <div className="flex gap-[1.25rem] justify-between">
-                  <div className="flex gap-[1.25rem]">
-                    <div>
-                      <span className="text-sm uppercase">Order Date:</span>
-                      <p className="text-sm font-bold">08 September 2025</p>
-                    </div>
-                    <div>
-                      <span className="text-sm uppercase">Total:</span>
-                      <p className="text-sm font-bold">₹9,894</p>
-                    </div>
-                    <div>
-                      <span className="text-sm uppercase">Status:</span>
-                      <p className="text-sm font-bold">Order Placed</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className="text-sm uppercase">Order Id:</span>
-                    <p className="text-sm font-bold">#80879571220</p>
-                  </div>
-                </div>
-              </div>
-              <div className="bottom-card p-[0.82rem]">
-                <div className="flex gap-[0.82rem]">
-                  <div className="w-[5rem] h-[5rem] rounded-2xl overflow-hidden">
-                    <img src={watch} alt="" />
-                  </div>
-                  <div>
-                    <h6 className="text-lg font-bold">
-                      Longine_s Heritage Classic Copper-Black
-                    </h6>
-                    <div className="flex gap-[0.82rem] items-center mt-[0.5rem]">
-                      <a
-                        href=""
-                        className="inline-flex text-sm gap-2 btn px-[1.5rem] py-[0.5rem] rounded-lg font-medium focus:outline-none items-center"
-                      >
-                        Buy it Again
-                      </a>
-                      <a href="" className="underline">
-                        View order details 
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <nav
             className="mt-[2.375rem] md:mt-[4.375rem]"
             aria-label="Page navigation"
@@ -466,8 +367,8 @@ const renderContent = (selected) => {
                   placeholder="Enter your zipcode"
                 />
               </div>
-              <div className="mb-6 flex space-x-6">
-                <div className="md:w-1/2">
+              <div className="mb-6 flex flex-col sm:flex-row">
+                <div className="w-full sm:w-1/2 mb-6 md:mb-0 sm:pr-3">
                   <label className="block text-sm font-medium mb-1">CITY</label>
                   <input
                     type="text"
@@ -475,7 +376,7 @@ const renderContent = (selected) => {
                     placeholder="Enter your city"
                   />
                 </div>
-                <div className="md:w-1/2">
+                <div className="w-full sm:w-1/2 sm:pl-3">
                   <label className="block text-sm font-medium mb-1">
                     STATE
                   </label>

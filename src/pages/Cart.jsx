@@ -61,7 +61,7 @@ function Cart() {
             {items.length === 0 ? (
               <div className="text-center p-6 border rounded-md">
                 <p>Your cart is empty.</p>
-                <Link className="text-blue-600 hover:underline" to="/shop">
+                <Link className="text-blue-600" to="/shop">
                   Continue shopping
                 </Link>
               </div>
@@ -94,7 +94,7 @@ function Cart() {
                       </button>
                       <button
                         onClick={() => removeItem(it.id)}
-                        className="ml-auto text-red-600 hover:underline"
+                        className="ml-auto text-red-600"
                       >
                         Remove
                       </button>

@@ -52,7 +52,7 @@ function CommonHeader({ className = "", ...props }) {
         <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem]">
           <h1 className="text-2xl font-bold">About Page Header</h1>
           <nav className="flex gap-4">
-            <Link to="/" className="hover:underline">
+            <Link to="/" className="">
               Home
             </Link>
           </nav>
@@ -112,10 +112,10 @@ function CommonHeader({ className = "", ...props }) {
     <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem]">
       <h1 className="text-2xl font-bold">Default Header</h1>
       <nav className="flex gap-4">
-        <Link to="/" className="hover:underline">
+        <Link to="/" className="">
           Home
         </Link>
-        <Link to="/about" className="hover:underline">
+        <Link to="/about" className="">
           About
         </Link>
       </nav>

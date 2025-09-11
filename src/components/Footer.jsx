@@ -29,13 +29,13 @@ function Footer() {
             <h2 className="mb-4 font-bold text-lg">Customer Care</h2>
             <ul className="font-regular flex flex-col gap-1">
               <li className="mb-1">
-                <a href="#" className="flex gap-2 hover:underline">
+                <a href="#" className="flex gap-2 ">
                   <Mail />
                   storename123@gmail.com
                 </a>
               </li>
               <li className="mb-1">
-                <a href="#" className="flex gap-2 hover:underline">
+                <a href="#" className="flex gap-2 ">
                   <Call />
                   +91 9876543210
                 </a>
@@ -59,17 +59,17 @@ function Footer() {
             <h2 className="mb-4 font-bold text-lg">Support</h2>
             <ul className="font-regular flex flex-col gap-1">
               <li className="mb-1">
-                <a href="#" className=" hover:underline">
+                <a href="#" className=" ">
                   FAQ
                 </a>
               </li>
               <li className="mb-1">
-                <a href="#" className="hover:underline">
+                <a href="#" className="">
                   Terms of use
                 </a>
               </li>
               <li className="mb-1">
-                <a href="#" className="hover:underline">
+                <a href="#" className="">
                   Privacy Policy
                 </a>
               </li>
@@ -80,17 +80,17 @@ function Footer() {
             <h2 className="mb-4 font-bold text-lg">Company</h2>
             <ul className="font-regular flex flex-col gap-1">
               <li className="mb-1">
-                <a href="#" className=" hover:underline">
+                <a href="#" className=" ">
                   About Us
                 </a>
               </li>
               <li className="mb-1">
-                <a href="#" className="hover:underline">
+                <a href="#" className="">
                   Contact Us
                 </a>
               </li>
               <li className="mb-1">
-                <a href="#" className="hover:underline">
+                <a href="#" className="">
                   Support
                 </a>
               </li>
@@ -101,19 +101,19 @@ function Footer() {
             <h2 className="mb-4 font-bold text-lg">Social Media</h2>
             <ul className="font-regular flex flex-col gap-4">
               <li className="mb-1">
-                <a href="#" className="flex gap-2 hover:underline">
+                <a href="#" className="flex gap-2 ">
                   <Facebook />
                   Facebook
                 </a>
               </li>
               <li className="mb-1">
-                <a href="#" className="flex gap-2 hover:underline">
+                <a href="#" className="flex gap-2 ">
                   <Instagram />
                   Instagram
                 </a>
               </li>
               <li className="mb-1">
-                <a href="#" className="flex gap-2 hover:underline">
+                <a href="#" className="flex gap-2 ">
                   <Twitter />
                   Twitter
                 </a>
