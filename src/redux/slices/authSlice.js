@@ -36,11 +36,6 @@ const authSlice = createSlice({
       state.error = null;
       state.isAuthenticated = false;
     },
-    setCredentials: (state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isAuthenticated = true;
-    },
     updateCustomer: (state, action) => {
       if (state.user && state.user.customer) {
         state.user.customer = {
