@@ -10,7 +10,7 @@ function CommonHeader({ className = "", ...props }) {
   const routeConfigs = {
     "/": {
       content: (
-        <div className="py-[2.5rem] lg:py-[4.6875rem] -mt-[70px] z-10 relative rounded-b-none rounded-3xl">
+        <div className="py-[2.5rem] lg:py-[4.6875rem] -mt-[40px] z-10 relative rounded-b-none rounded-3xl">
           <div className="flex items-center justify-between max-w-[90rem] ml-auto mr-auto">
             <div className="flex xxl:px-[248px] gap-6">
               <div className="flex-1 px-[2.5rem] lg:px-[3.75rem] py-[30px] lg:py-[3.75rem]">
