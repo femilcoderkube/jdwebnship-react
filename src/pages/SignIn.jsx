@@ -20,7 +20,6 @@ const validationSchema = Yup.object({
 });
 
 function SignIn() {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -36,7 +35,7 @@ function SignIn() {
       try {
         const resultAction = await dispatch(login(payload));
         if (resultAction.payload?.success) {
-          navigate("/dashboard")
+          navigate("/dashboard");
         }
       } catch (error) {
         console.error("Login failed:", error);
@@ -48,15 +47,17 @@ function SignIn() {
     },
   });
 
-
   return (
     <div>
       <CommonHeader />
-      <div className="px-4 sm:px-6 lg:px-10 xl:px-[3.75rem] py-10">
+      <div className="px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] py-10">
         <div className="max-w-md mx-auto">
           <form className="space-y-4" onSubmit={formik.handleSubmit}>
             <div className="form-group">
-              <label className="block text-sm mb-1 text-left form-label" htmlFor="email">
+              <label
+                className="block text-sm mb-1 text-left form-label"
+                htmlFor="email"
+              >
                 Email
               </label>
               <input
@@ -69,11 +70,16 @@ function SignIn() {
                 onBlur={formik.handleBlur}
               />
               {formik.touched.email && formik.errors.email ? (
-                <p className="text-red-600 text-sm mt-1 text-left">{formik.errors.email}</p>
+                <p className="text-red-600 text-sm mt-1 text-left">
+                  {formik.errors.email}
+                </p>
               ) : null}
             </div>
             <div className="form-group">
-              <label className="block text-sm mb-1 text-left form-label" htmlFor="password">
+              <label
+                className="block text-sm mb-1 text-left form-label"
+                htmlFor="password"
+              >
                 Password
               </label>
               <input

@@ -10,10 +10,10 @@ function CommonHeader({ className = "", ...props }) {
   const routeConfigs = {
     "/": {
       content: (
-        <div className="py-[2.5rem] lg:py-[3.75rem] -mt-[70px] z-10 relative rounded-b-none rounded-3xl">
-          <div className="flex items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-[3.75rem] max-w-[90rem] ml-auto mr-auto">
+        <div className="py-[2.5rem] lg:py-[4.6875rem] -mt-[70px] z-10 relative rounded-b-none rounded-3xl">
+          <div className="flex items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] max-w-[90rem] ml-auto mr-auto">
             <div className="grid md:grid-cols-3 xxl:px-[248px]">
-              <div className="px-[2.5rem] lg:px-[3.75rem] py-[30px] lg:py-[3.75rem] md:border-0 md:border-r">
+              <div className="px-[2.5rem] lg:px-[4.6875rem] py-[30px] lg:py-[4.6875rem] md:border-0 md:border-r">
                 <h1 className="mb-4 text-[1.125rem] lg:text-[1.5rem] font-bold">
                   Free Shipping
                 </h1>
@@ -22,7 +22,7 @@ function CommonHeader({ className = "", ...props }) {
                   Don't miss out.
                 </p>
               </div>
-              <div className="px-[2.5rem] lg:px-[3.75rem] py-[30px] lg:py-[3.75rem] md:border-0 md:border-r">
+              <div className="px-[2.5rem] lg:px-[4.6875rem] py-[30px] lg:py-[4.6875rem] md:border-0 md:border-r">
                 <h1 className="mb-4 text-[1.125rem] lg:text-[1.5rem] font-bold">
                   Secure Payment
                 </h1>
@@ -31,7 +31,7 @@ function CommonHeader({ className = "", ...props }) {
                   us.
                 </p>
               </div>
-              <div className="px-[2.5rem] lg:px-[3.75rem] py-[30px] lg:py-[3.75rem]">
+              <div className="px-[2.5rem] lg:px-[4.6875rem] py-[30px] lg:py-[4.6875rem]">
                 <h1 className="mb-4 text-[1.125rem] lg:text-[1.5rem] font-bold">
                   Satisfaction Guarantee
                 </h1>
@@ -47,7 +47,7 @@ function CommonHeader({ className = "", ...props }) {
     },
     "/about": {
       content: (
-        <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-10 xl:px-[3.75rem]">
+        <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem]">
           <h1 className="text-2xl font-bold">About Page Header</h1>
           <nav className="flex gap-4">
             <Link to="/" className="hover:underline">
@@ -79,13 +79,12 @@ function CommonHeader({ className = "", ...props }) {
       title: "Forgot Password",
     },
     "/reset-password": {
-      title: "Reset Password"
+      title: "Reset Password",
     },
     [`/shop/${id}`]: {
-      title: "Women's Watch", 
+      title: "Women's Watch",
       breadcrumb: true,
-    }
-  
+    },
   };
 
   // Breadcrumb component for reusability
@@ -108,7 +107,7 @@ function CommonHeader({ className = "", ...props }) {
 
   // Default content for unmatched routes
   const defaultContent = (
-    <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-10 xl:px-[3.75rem]">
+    <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem]">
       <h1 className="text-2xl font-bold">Default Header</h1>
       <nav className="flex gap-4">
         <Link to="/" className="hover:underline">
@@ -127,7 +126,7 @@ function CommonHeader({ className = "", ...props }) {
     routeConfig.content ||
     (routeConfig.title ? (
       <div className="xxl:px-[248px]">
-        <div className="px-[2.5rem] lg:px-[3.75rem] py-[30px] lg:py-[3.75rem] md:border-0 md:border-r">
+        <div className="px-[2.5rem] lg:px-[4.6875rem] py-[30px] lg:py-[4.6875rem] md:border-0 md:border-r">
           {routeConfig.breadcrumb && (
             <Breadcrumb currentPage={routeConfig.title} />
           )}

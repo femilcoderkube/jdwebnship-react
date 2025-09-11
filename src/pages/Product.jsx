@@ -85,7 +85,7 @@ function Product() {
     <div className="">
       <CommonHeader />
       <div className="mx-auto py-[3.125rem] lg:py-[100px]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-7.5 px-4 sm:px-6 lg:px-10 xl:px-[3.75rem]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-7.5 px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem]">
           {/* Left Column: Filters */}
           <div className="lg:col-span-2 text-start fillters">
             <div className="flex flex-col border-b mb-[1rem] xl:mb-[1.5rem]">
@@ -264,7 +264,7 @@ function Product() {
             </div>
             <nav className="mt-[4.375rem]" aria-label="Page navigation">
               <ul class="flex items-center justify-center -space-x-px h-8 text-sm text-[1rem]">
-                <li>
+                {/* <li>
                   <a href="#" class="px-3 h-8">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -281,7 +281,7 @@ function Product() {
                       />
                     </svg>
                   </a>
-                </li>
+                </li> */}
                 <li>
                   <a href="#" class="px-3 h-8">
                     1

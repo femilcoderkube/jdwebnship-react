@@ -47,7 +47,7 @@ export default function CardSlider() {
   const isSwiper = (theme?.categoryLayout || "swiper") === "swiper";
 
   return (
-    <div className="px-6 sm:px-6 lg:px-10 xl:px-[3.75rem]">
+    <div className="px-6 sm:px-6 lg:px-10 xl:px-[4.6875rem]">
       {isSwiper ? (
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}

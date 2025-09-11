@@ -27,7 +27,7 @@ function Advertisment() {
         </div>
       </Marquee>
       <div
-        className="py-[1.5rem] px-4 sm:px-6 lg:px-10 xl:px-[3.75rem] rounded-[2.125rem] relative"
+        className="py-[1.5rem] px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] rounded-[2.125rem] relative"
         style={{
           width: "100%",
           height: "780px",
@@ -46,7 +46,7 @@ function Advertisment() {
             objectFit: "cover",
           }}
         />
-        <div className="absolute top-1/2 left-1/2 w-full max-w-[20rem] sm:max-w-[45.625rem] -translate-x-1/2 -translate-y-1/2 category-title p-[20px] sm:p-[2.5rem] md:p-[3.75rem] rounded-[2.125rem] overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 w-full max-w-[20rem] sm:max-w-[45.625rem] -translate-x-1/2 -translate-y-1/2 category-title p-[20px] sm:p-[2.5rem] md:p-[4.6875rem] rounded-[2.125rem] overflow-hidden">
           <div className="flex flex-col gap-[0.9375rem]">
             <h2
               className="text-lg font-bold text-[1.625rem] lg:text-[2.625rem] text-white"

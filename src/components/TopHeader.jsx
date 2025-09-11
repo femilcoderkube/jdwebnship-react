@@ -30,7 +30,7 @@ function TopHeader({ visible = true, onHeightChange }) {
         transform: visible ? "translateY(0)" : "translateY(-100%)",
       }}
     >
-      <div className="w-[100%] px-4 sm:px-6 md:px-10 lg:px-[3.75rem] mx-auto">
+      <div className="w-[100%] px-4 sm:px-6 md:px-10 lg:px-[4.6875rem] mx-auto">
         <div className="flex items-center justify-center mx-auto text-center">
           <span className="font-medium text-[0.75] sm:text-[0.875rem] md:text-[1rem]">
             All over India Delivery Available.

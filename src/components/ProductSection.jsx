@@ -70,8 +70,8 @@ function ProductSection() {
       <h2 className="text-[2rem] lg:text-[2.625rem] font-bold mb-[1.25rem] lg:mb-[3.125rem]">
         New Trending
       </h2>
-      <section className="px-4 sm:px-6 lg:px-10 xl:px-[3.75rem]">
-        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 xxl:grid-cols-5  gap-4 md:gap-y-[4.375rem]">
+      <section className="px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem]">
+        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 xxl:grid-cols-5 gap-[1.5rem] md:gap-y-[4.375rem]">
           {products.map((product, index) => (
             <CardComponent
               key={index}

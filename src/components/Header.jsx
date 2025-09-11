@@ -42,7 +42,7 @@ function Header({ offsetY = 0, onHeightChange }) {
       style={{ top: offsetY }}
     >
       <nav
-        className="flex items-center relative justify-between px-4 sm:px-6 lg:px-10 xl:px-[3.75rem] py-[0.75] lg:py-[1.5rem]"
+        className="flex items-center relative justify-between px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] py-[0.75] lg:py-[1.5rem]"
         style={{
           backgroundColor: theme?.headerBackgroundColor || "#ffffff",
           color: headerTextColor || "#ffffff",

@@ -10,7 +10,7 @@ const CardComponent = ({ productName, price, imageSrc }) => {
     <div
       className="text-start relative card-element"
       style={{
-        height: "491px",
+        height: "auto",
         display: "flex",
         flexDirection: "column",
         gap: "0.625rem",
@@ -19,7 +19,7 @@ const CardComponent = ({ productName, price, imageSrc }) => {
       <div
         className="bg-[#F8F8F8] rounded-[1.125rem] flex flex-col align-items-center justify-center"
         style={{
-          height: "41.125rem",
+          height: "29.125rem",
           borderRadius: "1.125rem",
           overflow: "hidden",
         }}
@@ -29,6 +29,7 @@ const CardComponent = ({ productName, price, imageSrc }) => {
           alt={productName}
           style={{
             width: "100%",
+            height: "100%",
             objectFit: "contain",
             transform: "rotate(0deg)",
             opacity: 1,
@@ -54,7 +55,9 @@ const CardComponent = ({ productName, price, imageSrc }) => {
           </div>
         </div>
       </div>
-      <div>
+      <div className="flex flex-col gap-[0.1875rem] text-start">
+        {/* Time */}
+        <p className="text-sm opacity-40">Added 7 seconds ago</p>
         <h3
           className="line-clamp-1 mb-[6px]"
           style={{ margin: 0, fontSize: "1.125rem" }}
@@ -75,6 +78,9 @@ const CardComponent = ({ productName, price, imageSrc }) => {
             ₹19,999
           </p>
         </div>
+        <button className="text-sm uppercase underline text-start cursor-pointer">
+          Remove From Wishlist
+        </button>
       </div>
     </div>
   );
