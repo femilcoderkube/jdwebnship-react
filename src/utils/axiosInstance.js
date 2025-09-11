@@ -36,11 +36,13 @@ import axios from "axios";
 import { logout } from "../redux/slices/authSlice";
 
 export const baseURL = import.meta.env.VITE_API_BASE_URL;
+export const API_KEY = import.meta.env.VITE_API_KEY;
 
 const axiosInstance = axios.create({
   baseURL: `${baseURL}`,
   headers: {
     "Content-Type": "application/json",
+    "API-KEY": API_KEY,
   },
 });
 

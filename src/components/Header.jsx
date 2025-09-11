@@ -5,8 +5,8 @@ import Search from "./Search";
 import Profile from "./Profile";
 import Cart from "./Cart";
 import { useState, useEffect, useRef } from "react";
-
-const categories = ["Men's Watch", "T-shirts", "Jeans", "Shirts"];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchStoreInfo } from "../redux/slices/storeInfoSlice";
 
 function Header({ offsetY = 0, onHeightChange }) {
   const { theme, headerTextColor } = useTheme();
@@ -14,6 +14,14 @@ function Header({ offsetY = 0, onHeightChange }) {
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [isMobileCategoryOpen, setIsMobileCategoryOpen] = useState(false);
   const ref = useRef(null);
+  const dispatch = useDispatch();
+
+  const { storeInfo, loading } = useSelector((state) => state.storeInfo);
+  const categories = storeInfo?.sub_category_list || [];
+
+  useEffect(() => {
+    dispatch(fetchStoreInfo());
+  }, [dispatch]);
 
   // Prevent background scroll when drawer is open
   useEffect(() => {
@@ -134,29 +142,44 @@ function Header({ offsetY = 0, onHeightChange }) {
                     backgroundColor: theme?.headerBackgroundColor || "#ffffff",
                   }}
                 >
-                  {categories.map((category, index) => (
-                    <Link
-                      key={index}
-                      to={`/categories/${category
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
-                      className="block px-4 py-2 text-sm hover:bg-gray-100 transition-colors duration-200"
-                      style={{
-                        color: headerTextColor || "#111111",
-                        backgroundColor:
-                          theme?.headerBackgroundColor || "#ffffff",
-                      }}
-                      onMouseEnter={(e) =>
-                        (e.target.style.backgroundColor = "rgba(0,0,0,0.05)")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.target.style.backgroundColor =
-                          theme?.headerBackgroundColor || "#ffffff")
-                      }
-                    >
-                      {category}
-                    </Link>
-                  ))}
+                  {loading ? (
+                    <div className="flex items-center justify-center p-4">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                    </div>
+                  ) : categories.length > 0 ? (
+                    categories.map((category) => {
+                      return (
+                        <Link
+                          key={category.id}
+                          to={`/shop?categories=${encodeURIComponent(
+                            category.name
+                          )}`}
+                          className="block px-4 py-2 text-sm hover:bg-gray-100 transition-colors duration-200"
+                          style={{
+                            color: headerTextColor || "#111111",
+                            backgroundColor:
+                              theme?.headerBackgroundColor || "#ffffff",
+                          }}
+                          onMouseEnter={(e) =>
+                            (e.target.style.backgroundColor =
+                              "rgba(0,0,0,0.05)")
+                          }
+                          onMouseLeave={(e) =>
+                            (e.target.style.backgroundColor =
+                              theme?.headerBackgroundColor || "#ffffff")
+                          }
+                        >
+                          {category.name}
+                        </Link>
+                      );
+                    })
+                  ) : (
+                    <div className="flex items-center justify-center p-4">
+                      <p className="text-sm text-gray-500">
+                        No categories found
+                      </p>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -305,22 +328,32 @@ function Header({ offsetY = 0, onHeightChange }) {
             {/* Mobile Categories List */}
             {isMobileCategoryOpen && (
               <div className="ml-4 mt-2 space-y-1">
-                {categories.map((category, index) => (
-                  <Link
-                    key={index}
-                    to={`/categories/${category
-                      .toLowerCase()
-                      .replace(/\s+/g, "-")}`}
-                    className="block px-3 py-2 rounded hover:bg-black/10 transition text-sm"
-                    style={{ color: headerTextColor || "#111111" }}
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      setIsMobileCategoryOpen(false);
-                    }}
-                  >
-                    {category}
-                  </Link>
-                ))}
+                {loading ? (
+                  <div className="flex items-center justify-center p-4">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                  </div>
+                ) : categories.length > 0 ? (
+                  categories.map((category, index) => (
+                    <Link
+                      key={index}
+                      to={`/shop?categories=${encodeURIComponent(
+                        category.name
+                      )}`}
+                      className="block px-3 py-2 rounded hover:bg-black/10 transition text-sm"
+                      style={{ color: headerTextColor || "#111111" }}
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        setIsMobileCategoryOpen(false);
+                      }}
+                    >
+                      {category.name}
+                    </Link>
+                  ))
+                ) : (
+                  <div className="flex items-center justify-center p-4">
+                    <p className="text-sm text-gray-500">No categories found</p>
+                  </div>
+                )}
               </div>
             )}
           </div>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import CommonHeader from "../components/CommonHeader";
 import s01 from "../assets/images/s-01.jpg";
 import s02 from "../assets/images/s-02.jpg";
@@ -10,8 +11,78 @@ import CardComponent from "../components/CardComponent";
 import PriceRangeSlider from "../components/Pricerangeslider";
 
 function Product() {
-  // State for price range slider
-  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // State for price range and filters
+  const [filters, setFilters] = useState({
+    inStock: searchParams.get("inStock") === "true" || false,
+    // outOfStock: searchParams.get("outOfStock") === "true" || true,
+    categories: searchParams.get("categories")
+      ? searchParams.get("categories").split(",")
+      : [],
+    priceRange: [
+      searchParams.get("minPrice") ? Number(searchParams.get("minPrice")) : 0,
+      searchParams.get("maxPrice")
+        ? Number(searchParams.get("maxPrice"))
+        : 10000,
+    ],
+  });
+
+  // Update URL when filters change
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (filters.inStock) params.set("inStock", "true");
+    if (filters.outOfStock) params.set("outOfStock", "true");
+    if (filters.categories.length > 0)
+      params.set("categories", filters.categories.join(","));
+    if (filters.priceRange[0] > 0)
+      params.set("minPrice", filters.priceRange[0]);
+    if (filters.priceRange[1] < 10000)
+      params.set("maxPrice", filters.priceRange[1]);
+
+    setSearchParams(params, { replace: true });
+  }, [filters, setSearchParams]);
+
+  // Parse URL params on component mount
+  useEffect(() => {
+    const inStock = searchParams.get("inStock") === "true";
+    const outOfStock = searchParams.get("outOfStock") === "true";
+    const categories = searchParams.get("categories")
+      ? searchParams.get("categories").split(",")
+      : [];
+
+    setFilters((prev) => ({
+      ...prev,
+      inStock: inStock || prev.inStock,
+      outOfStock: outOfStock || prev.outOfStock,
+      categories: categories.length > 0 ? categories : prev.categories,
+    }));
+  }, [searchParams]);
+
+  const handleCheckboxChange = (filterType, value) => {
+    if (filterType === "inStock" || filterType === "outOfStock") {
+      setFilters((prev) => ({
+        ...prev,
+        [filterType]: !prev[filterType],
+      }));
+    } else if (filterType === "categories") {
+      setFilters((prev) => ({
+        ...prev,
+        categories: prev.categories.includes(value)
+          ? prev.categories.filter((cat) => cat !== value)
+          : [...prev.categories, value],
+      }));
+    }
+  };
+
+  const clearAllFilters = () => {
+    setFilters({
+      inStock: false,
+      outOfStock: true,
+      categories: [],
+    });
+    setSearchParams({});
+  };
 
   // Dummy product data
   const products = [
@@ -59,7 +130,7 @@ function Product() {
       id: 1,
       productName: "Women's Classic Watch",
       category: "Women's Watch",
-      price: 199.99,
+      price: 1299.99,
       inStock: true,
       imageSrc: s01,
     },
@@ -81,6 +152,26 @@ function Product() {
     },
   ];
 
+  // Filter products based on selected filters
+  const filteredProducts = products.filter((product) => {
+    // Check stock status
+    const stockMatch =
+      (filters.inStock && product.inStock) ||
+      (filters.outOfStock && !product.inStock);
+
+    // Check category
+    const categoryMatch =
+      filters.categories.length === 0 ||
+      filters.categories.includes(product.category);
+
+    // Check price range
+    const priceMatch =
+      product.price >= filters.priceRange[0] &&
+      product.price <= filters.priceRange[1];
+
+    return stockMatch && categoryMatch && priceMatch;
+  });
+
   return (
     <div className="">
       <CommonHeader />
@@ -93,7 +184,12 @@ function Product() {
                 <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
                   Filter By <span>(2)</span>
                 </h4>
-                <span className="underline text-[0.875rem]">Clear All</span>
+                <span
+                  className="underline text-[0.875rem] cursor-pointer"
+                  onClick={clearAllFilters}
+                >
+                  Clear All
+                </span>
               </div>
               <div className="flex flex-wrap gap-[0.5rem] py-[1.5rem]">
                 <span className="bg-[#F8F8F8] inline-flex px-[0.9375rem] py-[0.375rem] gap-[0.375rem] rounded-lg">
@@ -120,6 +216,8 @@ function Product() {
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
                     defaultChecked
+                    checked={filters.inStock}
+                    onChange={() => handleCheckboxChange("inStock")}
                   />
                   <span className="ml-2">In Stock</span>
                 </label>
@@ -127,7 +225,8 @@ function Product() {
                   <input
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    defaultChecked
+                    checked={filters.outOfStock}
+                    onChange={() => handleCheckboxChange("outOfStock")}
                   />
                   <span className="ml-2">Out of Stock</span>
                 </label>
@@ -144,52 +243,72 @@ function Product() {
                   <input
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    defaultChecked
+                    checked={filters.categories.includes("Women's Watch")}
+                    onChange={() =>
+                      handleCheckboxChange("categories", "Women's Watch")
+                    }
                   />
-                  <span className="ml-2">Women’s Watch</span>
+                  <span className="ml-2">Women's Watch</span>
                 </label>
 
                 <label className="flex items-center text-[0.875rem]">
                   <input
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    defaultChecked
+                    checked={filters.categories.includes("Men's Sneaker")}
+                    onChange={() =>
+                      handleCheckboxChange("categories", "Men's Sneaker")
+                    }
                   />
-                  <span className="ml-2">Men’s Sneaker</span>
+                  <span className="ml-2">Men's Sneaker</span>
                 </label>
 
                 <label className="flex items-center text-[0.875rem]">
                   <input
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    defaultChecked
+                    checked={filters.categories.includes("Women's Sneaker")}
+                    onChange={() =>
+                      handleCheckboxChange("categories", "Women's Sneaker")
+                    }
                   />
-                  <span className="ml-2">Women’s Sneaker</span>
+                  <span className="ml-2">Women's Sneaker</span>
                 </label>
 
                 <label className="flex items-center text-[0.875rem]">
                   <input
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    defaultChecked
+                    checked={filters.categories.includes("Perfumes for Men's")}
+                    onChange={() =>
+                      handleCheckboxChange("categories", "Perfumes for Men's")
+                    }
                   />
-                  <span className="ml-2"> Perfumes for Men’s</span>
+                  <span className="ml-2">Perfumes for Men's</span>
                 </label>
 
                 <label className="flex items-center text-[0.875rem]">
                   <input
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    defaultChecked
+                    checked={filters.categories.includes(
+                      "Perfumes for Women's"
+                    )}
+                    onChange={() =>
+                      handleCheckboxChange("categories", "Perfumes for Women's")
+                    }
                   />
-                  <span className="ml-2">Perfumes for Women’s</span>
+                  <span className="ml-2">Perfumes for Women's</span>
                 </label>
 
                 <label className="flex items-center text-[0.875rem]">
                   <input
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    defaultChecked
+                    checked={filters.categories.includes("T-Shirts")}
+                    onChange={() =>
+                      handleCheckboxChange("categories", "T-Shirts")
+                    }
                   />
                   <span className="ml-2">T-Shirts</span>
                 </label>
@@ -198,7 +317,10 @@ function Product() {
                   <input
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    defaultChecked
+                    checked={filters.categories.includes("Handbags")}
+                    onChange={() =>
+                      handleCheckboxChange("categories", "Handbags")
+                    }
                   />
                   <span className="ml-2">Handbags</span>
                 </label>
@@ -207,7 +329,10 @@ function Product() {
                   <input
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    defaultChecked
+                    checked={filters.categories.includes("Duffle Bags")}
+                    onChange={() =>
+                      handleCheckboxChange("categories", "Duffle Bags")
+                    }
                   />
                   <span className="ml-2">Duffle Bags</span>
                 </label>
@@ -216,7 +341,10 @@ function Product() {
                   <input
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    defaultChecked
+                    checked={filters.categories.includes("Sunglasses")}
+                    onChange={() =>
+                      handleCheckboxChange("categories", "Sunglasses")
+                    }
                   />
                   <span className="ml-2">Sunglasses</span>
                 </label>
@@ -225,7 +353,8 @@ function Product() {
                   <input
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    defaultChecked
+                    checked={filters.categories.includes("Caps")}
+                    onChange={() => handleCheckboxChange("categories", "Caps")}
                   />
                   <span className="ml-2">Caps</span>
                 </label>
@@ -237,7 +366,12 @@ function Product() {
               <h4 className="text-lg font-bold uppercase text-[0.875rem] text-[#111111] mb-[0.9375rem]">
                 Price Range
               </h4>
-              <PriceRangeSlider />
+              <PriceRangeSlider
+                value={filters.priceRange}
+                onChange={(newRange) =>
+                  setFilters((prev) => ({ ...prev, priceRange: newRange }))
+                }
+              />
             </div>
           </div>
 
@@ -253,14 +387,28 @@ function Product() {
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-y-[4.375rem]">
-              {products.map((product, index) => (
-                <CardComponent
-                  key={index}
-                  productName={product.productName}
-                  price={product.price}
-                  imageSrc={product.imageSrc}
-                />
-              ))}
+              {filteredProducts.length > 0 ? (
+                filteredProducts.map((product, index) => (
+                  <CardComponent
+                    key={index}
+                    productName={product.productName}
+                    price={product.price}
+                    imageSrc={product.imageSrc}
+                  />
+                ))
+              ) : (
+                <div className="col-span-full text-center py-8">
+                  <p className="text-lg text-gray-600">
+                    No products match the selected filters.
+                  </p>
+                  <button
+                    onClick={clearAllFilters}
+                    className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                  >
+                    Clear all filters
+                  </button>
+                </div>
+              )}
             </div>
             <nav className="mt-[4.375rem]" aria-label="Page navigation">
               <ul class="flex items-center justify-center -space-x-px h-8 text-sm text-[1rem]">

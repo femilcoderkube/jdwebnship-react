@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { clearState, loadState, saveState } from "../utils/sessionStorage";
-import authSlice from "../redux/slices/authSlice"; 
+import authSlice from "../redux/slices/authSlice";
+import storeInfoSlice from "../redux/slices/storeInfoSlice";
 // import cartReducer from "./slices/cartSlice";
 // import wishlistReducer from "./slices/wishlistSlice";
 // import storeReducer from "./slices/storeSlice";
@@ -15,6 +16,7 @@ import authSlice from "../redux/slices/authSlice";
 // --- combine all slices
 const appReducer = combineReducers({
   auth: authSlice,
+  storeInfo: storeInfoSlice,
   // cart: cartReducer,
   // orders: ordersReducer,
   // accountDetails: accountDetailsReducer,
