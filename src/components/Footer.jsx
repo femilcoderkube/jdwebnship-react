@@ -5,10 +5,14 @@ import Instagram from "./instagram";
 import Mail from "./Mail";
 import Call from "./Call";
 import Twitter from "./Twitter";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Footer() {
   const { theme, footerTextColor } = useTheme();
+  const { storeInfo } = useSelector((state) => state.storeInfo);
 
+  console.log("storeInfo", storeInfo);
   return (
     <footer
       className="pt-[30px] py-[30px] lg:py-[70px]"
@@ -22,7 +26,7 @@ function Footer() {
         <div className="grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6 pb-[1.875rem] lg:pb-[4.6875rem] gap-4">
           <div className="text-left">
             <h2 className="uppercase mb-6 text-sm font-semibold text-[1.5rem] lg:text[2rem]">
-              Store name
+              {storeInfo?.storeinfo?.store_name ?? "Store name"}
             </h2>
           </div>
           <div className="text-left">
@@ -31,13 +35,13 @@ function Footer() {
               <li className="mb-1">
                 <a href="#" className="flex gap-2 ">
                   <Mail />
-                  storename123@gmail.com
+                  {storeInfo?.storeinfo?.email || "storename123@gmail.com"}
                 </a>
               </li>
               <li className="mb-1">
                 <a href="#" className="flex gap-2 ">
                   <Call />
-                  +91 9876543210
+                  {storeInfo?.storeinfo?.mobile_no || "+91 9876543210"}
                 </a>
               </li>
             </ul>
@@ -47,7 +51,10 @@ function Footer() {
             <h2 className="mb-4 font-bold text-lg">Store</h2>
             <ul className="font-regular flex flex-col gap-1">
               <li className="mb-1">
-                <span>11:00 AM to 08:00 PM</span>
+                <span>
+                  {" "}
+                  {storeInfo?.storeinfo?.store_time || "11:00 AM to 08:00 PM"}
+                </span>
               </li>
               <li className="mb-1">
                 <span>Monday - Saturday</span>
@@ -101,22 +108,31 @@ function Footer() {
             <h2 className="mb-4 font-bold text-lg">Social Media</h2>
             <ul className="font-regular flex flex-col gap-4">
               <li className="mb-1">
-                <a href="#" className="flex gap-2 ">
+                <Link
+                  to={storeInfo?.storeinfo?.facebook || "#"}
+                  className="flex gap-2 "
+                >
                   <Facebook />
                   Facebook
-                </a>
+                </Link>
               </li>
               <li className="mb-1">
-                <a href="#" className="flex gap-2 ">
+                <Link
+                  to={storeInfo?.storeinfo?.instagram_url || "#"}
+                  className="flex gap-2 "
+                >
                   <Instagram />
                   Instagram
-                </a>
+                </Link>
               </li>
               <li className="mb-1">
-                <a href="#" className="flex gap-2 ">
+                <Link
+                  to={storeInfo?.storeinfo?.twitter_url || "#"}
+                  className="flex gap-2 "
+                >
                   <Twitter />
                   Twitter
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

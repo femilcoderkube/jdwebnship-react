@@ -205,7 +205,7 @@ function Header({ offsetY = 0, onHeightChange }) {
             className="uppercase text-[1.125rem] sm:text-[20px] lg:text-[1.5rem] xl:text-[2rem] font-medium text-center"
             style={{ color: headerTextColor || "#111111" }}
           >
-            Store name
+            {storeInfo?.storeinfo?.store_name ?? "Store name"}
           </h1>
         </Link>
         <div className="right-nav flex items-center gap-3 sm:gap-4">
@@ -264,7 +264,9 @@ function Header({ offsetY = 0, onHeightChange }) {
         }}
       >
         <div className="flex items-center justify-between px-4 py-3 border-b border-black/10">
-          <span className="uppercase font-semibold">Store name</span>
+          <span className="uppercase font-semibold">
+            {storeInfo?.storeinfo?.store_name ?? "Store name"}
+          </span>
           <button
             type="button"
             className="inline-flex items-center justify-center w-9 h-9 rounded-md bg-black/10 hover:bg-black/15 transition"

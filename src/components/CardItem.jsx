@@ -1,6 +1,6 @@
 export function CardItem({ item }) {
   return (
-    <div className="w-full bg-white rounded-[1.125rem] shadow-lg flex flex-col flex-shrink-0 overflow-hidden relative">
+    <div className="w-full bg-white rounded-[1.125rem] shadow-lg flex flex-col flex-shrink-0 overflow-hidden relative h-100">
       <img
         src={item.image}
         alt={item.name}
