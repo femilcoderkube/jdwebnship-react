@@ -5,7 +5,7 @@ function AuthGuard() {
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   if (!isAuthenticated) {
-    return <Navigate to="/signin" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return <Outlet />;

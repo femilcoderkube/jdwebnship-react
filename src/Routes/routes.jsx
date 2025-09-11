@@ -24,18 +24,18 @@ function AppRoutes() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/shop" element={<Product />} />
+      <Route path="/shop/:id" element={<ProductDetail />} />
+      <Route path="/categories" element={<Shop />} />
+      <Route path="/cart" element={<Cart />} />
 
       {/* Protected routes */}
       <Route element={<AuthGuard />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/shop" element={<Product />} />
-        <Route path="/shop/:id" element={<ProductDetail />} />
-        <Route path="/categories" element={<Shop />} />
-        <Route path="/my-account" element={<MyAccount />} />
-        <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/my-account" element={<MyAccount />} />
         <Route path="/order-success" element={<OrderSuccess />} />
         <Route path="/order-failure" element={<OrderFailure />} />
       </Route>
