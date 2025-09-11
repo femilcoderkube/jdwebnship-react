@@ -46,7 +46,6 @@ function Header({ offsetY = 0, onHeightChange }) {
     return () => ro.disconnect();
   }, [onHeightChange]);
 
-
   return (
     <header
       ref={ref}
@@ -161,12 +160,12 @@ function Header({ offsetY = 0, onHeightChange }) {
                               theme?.headerBackgroundColor || "#ffffff",
                           }}
                           onMouseEnter={(e) =>
-                          (e.target.style.backgroundColor =
-                            "rgba(0,0,0,0.05)")
+                            (e.target.style.backgroundColor =
+                              "rgba(0,0,0,0.05)")
                           }
                           onMouseLeave={(e) =>
-                          (e.target.style.backgroundColor =
-                            theme?.headerBackgroundColor || "#ffffff")
+                            (e.target.style.backgroundColor =
+                              theme?.headerBackgroundColor || "#ffffff")
                           }
                         >
                           {category.name}
@@ -201,12 +200,20 @@ function Header({ offsetY = 0, onHeightChange }) {
           className="center-nav flex-1 flex items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           to="/"
         >
-          <h1
-            className="uppercase text-[1.125rem] sm:text-[20px] lg:text-[1.5rem] xl:text-[2rem] font-medium text-center"
-            style={{ color: headerTextColor || "#111111" }}
-          >
-            {storeInfo?.storeinfo?.store_name ?? "Store name"}
-          </h1>
+          {storeInfo?.storeinfo?.logo?.trim() ? (
+            <img
+              src={storeInfo.storeinfo.logo}
+              alt={storeInfo?.storeinfo?.store_name || "Store logo"}
+              className="w-12 h-12"
+            />
+          ) : (
+            <h1
+              className="uppercase text-[1.125rem] sm:text-[20px] lg:text-[1.5rem] xl:text-[2rem] font-medium text-center"
+              style={{ color: headerTextColor || "#111111" }}
+            >
+              {storeInfo?.storeinfo?.store_name || "Store name"}
+            </h1>
+          )}
         </Link>
         <div className="right-nav flex items-center gap-3 sm:gap-4">
           <div className="hidden lg:flex items-center">

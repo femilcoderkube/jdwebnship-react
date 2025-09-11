@@ -9,13 +9,17 @@ import s05 from "../assets/images/s-05.jpg";
 import cross from "../assets/x.svg";
 import CardComponent from "../components/CardComponent";
 import PriceRangeSlider from "../components/Pricerangeslider";
+import { useSelector } from "react-redux";
 
 function Product() {
+  const { storeInfo, loading } = useSelector((state) => state.storeInfo);
+  const categories = storeInfo?.sub_category_list || [];
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   // State for price range and filters
   const [filters, setFilters] = useState({
-    inStock: searchParams.get("inStock") === "true" || false,
+    inStock: searchParams.get("inStock") !== null ? searchParams.get("inStock") === "true" : true,
     // outOfStock: searchParams.get("outOfStock") === "true" || true,
     categories: searchParams.get("categories")
       ? searchParams.get("categories").split(",")
@@ -234,132 +238,42 @@ function Product() {
             </div>
 
             {/* Category Filter */}
-            <div className="mb-[1.5rem]">
-              <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
-                Category <span>(2)</span>
-              </h4>
-              <div className="flex flex-wrap gap-5 lg:gap-[0.5rem] flex-row lg:flex-col">
-                <label className="flex items-center text-[0.875rem]">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    checked={filters.categories.includes("Women's Watch")}
-                    onChange={() =>
-                      handleCheckboxChange("categories", "Women's Watch")
-                    }
-                  />
-                  <span className="ml-2">Women's Watch</span>
-                </label>
-
-                <label className="flex items-center text-[0.875rem]">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    checked={filters.categories.includes("Men's Sneaker")}
-                    onChange={() =>
-                      handleCheckboxChange("categories", "Men's Sneaker")
-                    }
-                  />
-                  <span className="ml-2">Men's Sneaker</span>
-                </label>
-
-                <label className="flex items-center text-[0.875rem]">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    checked={filters.categories.includes("Women's Sneaker")}
-                    onChange={() =>
-                      handleCheckboxChange("categories", "Women's Sneaker")
-                    }
-                  />
-                  <span className="ml-2">Women's Sneaker</span>
-                </label>
-
-                <label className="flex items-center text-[0.875rem]">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    checked={filters.categories.includes("Perfumes for Men's")}
-                    onChange={() =>
-                      handleCheckboxChange("categories", "Perfumes for Men's")
-                    }
-                  />
-                  <span className="ml-2">Perfumes for Men's</span>
-                </label>
-
-                <label className="flex items-center text-[0.875rem]">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    checked={filters.categories.includes(
-                      "Perfumes for Women's"
-                    )}
-                    onChange={() =>
-                      handleCheckboxChange("categories", "Perfumes for Women's")
-                    }
-                  />
-                  <span className="ml-2">Perfumes for Women's</span>
-                </label>
-
-                <label className="flex items-center text-[0.875rem]">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    checked={filters.categories.includes("T-Shirts")}
-                    onChange={() =>
-                      handleCheckboxChange("categories", "T-Shirts")
-                    }
-                  />
-                  <span className="ml-2">T-Shirts</span>
-                </label>
-
-                <label className="flex items-center text-[0.875rem]">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    checked={filters.categories.includes("Handbags")}
-                    onChange={() =>
-                      handleCheckboxChange("categories", "Handbags")
-                    }
-                  />
-                  <span className="ml-2">Handbags</span>
-                </label>
-
-                <label className="flex items-center text-[0.875rem]">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    checked={filters.categories.includes("Duffle Bags")}
-                    onChange={() =>
-                      handleCheckboxChange("categories", "Duffle Bags")
-                    }
-                  />
-                  <span className="ml-2">Duffle Bags</span>
-                </label>
-
-                <label className="flex items-center text-[0.875rem]">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    checked={filters.categories.includes("Sunglasses")}
-                    onChange={() =>
-                      handleCheckboxChange("categories", "Sunglasses")
-                    }
-                  />
-                  <span className="ml-2">Sunglasses</span>
-                </label>
-
-                <label className="flex items-center text-[0.875rem]">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    checked={filters.categories.includes("Caps")}
-                    onChange={() => handleCheckboxChange("categories", "Caps")}
-                  />
-                  <span className="ml-2">Caps</span>
-                </label>
+            {loading ? (
+              <div className="flex items-center justify-center p-4">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
               </div>
-            </div>
+            ) : categories.length > 0 ? (
+              <div className="mb-[1.5rem]">
+                <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
+                  Category <span>({categories.length})</span>
+                </h4>
+                <div className="flex flex-wrap gap-5 lg:gap-[0.5rem] flex-row lg:flex-col">
+                  {categories.map((category) => {
+                    const name = category?.name || "Unnamed";
+                    return (
+                      <label
+                        key={category.id || name}
+                        className="flex items-center text-[0.875rem]"
+                      >
+                        <input
+                          type="checkbox"
+                          className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
+                          checked={filters.categories.includes(name)}
+                          onChange={() =>
+                            handleCheckboxChange("categories", name)
+                          }
+                        />
+                        <span className="ml-2">{name}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center p-4">
+                <p className="text-sm text-gray-500">No categories found</p>
+              </div>
+            )}
 
             {/* Price Range Slider */}
             <div>
