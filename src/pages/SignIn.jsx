@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { login } from "../slice/authSlice";
+import { login } from "../redux/slices/authSlice";
 
 const initialValues = {
   email: "",
@@ -33,10 +33,11 @@ function SignIn() {
         password: values.password,
       };
       try {
-        const resultAction = await dispatch(login(payload));
-        if (resultAction.payload?.success) {
-          navigate("/dashboard");
-        }
+        const resultAction = await dispatch(await dispatch(login({ credentials: payload, navigate })));
+        console.log("resultAction",resultAction);
+        // if (resultAction.payload?.success) {
+        //   navigate("/");
+        // }
       } catch (error) {
         console.error("Login failed:", error);
       }
