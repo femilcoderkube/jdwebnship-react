@@ -6,9 +6,13 @@ import Profile from "./Profile";
 import Cart from "./Cart";
 import { useState, useEffect, useRef } from "react";
 
+const categories = ["Men's Watch", "T-shirts", "Jeans", "Shirts"];
+
 function Header({ offsetY = 0, onHeightChange }) {
   const { theme, headerTextColor } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  const [isMobileCategoryOpen, setIsMobileCategoryOpen] = useState(false);
   const ref = useRef(null);
 
   // Prevent background scroll when drawer is open
@@ -86,16 +90,77 @@ function Header({ offsetY = 0, onHeightChange }) {
             >
               Home
             </Link>
-            <Link
-              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase hover:underline transition-all duration-300"
-              to="/categories"
-              style={{
-                color: headerTextColor || "#111111",
-                margin: "0 1rem",
-              }}
+
+            {/* Categories Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsCategoryDropdownOpen(true)}
+              onMouseLeave={() => setIsCategoryDropdownOpen(false)}
             >
-              Category
-            </Link>
+              <Link
+                className="text-[0.875rem] xl:text-[1rem] font-medium uppercase hover:underline transition-all duration-300 flex items-center"
+                to="/categories"
+                style={{
+                  color: headerTextColor || "#111111",
+                  margin: "0 1rem",
+                }}
+              >
+                Category
+                <svg
+                  className="ml-1 w-4 h-4 transition-transform duration-200"
+                  style={{
+                    transform: isCategoryDropdownOpen
+                      ? "rotate(180deg)"
+                      : "rotate(0deg)",
+                  }}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </Link>
+
+              {/* Dropdown Menu */}
+              {isCategoryDropdownOpen && (
+                <div
+                  className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50"
+                  style={{
+                    backgroundColor: theme?.headerBackgroundColor || "#ffffff",
+                  }}
+                >
+                  {categories.map((category, index) => (
+                    <Link
+                      key={index}
+                      to={`/categories/${category
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}`}
+                      className="block px-4 py-2 text-sm hover:bg-gray-100 transition-colors duration-200"
+                      style={{
+                        color: headerTextColor || "#111111",
+                        backgroundColor:
+                          theme?.headerBackgroundColor || "#ffffff",
+                      }}
+                      onMouseEnter={(e) =>
+                        (e.target.style.backgroundColor = "rgba(0,0,0,0.05)")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.target.style.backgroundColor =
+                          theme?.headerBackgroundColor || "#ffffff")
+                      }
+                    >
+                      {category}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <Link
               className="text-[0.875rem] xl:text-[1rem] font-medium uppercase hover:underline transition-all duration-300"
               to="/shop"
@@ -208,14 +273,58 @@ function Header({ offsetY = 0, onHeightChange }) {
           >
             Home
           </Link>
-          <Link
-            to="/categories"
-            className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
-            style={{ color: headerTextColor || "#111111" }}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Category
-          </Link>
+
+          {/* Mobile Categories Dropdown */}
+          <div className="w-full">
+            <button
+              className="w-full flex items-center justify-between px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
+              style={{ color: headerTextColor || "#111111" }}
+              onClick={() => setIsMobileCategoryOpen(!isMobileCategoryOpen)}
+            >
+              Category
+              <svg
+                className="w-4 h-4 transition-transform duration-200"
+                style={{
+                  transform: isMobileCategoryOpen
+                    ? "rotate(180deg)"
+                    : "rotate(0deg)",
+                }}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Mobile Categories List */}
+            {isMobileCategoryOpen && (
+              <div className="ml-4 mt-2 space-y-1">
+                {categories.map((category, index) => (
+                  <Link
+                    key={index}
+                    to={`/categories/${category
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
+                    className="block px-3 py-2 rounded hover:bg-black/10 transition text-sm"
+                    style={{ color: headerTextColor || "#111111" }}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsMobileCategoryOpen(false);
+                    }}
+                  >
+                    {category}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
           <Link
             to="/shop"
             className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
