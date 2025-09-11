@@ -1,16 +1,17 @@
-import { useState } from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Profile() {
   const navigate = useNavigate();
-  const { theme, headerTextColor } = useTheme();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { headerTextColor } = useTheme();
   return (
     <div
       className="relative cursor-pointer"
       onClick={(e) => {
         e.preventDefault();
-        navigate("/signin");
+        isAuthenticated ? navigate("/my-account") : navigate("/signin");
       }}
     >
       {/* Settings Button */}

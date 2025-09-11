@@ -18,13 +18,41 @@ export const login = createAsyncThunk(
       if (response?.data?.success || response?.status) {
         navigate("/")
       }
-      console.log("response", response);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || "Login failed");
     }
   }
 );
+
+export const logoutUser = createAsyncThunk(
+  "auth/logout",
+  async ({ navigate }, { rejectWithValue, dispatch }) => {
+    console.log("sdhjksdffghjskdfghjs");
+    try {
+      const response = await axiosInstance.post("/customer/logout", {
+        user_token: import.meta.env.VITE_API_KEY,
+      });
+      console.log("response",response);
+      if (response?.data?.success || response?.status) {
+        // Clear state
+        dispatch(logout());
+        dispatch({ type: "RESET_APP" }); // if you have global reset
+        // dispatch(clearCart()); // if cart slice
+
+        // Redirect to login
+        navigate("/");
+      }
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Logout failed"
+      );
+    }
+  }
+);
+
 
 const authSlice = createSlice({
   name: "auth",
@@ -53,6 +81,7 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // login
       .addCase(login.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -66,6 +95,20 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload || "Login failed";
         state.isAuthenticated = false;
+      })
+
+      // logout
+      .addCase(logoutUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.loading = false;
+        state.user = null;
+        state.isAuthenticated = false;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Logout failed";
       });
   },
 });

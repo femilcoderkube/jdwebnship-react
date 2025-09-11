@@ -3,11 +3,81 @@ import CommonHeader from "../components/CommonHeader";
 import { useTheme } from "../contexts/ThemeContext";
 import watch from "../assets/watch.png";
 import CardComponent from "../components/CardComponent";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../redux/slices/authSlice";
 
 import w01 from "../assets/images/w01.jpg";
 import w02 from "../assets/images/w02.jpg";
 import w03 from "../assets/images/w03.jpg";
 import empty from "../assets/images/empty-state.svg";
+
+const products = [
+  {
+    id: 1,
+    productName: "Women's Classic Watch",
+    category: "Women's Watch",
+    price: 199.99,
+    inStock: true,
+    imageSrc: w01,
+  },
+  {
+    id: 2,
+    productName: "Men's Sport Perfume",
+    category: "Perfumes for Men",
+    price: 49.99,
+    inStock: false,
+    imageSrc: w02,
+  },
+  {
+    id: 3,
+    productName: "Graphic T-Shirt",
+    category: "T-Shirts",
+    price: 29.99,
+    inStock: true,
+    imageSrc: w03,
+  },
+  {
+    id: 4,
+    productName: "Luxury Women's Watch",
+    category: "Women's Watch",
+    price: 299.99,
+    inStock: true,
+    imageSrc: w01,
+  },
+  {
+    id: 5,
+    productName: "Casual T-Shirt",
+    category: "T-Shirts",
+    price: 19.99,
+    inStock: false,
+    imageSrc: w02,
+  },
+  {
+    id: 1,
+    productName: "Women's Classic Watch",
+    category: "Women's Watch",
+    price: 199.99,
+    inStock: true,
+    imageSrc: w02,
+  },
+  {
+    id: 2,
+    productName: "Men's Sport Perfume",
+    category: "Perfumes for Men",
+    price: 49.99,
+    inStock: false,
+    imageSrc: w03,
+  },
+  {
+    id: 3,
+    productName: "Graphic T-Shirt",
+    category: "T-Shirts",
+    price: 29.99,
+    inStock: true,
+    imageSrc: w01,
+  },
+];
 
 const renderContent = (selected) => {
   switch (selected) {
@@ -79,7 +149,7 @@ const renderContent = (selected) => {
                         Buy it Again
                       </a>
                       <a href="" className="underline">
-                        View order details 
+                        View order details
                       </a>
                     </div>
                   </div>
@@ -165,72 +235,6 @@ const renderContent = (selected) => {
         </div>
       );
     case "wishlist":
-      const products = [
-        {
-          id: 1,
-          productName: "Women's Classic Watch",
-          category: "Women's Watch",
-          price: 199.99,
-          inStock: true,
-          imageSrc: w01,
-        },
-        {
-          id: 2,
-          productName: "Men's Sport Perfume",
-          category: "Perfumes for Men",
-          price: 49.99,
-          inStock: false,
-          imageSrc: w02,
-        },
-        {
-          id: 3,
-          productName: "Graphic T-Shirt",
-          category: "T-Shirts",
-          price: 29.99,
-          inStock: true,
-          imageSrc: w03,
-        },
-        {
-          id: 4,
-          productName: "Luxury Women's Watch",
-          category: "Women's Watch",
-          price: 299.99,
-          inStock: true,
-          imageSrc: w01,
-        },
-        {
-          id: 5,
-          productName: "Casual T-Shirt",
-          category: "T-Shirts",
-          price: 19.99,
-          inStock: false,
-          imageSrc: w02,
-        },
-        {
-          id: 1,
-          productName: "Women's Classic Watch",
-          category: "Women's Watch",
-          price: 199.99,
-          inStock: true,
-          imageSrc: w02,
-        },
-        {
-          id: 2,
-          productName: "Men's Sport Perfume",
-          category: "Perfumes for Men",
-          price: 49.99,
-          inStock: false,
-          imageSrc: w03,
-        },
-        {
-          id: 3,
-          productName: "Graphic T-Shirt",
-          category: "T-Shirts",
-          price: 29.99,
-          inStock: true,
-          imageSrc: w01,
-        },
-      ];
       return (
         <div className="w-full">
           <div className="flex justify-between w-full pb-[1.25rem] items-center">
@@ -525,6 +529,13 @@ const renderContent = (selected) => {
 const MyAccount = () => {
   const [selected, setSelected] = useState("orders");
   const { theme, bottomFooterTextColor } = useTheme();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    console.log("gjhsdgfhdgjf");
+    dispatch(logoutUser({ navigate }));
+  };
 
   const menuItems = [
     {
@@ -682,7 +693,9 @@ const MyAccount = () => {
               {menuItems.map((item) => (
                 <li className="lg:text-lg" key={item.key}>
                   <button
-                    onClick={() => setSelected(item.key)}
+                    onClick={() =>
+                      item.key === "logout" ? handleLogout() : setSelected(item.key)
+                    }
                     style={{
                       display: "flex",
                       alignItems: "center",
