@@ -11,9 +11,9 @@ function CommonHeader({ className = "", ...props }) {
     "/": {
       content: (
         <div className="py-[2.5rem] lg:py-[4.6875rem] -mt-[70px] z-10 relative rounded-b-none rounded-3xl">
-          <div className="flex items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] max-w-[90rem] ml-auto mr-auto">
-            <div className="grid md:grid-cols-3 xxl:px-[248px]">
-              <div className="px-[2.5rem] lg:px-[4.6875rem] py-[30px] lg:py-[4.6875rem] md:border-0 md:border-r">
+          <div className="flex items-center justify-between max-w-[90rem] ml-auto mr-auto">
+            <div className="flex xxl:px-[248px] gap-6">
+              <div className="flex-1 px-[2.5rem] lg:px-[3.75rem] py-[30px] lg:py-[3.75rem]">
                 <h1 className="mb-4 text-[1.125rem] lg:text-[1.5rem] font-bold">
                   Free Shipping
                 </h1>
@@ -22,7 +22,8 @@ function CommonHeader({ className = "", ...props }) {
                   Don't miss out.
                 </p>
               </div>
-              <div className="px-[2.5rem] lg:px-[4.6875rem] py-[30px] lg:py-[4.6875rem] md:border-0 md:border-r">
+              <span className="seperator border-r"></span>
+              <div className="flex-1 px-[2.5rem] lg:px-[3.75rem] py-[30px] lg:py-[3.75rem]">
                 <h1 className="mb-4 text-[1.125rem] lg:text-[1.5rem] font-bold">
                   Secure Payment
                 </h1>
@@ -31,7 +32,8 @@ function CommonHeader({ className = "", ...props }) {
                   us.
                 </p>
               </div>
-              <div className="px-[2.5rem] lg:px-[4.6875rem] py-[30px] lg:py-[4.6875rem]">
+              <span className="seperator border-r"></span>
+              <div className="flex-1 px-[2.5rem] lg:px-[3.75rem] py-[30px] lg:py-[3.75rem]">
                 <h1 className="mb-4 text-[1.125rem] lg:text-[1.5rem] font-bold">
                   Satisfaction Guarantee
                 </h1>
