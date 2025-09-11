@@ -15,8 +15,6 @@ const CardComponent = ({
 }) => {
   const { textColor } = useTheme();
 
-  console.log("oldPrice",oldPrice)
-
   return (
     <div
       className="text-start relative card-element"

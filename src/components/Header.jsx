@@ -15,7 +15,6 @@ function Header({ offsetY = 0, onHeightChange }) {
   const [isMobileCategoryOpen, setIsMobileCategoryOpen] = useState(false);
   const ref = useRef(null);
   const dispatch = useDispatch();
-
   const { storeInfo, loading } = useSelector((state) => state.storeInfo);
   const categories = storeInfo?.sub_category_list || [];
 
@@ -46,6 +45,7 @@ function Header({ offsetY = 0, onHeightChange }) {
     ro.observe(ref.current);
     return () => ro.disconnect();
   }, [onHeightChange]);
+
 
   return (
     <header
@@ -161,12 +161,12 @@ function Header({ offsetY = 0, onHeightChange }) {
                               theme?.headerBackgroundColor || "#ffffff",
                           }}
                           onMouseEnter={(e) =>
-                            (e.target.style.backgroundColor =
-                              "rgba(0,0,0,0.05)")
+                          (e.target.style.backgroundColor =
+                            "rgba(0,0,0,0.05)")
                           }
                           onMouseLeave={(e) =>
-                            (e.target.style.backgroundColor =
-                              theme?.headerBackgroundColor || "#ffffff")
+                          (e.target.style.backgroundColor =
+                            theme?.headerBackgroundColor || "#ffffff")
                           }
                         >
                           {category.name}

@@ -26,21 +26,17 @@ function SignIn() {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       const payload = {
         user_token: import.meta.env.VITE_API_KEY,
         email: values.email,
         password: values.password,
       };
       try {
-        await dispatch(login({ credentials: payload, navigate }));
+        dispatch(login({ credentials: payload, navigate }));
       } catch (error) {
         console.error("Login failed:", error);
       }
-
-      // Handle sign-in here
-      console.log("Signing in with:", values);
-      // Example: call your API here
     },
   });
 

@@ -533,7 +533,6 @@ const MyAccount = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    console.log("gjhsdgfhdgjf");
     dispatch(logoutUser({ navigate }));
   };
 

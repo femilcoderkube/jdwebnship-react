@@ -69,14 +69,12 @@ import SignUp from "../pages/SignUp";
 // ✅ ProtectedRoute: Only logged-in users can access
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useSelector((state) => state.auth);
-  console.log("isAuthenticated 1",isAuthenticated);
   return isAuthenticated ? children : <Navigate to="/signin" replace />;
 };
 
 // ✅ GuestRoute: Only guests can access (redirect logged-in users)
 const GuestRoute = ({ children }) => {
   const { isAuthenticated } = useSelector((state) => state.auth);
-  console.log("isAuthenticated 2",isAuthenticated);
   return !isAuthenticated ? children : <Navigate to="/" replace />;
 };
 

@@ -1,6 +1,7 @@
 // src/redux/slices/authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../utils/axiosInstance";
+import { toast } from "react-toastify";
 
 const initialState = {
   user: null,
@@ -9,14 +10,15 @@ const initialState = {
   isAuthenticated: false,
 };
 
-// --- Thunks
-export const login = createAsyncThunk(
-  "auth/login",
-  async ({ credentials, navigate }, { rejectWithValue }) => {
+
+// Register
+export const registerUser = createAsyncThunk(
+  "auth/register",
+  async ({ data, navigate }, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post("/customer/login", credentials);
+      const response = await axiosInstance.post("/customer/register", data);
       if (response?.data?.success || response?.status) {
-        navigate("/")
+        navigate("/signup")
       }
       return response.data;
     } catch (error) {
@@ -25,25 +27,38 @@ export const login = createAsyncThunk(
   }
 );
 
+// Login with email
+export const login = createAsyncThunk(
+  "auth/login",
+  async ({ credentials, navigate }, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post("/customer/login", credentials);
+      if (response?.data?.success) {
+        toast.success(response?.data?.message || "Login successful.")
+        navigate("/")
+      } else {
+        toast.error(response?.data?.message || "Please verify your email before logging in.")
+      }
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || "Login failed");
+    }
+  }
+);
+
+// logout
 export const logoutUser = createAsyncThunk(
   "auth/logout",
   async ({ navigate }, { rejectWithValue, dispatch }) => {
-    console.log("sdhjksdffghjskdfghjs");
     try {
       const response = await axiosInstance.post("/customer/logout", {
         user_token: import.meta.env.VITE_API_KEY,
       });
-      console.log("response",response);
       if (response?.data?.success || response?.status) {
-        // Clear state
         dispatch(logout());
-        dispatch({ type: "RESET_APP" }); // if you have global reset
-        // dispatch(clearCart()); // if cart slice
-
-        // Redirect to login
+        dispatch({ type: "RESET_APP" });
         navigate("/");
       }
-
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -81,6 +96,23 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+      // Register
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.data;
+        state.isAuthenticated = action.payload.data ? true : false;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Register failed";
+        state.isAuthenticated = false;
+      })
+
       // login
       .addCase(login.pending, (state) => {
         state.loading = true;
@@ -89,7 +121,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.data;
-        state.isAuthenticated = true;
+        state.isAuthenticated = action.payload.data ? true : false;
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
