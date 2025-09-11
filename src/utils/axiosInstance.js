@@ -1,16 +1,22 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({
+const baseConfig = {
   baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
   withCredentials: false,
-});
+};
 
-axiosInstance.interceptors.request.use(
+// Axios instance for APIs that require authentication
+const authenticatedAxios = axios.create(baseConfig);
+
+// Axios instance for APIs that work without authentication
+const publicAxios = axios.create(baseConfig);
+
+// Add token to authenticated requests
+authenticatedAxios.interceptors.request.use(
   (config) => {
-    // Example: attach auth token if available
     const token = localStorage.getItem("auth_token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -20,18 +26,8 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    // Centralized error handling
-    if (error.response) {
-      // Optionally handle specific status codes
-      if (error.response.status === 401) {
-        // e.g., redirect to signin or refresh token
-      }
-    }
-    return Promise.reject(error);
-  }
-);
+// Export both instances
+export { authenticatedAxios, publicAxios };
 
-export default axiosInstance;
+// Default export for backward compatibility (authenticated)
+export default authenticatedAxios;
