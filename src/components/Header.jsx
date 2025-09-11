@@ -89,7 +89,7 @@ function Header({ offsetY = 0, onHeightChange }) {
 
           <div className="left-nav hidden lg:flex items-center">
             <Link
-              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300"
+              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300 py-3"
               to="/"
               style={{
                 color: headerTextColor || "#111111",
@@ -106,7 +106,7 @@ function Header({ offsetY = 0, onHeightChange }) {
               onMouseLeave={() => setIsCategoryDropdownOpen(false)}
             >
               <Link
-                className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300 flex items-center"
+                className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300 py-3 flex items-center"
                 to="/categories"
                 style={{
                   color: headerTextColor || "#111111",
@@ -137,7 +137,7 @@ function Header({ offsetY = 0, onHeightChange }) {
               {/* Dropdown Menu */}
               {isCategoryDropdownOpen && (
                 <div
-                  className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50"
+                  className="absolute top-full left-0 mt-0 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50"
                   style={{
                     backgroundColor: theme?.headerBackgroundColor || "#ffffff",
                   }}
@@ -185,7 +185,7 @@ function Header({ offsetY = 0, onHeightChange }) {
             </div>
 
             <Link
-              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300"
+              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300 py-3"
               to="/shop"
               style={{
                 color: headerTextColor || "#111111",
@@ -211,7 +211,7 @@ function Header({ offsetY = 0, onHeightChange }) {
         <div className="right-nav flex items-center gap-3 sm:gap-4">
           <div className="hidden lg:flex items-center">
             <Link
-              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300"
+              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300 py-3"
               to="/about"
               style={{
                 color: headerTextColor || "#111111",
@@ -221,7 +221,7 @@ function Header({ offsetY = 0, onHeightChange }) {
               About Us
             </Link>
             <Link
-              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300"
+              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300 py-3"
               to="/about"
               style={{
                 color: headerTextColor || "#111111",
