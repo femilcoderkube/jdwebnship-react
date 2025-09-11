@@ -93,14 +93,14 @@ function CommonHeader({ className = "", ...props }) {
   const Breadcrumb = ({ currentPage }) => (
     <nav className="flex justify-center" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-        <li className="inline-flex items-center font-medium me-4">
+        <li className="inline-flex items-center font-medium me-2">
           <Link to="/" className="inline-flex items-center">
             Home
           </Link>
         </li>
         <li aria-current="page">
-          <div className="flex items-center border-l opacity-35 font-medium ps-4">
-            <span className="ms-1 text-sm">{currentPage}</span>
+          <div className="flex items-center border-l opacity-35 font-medium ps-2">
+            <span className="text-sm">{currentPage}</span>
           </div>
         </li>
       </ol>
