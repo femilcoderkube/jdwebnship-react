@@ -209,7 +209,7 @@ function Header({ offsetY = 0, onHeightChange }) {
             Home
           </Link>
           <Link
-            to="/Category"
+            to="/categories"
             className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
             style={{ color: headerTextColor || "#111111" }}
             onClick={() => setIsMenuOpen(false)}
@@ -217,7 +217,7 @@ function Header({ offsetY = 0, onHeightChange }) {
             Category
           </Link>
           <Link
-            to="/categories"
+            to="/shop"
             className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
             style={{ color: headerTextColor || "#111111" }}
             onClick={() => setIsMenuOpen(false)}
@@ -225,7 +225,7 @@ function Header({ offsetY = 0, onHeightChange }) {
             Shop
           </Link>
           <Link
-            to="/categories"
+            to="/about"
             className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
             style={{ color: headerTextColor || "#111111" }}
             onClick={() => setIsMenuOpen(false)}
