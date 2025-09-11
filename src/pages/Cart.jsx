@@ -7,14 +7,14 @@ function Cart() {
   const [items, setItems] = useState([
     {
       id: 1,
-      name: "Wireless Headphones",
+      name: "Longine_s Heritage Classic Copper-Black",
       price: 79.99,
       quantity: 1,
       image: "/src/assets/images/hero.jpg",
     },
     {
       id: 2,
-      name: "Smart Watch",
+      name: "Lacost e Navy Blue Logo Work Premium Polo T-Shirt",
       price: 129.0,
       quantity: 2,
       image: "/src/assets/images/hero.jpg",
@@ -54,10 +54,12 @@ function Cart() {
   return (
     <div>
       <CommonHeader />
-      <div className="px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] py-10">
-        <h1 className="text-2xl font-semibold mb-6">Your Cart</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-4">
+      <div className="max-w-[80rem] mx-auto lg:py-[6.25rem] md:py-[5rem] py-[3.5rem] text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-4">
+          <div className="lg:col-span-2 space-y-7.5">
+            <h1 className="text-2xl font-bold mb-6 pb-5 border-b border-[#11111126] text-left">
+              Your Cart
+            </h1>
             {items.length === 0 ? (
               <div className="text-center p-6 border rounded-md">
                 <p>Your cart is empty.</p>
@@ -67,31 +69,19 @@ function Cart() {
               </div>
             ) : (
               items.map((it) => (
-                <div key={it.id} className="flex gap-4 p-4 border rounded-md">
-                  <img
-                    src={it.image}
-                    alt={it.name}
-                    className="w-20 h-20 object-cover rounded"
-                  />
-                  <div className="flex-1">
-                    <div className="font-medium">{it.name}</div>
-                    <div className="text-sm text-gray-600">
-                      ${it.price.toFixed(2)}
-                    </div>
-                    <div className="mt-3 flex items-center gap-3">
-                      <button
-                        onClick={() => decreaseQty(it.id)}
-                        className="px-2 py-1 border rounded"
-                      >
-                        -
-                      </button>
-                      <span>{it.quantity}</span>
-                      <button
-                        onClick={() => increaseQty(it.id)}
-                        className="px-2 py-1 border rounded"
-                      >
-                        +
-                      </button>
+                <div key={it.id} className="flex gap-6 justify-between">
+                  <div className="flex gap-6 flex-1 max-w-[25.938rem]">
+                    <img
+                      src={it.image}
+                      alt={it.name}
+                      className="lg:w-[6.25rem] lg:h-[6.25rem] w-20 h-20 object-cover rounded-[1.125rem]"
+                    />
+                    <div>
+                      <div className="text-lg font-bold mb-2.5 text-[#111111]">{it.name}</div>
+                      <div className="flex items-center gap-2 mb-2.5">
+                        <span className="text-base font-bold text-[#111111]">₹3,298</span>
+                        <span className="text-sm text-[#808080]">₹19,999</span>
+                      </div>
                       <button
                         onClick={() => removeItem(it.id)}
                         className="ml-auto text-red-600"
@@ -100,11 +90,29 @@ function Cart() {
                       </button>
                     </div>
                   </div>
+                  <div className="flex items-start gap-3">
+                    <button
+                      onClick={() => decreaseQty(it.id)}
+                      className="px-2 py-1 border rounded"
+                    >
+                      -
+                    </button>
+                    <span>{it.quantity}</span>
+                    <button
+                      onClick={() => increaseQty(it.id)}
+                      className="px-2 py-1 border rounded"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div>
+                    <p className="text-lg font-bold">₹9,894</p>
+                  </div>
                 </div>
               ))
             )}
           </div>
-          <aside className="border rounded-md p-4 h-fit">
+          <aside className="border rounded-md p-4 h-fit lg:mt-12">
             <h2 className="text-lg font-semibold mb-4">Summary</h2>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">

@@ -63,6 +63,10 @@ function CommonHeader({ className = "", ...props }) {
       title: "Shop",
       breadcrumb: true,
     },
+    "/cart": {
+      title: "Your Shopping Cart",
+      breadcrumb: true,
+    },
     "/categories": {
       title: "Shop By Category",
       breadcrumb: true,
