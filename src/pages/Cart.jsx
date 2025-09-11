@@ -68,73 +68,82 @@ function Cart() {
                 </Link>
               </div>
             ) : (
+
               items.map((it) => (
-                <div key={it.id} className="flex gap-6 justify-between">
-                  <div className="flex gap-6 flex-1 max-w-[25.938rem]">
+                <div key={it.id} className="flex md:flex-row flex-col md:gap-6 gap-4 justify-between">
+                  <div className="flex gap-4 flex-1 max-w-[25.938rem]">
                     <img
                       src={it.image}
                       alt={it.name}
                       className="lg:w-[6.25rem] lg:h-[6.25rem] w-20 h-20 object-cover rounded-[1.125rem]"
                     />
                     <div>
-                      <div className="text-lg font-bold mb-2.5 text-[#111111]">{it.name}</div>
-                      <div className="flex items-center gap-2 mb-2.5">
-                        <span className="text-base font-bold text-[#111111]">₹3,298</span>
-                        <span className="text-sm text-[#808080]">₹19,999</span>
+                      <div className="sm:text-lg text-base font-bold mb-2.5 text-[#111111]">{it.name}</div>
+                      <div className="flex mb-2">
+                        <span className="leading-none inline-block text-base text-[#AAAAAA] border-r border-[#AAAAAA] pr-2 mr-2">Size:<strong className="font-bold text-[#111111] ml-2">L</strong></span>
+                      <div className="flex items-center gap-2">
+                        <span className="leading-none text-base font-bold text-[#111111]">₹3,298</span>
+                        <span className="leading-none text-sm text-[#808080]">₹19,999</span>
+                      </div>
                       </div>
                       <button
                         onClick={() => removeItem(it.id)}
-                        className="ml-auto text-red-600"
+                        className="text-sm underline uppercase cursor-pointer text-[#111111]"
                       >
                         Remove
                       </button>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-center gap-8 h-12 border border-[#AAAAAA] rounded-[0.625rem] w-fit md:mx-auto md:ml-[0] ml-[6rem]">
                     <button
                       onClick={() => decreaseQty(it.id)}
-                      className="px-2 py-1 border rounded"
+                      className="text-2xl font-normal text-[#111111] focus:outline-none"
+                      style={{ minWidth: "2.5rem" }}
                     >
-                      -
+                      –
                     </button>
-                    <span>{it.quantity}</span>
+                    <span className="text-base font-normal text-[#111111] select-none">{it.quantity}</span>
                     <button
                       onClick={() => increaseQty(it.id)}
-                      className="px-2 py-1 border rounded"
+                      className="text-2xl font-normal text-[#111111] focus:outline-none"
+                      style={{ minWidth: "2.5rem" }}
                     >
                       +
                     </button>
                   </div>
-                  <div>
+                  <div className="md:ml-[0] ml-[6rem]">
                     <p className="text-lg font-bold">₹9,894</p>
                   </div>
                 </div>
               ))
             )}
           </div>
-          <aside className="border rounded-md p-4 h-fit lg:mt-12">
-            <h2 className="text-lg font-semibold mb-4">Summary</h2>
+          <aside className="bg-[#FFF7F2] rounded-[2.125rem] p-[1.875rem] h-fit lg:mt-12">
+            <h2 className="md:text-2xl text-lg font-semibold mb-6">Order Summary</h2>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span>Subtotal</span>
-                <span>${subtotal.toFixed(2)}</span>
+                <span className="sm:text-lg font-medium">Subtotal</span>
+                <span className="sm:text-lg font-medium">${subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
-                <span>Taxes (7%)</span>
-                <span>${tax.toFixed(2)}</span>
+                <span className="sm:text-lg font-medium">Taxes (7%)</span>
+                <span className="sm:text-lg font-medium">${tax.toFixed(2)}</span>
               </div>
-              <div className="border-t pt-2 flex justify-between font-medium">
-                <span>Total</span>
-                <span>${total.toFixed(2)}</span>
+              <div className="border-t border-[#11111126] pt-5 mt-4 flex justify-between font-medium">
+                <span className="md:text-2xl text-lg font-medium">Total</span>
+                <span className="md:text-2xl text-lg font-medium">${total.toFixed(2)}</span>
               </div>
             </div>
             <button
               onClick={proceedToCheckout}
               disabled={items.length === 0}
-              className="mt-4 w-full bg-black text-white rounded-md py-2 disabled:opacity-60"
+              className="mt-6 w-full sm:text-lg font-normal bg-black text-white rounded-[0.625rem] sm:py-4 py-3 uppercase disabled:opacity-60 cursor-pointer"
             >
-              Proceed to Checkout
+              Checkout
             </button>
+            <div className="text-center mt-6">
+            <a className="sm:text-lg uppercase font-normal underline hover:text-[#007BFF]" href="">Continue Shopping</a>
+            </div>
           </aside>
         </div>
       </div>
