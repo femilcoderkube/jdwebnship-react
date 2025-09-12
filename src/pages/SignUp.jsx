@@ -207,7 +207,7 @@ function SignUp() {
           <form className="space-y-6" onSubmit={formik.handleSubmit}>
             {/* First & Last Name */}
             <div className="sm:mb-0 mb-6 flex flex-col sm:flex-row space-x-4">
-              <div className="sm:w-1/2 w-full mb-6">
+              <div className="sm:w-1/2 w-full mb-6 relative">
                 <label className="block text-sm mb-2 font-bold uppercase">
                   First name
                 </label>
@@ -222,12 +222,12 @@ function SignUp() {
                   onBlur={formik.handleBlur}
                 />
                 {formik.touched.firstName && formik.errors.firstName && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red-500 text-sm absolute">
                     {formik.errors.firstName}
                   </p>
                 )}
               </div>
-              <div className="sm:w-1/2 w-full">
+              <div className="sm:w-1/2 w-full relative">
                 <label className="block text-sm mb-2 font-bold uppercase">
                   Last name
                 </label>
@@ -242,7 +242,7 @@ function SignUp() {
                   onBlur={formik.handleBlur}
                 />
                 {formik.touched.lastName && formik.errors.lastName && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red-500 text-sm absolute">
                     {formik.errors.lastName}
                   </p>
                 )}
@@ -250,7 +250,7 @@ function SignUp() {
             </div>
 
             {/* Email */}
-            <div>
+            <div className="relative">
               <label className="block text-sm mb-2 font-bold uppercase">
                 Email
               </label>
@@ -265,12 +265,12 @@ function SignUp() {
                 onBlur={formik.handleBlur}
               />
               {formik.touched.email && formik.errors.email && (
-                <p className="text-red-500 text-sm">{formik.errors.email}</p>
+                <p className="text-red-500 text-sm absolute">{formik.errors.email}</p>
               )}
             </div>
 
             {/* Password */}
-            <div>
+            <div className="relative">
               <label className="block text-sm mb-2 font-bold uppercase">
                 Password
               </label>
@@ -298,12 +298,12 @@ function SignUp() {
                 </button>
               </div>
               {formik.touched.password && formik.errors.password && (
-                <p className="text-red-500 text-sm">{formik.errors.password}</p>
+                <p className="text-red-500 text-sm absolute">{formik.errors.password}</p>
               )}
             </div>
 
             {/* Mobile */}
-            <div>
+            <div className="relative">
               <label className="block text-sm mb-2 font-bold uppercase">
                 Mobile Number
               </label>
@@ -321,7 +321,7 @@ function SignUp() {
                 onBlur={formik.handleBlur}
               />
               {formik.touched.mobile && formik.errors.mobile && (
-                <p className="text-red-500 text-sm">{formik.errors.mobile}</p>
+                <p className="text-red-500 text-sm absolute">{formik.errors.mobile}</p>
               )}
             </div>
 

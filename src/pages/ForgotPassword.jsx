@@ -39,7 +39,7 @@ function ForgotPassword() {
           <p className="bg-[#FFF7F2] p-4 rounded-[0.625rem] text-sm font-medium text-[#111111] mb-6 text-center">
             Please enter the email address associated with your account. We'll promptly send you a link to reset your password.
           </p>
-          <form className="space-y-6" onSubmit={formik.handleSubmit}>
+          <form className="space-y-6 relative" onSubmit={formik.handleSubmit}>
             <div>
               <label
                 className="block text-sm mb-2 font-bold uppercase"
@@ -57,7 +57,7 @@ function ForgotPassword() {
                 onBlur={formik.handleBlur}
               />
               {formik.touched.email && formik.errors.email ? (
-                <p className="text-red-600 text-sm mt-1 text-left">
+                <p className="text-red-600 text-sm text-left absolute">
                   {formik.errors.email}
                 </p>
               ) : null}

@@ -80,7 +80,7 @@ function ResetPassword() {
         <div className="max-w-[37.5rem] mx-auto text-left">
           <form className="space-y-6" onSubmit={formik.handleSubmit}>
             {passwordFields.map((field) => (
-              <div key={field.name}>
+              <div className="relative" key={field.name}>
                 <label
                   htmlFor={field.name}
                   className="block text-sm mb-2 font-bold uppercase"
@@ -116,7 +116,7 @@ function ResetPassword() {
                   </button>
                 </div>
                 {formik.touched[field.name] && formik.errors[field.name] && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red-500 text-sm absolute">
                     {formik.errors[field.name]}
                   </p>
                 )}

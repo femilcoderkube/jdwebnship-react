@@ -53,7 +53,7 @@ function SignIn() {
       <div className="px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] lg:py-[6.25rem] md:py-[5rem] py-[3.5rem]">
         <div className="max-w-[37.5rem] mx-auto text-left">
           <form className="space-y-6" onSubmit={formik.handleSubmit}>
-            <div className="form-group">
+            <div className="form-group relative">
               <label
                 className="block text-sm mb-2 font-bold uppercase"
                 htmlFor="email"
@@ -70,7 +70,7 @@ function SignIn() {
                 onBlur={formik.handleBlur}
               />
               {formik.touched.email && formik.errors.email ? (
-                <p className="text-red-600 text-sm mt-1 text-left">
+                <p className="text-red-600 text-sm text-left absolute">
                   {formik.errors.email}
                 </p>
               ) : null}
