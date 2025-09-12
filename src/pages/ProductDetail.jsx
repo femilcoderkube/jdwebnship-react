@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CommonHeader from "../components/CommonHeader";
 import ProductSliderSection from "../components/ProductSliderSection";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Mousewheel, Navigation } from "swiper/modules"; // Import Mousewheel and Navigation modules
+import { Navigation, Thumbs, Mousewheel } from "swiper/modules"; // Import Mousewheel and Navigation modules
 import "swiper/css"; // Core Swiper styles
 import "swiper/css/mousewheel"; // Mousewheel styles
 import "swiper/css/navigation"; // Navigation styles
@@ -10,6 +10,7 @@ import whatsapp from "../assets/whatsapp-og.svg";
 
 function ProductDetail() {
   // Dummy product data with unique image URLs
+  const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
   const product = {
     name: "Women's Classic Watch",
     price: 199.99,
@@ -51,80 +52,75 @@ function ProductDetail() {
     <div className="mr-auto ml-auto">
       <CommonHeader />
       <div className="pt-25">
-        <div className="flex flex-col lg:flex-row gap-15 justify-center">
+        <div className="flex flex-col lg:flex-row gap-25 justify-center">
           {/* Left Column: Vertical Swiper */}
 
           {/* Center Column: Main Product Image */}
-          <div className="w-full max-w-[63.75rem] gap-6 flex justify-center">
-            <div className="w-full lg:w-1/10 flex justify-center">
-              <div className="relative flex flex-col items-center w-full">
-                {/* Previous Arrow (Above Swiper) */}
-                <div className="swiper-button-prev mb-2 w-10 h-10 bg-gray-800 text-white rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-900 transition shadow-md">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 15l7-7 7 7"
-                    />
-                  </svg>
+          <div className="w-full max-w-[63.75rem] gap-6 flex justify-center items-start">
+            <div className="w-full flex flex-col-reverse md:flex-row items-start">
+              <div className="flex flex-row md:flex-col w-full md:w-[150px] md:mr-8 mt-6 md:mt-0">
+                <div className="slider__prev cursor-pointer text-center text-sm h-auto w-8 md:h-12 md:w-auto flex items-center justify-center select-none focus:outline-none">
+                  Prev
                 </div>
                 <Swiper
-                  direction="vertical"
-                  slidesPerView={4}
-                  spaceBetween={8}
-                  mousewheel={true} // Enable mousewheel scrolling
+                  onSwiper={setThumbsSwiper}
+                  direction="horizontal"
+                  slidesPerView={3}
+                  spaceBetween={24}
+                  freeMode={true}
+                  breakpoints={{
+                    0: { direction: "horizontal" },
+                    768: { direction: "vertical" },
+                  }}
+                  modules={[Navigation, Thumbs]}
                   navigation={{
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                  }} // Enable navigation arrows
-                  modules={[Mousewheel, Navigation]} // Register Mousewheel and Navigation modules
-                  className="h-[400px] w-full"
+                    nextEl: ".slider__next",
+                    prevEl: ".slider__prev",
+                  }}
+                  className="h-[100px] w-[calc(100%-96px)] mx-4 md:w-full md:h-[calc(400px-96px)]"
                 >
-                  {product.images.map((image, index) => (
+                  {product.images.map((src, index) => (
                     <SwiperSlide key={index}>
-                      <img
-                        src={image}
-                        alt={`Thumbnail ${index + 1}`}
-                        className={`w-full h-full object-cover rounded-md cursor-pointer border-2 ${
-                          selectedImage === image
-                            ? "border-blue-500"
-                            : "border-transparent"
-                        }`}
-                        onClick={() => setSelectedImage(image)}
-                      />
+                      <div className="slider__image w-full h-full rounded-[10px] overflow-hidden transition duration-250 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 swiper-slide-thumb-active:grayscale-0 swiper-slide-thumb-active:opacity-100">
+                        <img src={src} alt="" className="w-full h-full object-cover block" />
+                      </div>
                     </SwiperSlide>
                   ))}
                 </Swiper>
-                {/* Next Arrow (Below Swiper) */}
-                <div className="swiper-button-next mt-2 w-10 h-10 bg-gray-800 text-white rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-900 transition shadow-md">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
+                <div className="slider__next cursor-pointer text-center text-sm h-auto w-8 md:h-12 md:w-auto flex items-center justify-center select-none focus:outline-none">
+                  Next
                 </div>
               </div>
-            </div>
-            <div className="flex-1 relative before:content-[''] before:block before:float-left before:pt-[100%] after:content-[''] after:table after:clear-both bg-[#f2f2f2] rounded-2xl">
-              <img
-                src={selectedImage}
-                alt="Main Product"
-                className="w-full h-full object-contain rounded-lg absolute top-0 left-0"
-              />
+              <Swiper
+                direction="horizontal"
+                slidesPerView={1}
+                spaceBetween={32}
+                mousewheel={true}
+                grabCursor={true}
+                thumbs={{ swiper: thumbsSwiper }}
+                modules={[Navigation, Thumbs, Mousewheel]}
+                navigation={{
+                  nextEl: ".slider__next",
+                  prevEl: ".slider__prev",
+                }}
+                breakpoints={{
+                  0: { direction: "horizontal" },
+                  768: { direction: "vertical" },
+                }}
+                className="w-full md:h-[400px]"
+              >
+                {product.images.map((src, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="slider__image w-full h-full rounded-[10px] overflow-hidden">
+                      <img
+                        src={src}
+                        alt=""
+                        className="w-full h-full object-cover block transition-transform duration-3000 group-hover:scale-110"
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
           </div>
 

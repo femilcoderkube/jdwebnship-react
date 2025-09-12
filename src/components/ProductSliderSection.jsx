@@ -90,7 +90,7 @@ function ProductSliderSection() {
       <section className="px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem]">
         <Swiper
           modules={[Navigation, Pagination]}
-          loop={true}
+        //   loop={true}
           spaceBetween={24}
           slidesPerView={1}
           navigation
