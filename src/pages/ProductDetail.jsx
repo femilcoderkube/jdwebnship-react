@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CommonHeader from "../components/CommonHeader";
-import ProductSection from "../components/ProductSection";
+import ProductSliderSection from "../components/ProductSliderSection";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Navigation } from "swiper/modules"; // Import Mousewheel and Navigation modules
 import "swiper/css"; // Core Swiper styles
@@ -225,7 +225,7 @@ function ProductDetail() {
           </div>
         </div>
       </div>
-      <ProductSection />
+      <ProductSliderSection />
     </div>
   );
 }

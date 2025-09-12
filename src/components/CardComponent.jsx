@@ -27,7 +27,7 @@ const CardComponent = ({
     >
       {imageSrc && (
       <div
-        className="bg-[#F8F8F8] rounded-[1.125rem] flex flex-col align-items-center justify-center"
+        className="relative before:content-[''] before:block before:float-left before:pt-[125%] after:content-[''] after:table after:clear-both bg-[#f2f2f2] rounded-[1.125rem] flex flex-col align-items-center justify-center"
         style={{
           height: "100%",
           borderRadius: "1.125rem",
@@ -44,7 +44,7 @@ const CardComponent = ({
           }}
         > */}
         
-          <img
+          <img className="absolute top-0 left-0"
             src={imageSrc}
             alt={productName || "Product Image"}
             style={{
