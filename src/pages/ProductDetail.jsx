@@ -11,6 +11,7 @@ import whatsapp from "../assets/whatsapp-og.svg";
 function ProductDetail() {
   // Dummy product data with unique image URLs
   const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
+   const [activeIndex, setActiveIndex] = useState(0); // New: Track main Swiper's active slide index
   const product = {
     name: "Women's Classic Watch",
     price: 199.99,
@@ -48,6 +49,14 @@ function ProductDetail() {
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   };
 
+  // New: Handle slide change to update active index
+  const handleSlideChange = (swiper) => {
+    setActiveIndex(swiper.activeIndex);
+    if (thumbsSwiper) {
+      thumbsSwiper.slideTo(swiper.activeIndex); // Sync thumbnail Swiper
+    }
+  };
+
   return (
     <div className="mr-auto ml-auto">
       <CommonHeader />
@@ -58,15 +67,15 @@ function ProductDetail() {
           {/* Center Column: Main Product Image */}
           <div className="w-full max-w-[63.75rem] gap-6 flex justify-center items-start">
             <div className="w-full flex flex-col-reverse md:flex-row items-start">
-              <div className="flex flex-row md:flex-col w-full md:w-[150px] md:mr-8 mt-6 md:mt-0">
+              <div className="flex flex-row md:flex-col w-full md:w-[100px] md:mr-8 mt-6 md:mt-0">
                 <div className="slider__prev cursor-pointer text-center text-sm h-auto w-8 md:h-12 md:w-auto flex items-center justify-center select-none focus:outline-none">
                   Prev
                 </div>
                 <Swiper
                   onSwiper={setThumbsSwiper}
                   direction="horizontal"
-                  slidesPerView={3}
-                  spaceBetween={24}
+                  slidesPerView={5}
+                  spaceBetween={15}
                   freeMode={true}
                   breakpoints={{
                     0: { direction: "horizontal" },
@@ -77,11 +86,15 @@ function ProductDetail() {
                     nextEl: ".slider__next",
                     prevEl: ".slider__prev",
                   }}
-                  className="h-[100px] w-[calc(100%-96px)] mx-4 md:w-full md:h-[calc(400px-96px)]"
+                  className="h-[100px] w-[calc(100%-96px)] mx-4 md:w-full md:h-[calc(100px*5+(24px/2*5)))]"
                 >
                   {product.images.map((src, index) => (
                     <SwiperSlide key={index}>
-                      <div className="slider__image w-full h-full rounded-[10px] overflow-hidden transition duration-250 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 swiper-slide-thumb-active:grayscale-0 swiper-slide-thumb-active:opacity-100">
+                      <div className={`slider__image w-full h-full rounded-[10px] overflow-hidden transition duration-250 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 swiper-slide-thumb-active:grayscale-0 swiper-slide-thumb-active:opacity-100 ${
+                          activeIndex === index
+                            ? "grayscale-0 opacity-100"
+                            : "grayscale opacity-50"
+                        }`}>
                         <img src={src} alt="" className="w-full h-full object-cover block" />
                       </div>
                     </SwiperSlide>
@@ -94,8 +107,7 @@ function ProductDetail() {
               <Swiper
                 direction="horizontal"
                 slidesPerView={1}
-                spaceBetween={32}
-                mousewheel={true}
+                spaceBetween={24}
                 grabCursor={true}
                 thumbs={{ swiper: thumbsSwiper }}
                 modules={[Navigation, Thumbs, Mousewheel]}
@@ -105,17 +117,18 @@ function ProductDetail() {
                 }}
                 breakpoints={{
                   0: { direction: "horizontal" },
-                  768: { direction: "vertical" },
+                  768: { direction: "horizontal" },
                 }}
-                className="w-full md:h-[400px]"
+                onSlideChange={handleSlideChange}
+                className="mySwiper md:flex-1"
               >
                 {product.images.map((src, index) => (
                   <SwiperSlide key={index}>
-                    <div className="slider__image w-full h-full rounded-[10px] overflow-hidden">
+                    <div className="slider__image w-full h-full rounded-[10px] overflow-hidden relative before:content-[''] before:block before:float-left before:pt-[100%] after:content-[''] after:table after:clear-both bg-[#f2f2f2]">
                       <img
                         src={src}
                         alt=""
-                        className="w-full h-full object-cover block transition-transform duration-3000 group-hover:scale-110"
+                        className="absolute top-0 left-0 object-contain w-full h-full block transition-transform duration-3000 group-hover:scale-110"
                       />
                     </div>
                   </SwiperSlide>
