@@ -23,6 +23,9 @@ function Product() {
     categories: searchParams.get("categories")
       ? searchParams.get("categories").split(",")
       : [],
+    sizes: searchParams.get("sizes")
+      ? searchParams.get("sizes").split(",")
+      : [],
     priceRange: [
       searchParams.get("minPrice") ? Number(searchParams.get("minPrice")) : 0,
       searchParams.get("maxPrice")
@@ -41,6 +44,7 @@ function Product() {
     if (filters.out_of_stock) params.set("out_of_stock", "true");
     if (filters.categories.length > 0)
       params.set("categories", filters.categories.join(","));
+    if (filters.sizes.length > 0) params.set("sizes", filters.sizes.join(","));
     if (filters.priceRange[0] > 0)
       params.set("minPrice", filters.priceRange[0]);
     if (filters.priceRange[1] < 10000)
@@ -55,12 +59,15 @@ function Product() {
     const categories = searchParams.get("categories")
       ? searchParams.get("categories").split(",")
       : [];
-
+    const sizes = searchParams.get("sizes")
+      ? searchParams.get("sizes").split(",")
+      : [];
     setFilters((prev) => ({
       ...prev,
       in_stock: in_stock || prev.in_stock,
       out_of_stock: out_of_stock || prev.out_of_stock,
       categories: categories.length > 0 ? categories : prev.categories,
+      sizes: sizes.length > 0 ? sizes : prev.sizes,
     }));
   }, [searchParams]);
 
@@ -80,6 +87,13 @@ function Product() {
           ? prev.categories.filter((cat) => cat !== categoryName)
           : [...prev.categories, categoryName],
       }));
+    } else if (filterType === "sizes") {
+      setFilters((prev) => ({
+        ...prev,
+        sizes: prev.sizes?.includes(value)
+          ? prev.sizes.filter((s) => s !== value)
+          : [...(prev.sizes || []), value],
+      }));
     }
   };
 
@@ -88,10 +102,11 @@ function Product() {
       in_stock: false,
       out_of_stock: true,
       categories: [],
+      sizes: [],
+      priceRange: [0, 10000],
     });
     setSearchParams({});
   };
-
   const products = product?.data?.products?.data || [];
 
   const filteredProducts = products.filter((product) => {
@@ -138,6 +153,10 @@ function Product() {
     return images[0] || "https://via.placeholder.com/200";
   };
 
+  const uniqueSizes = [
+    ...new Set(products.map((product) => product.size).filter(Boolean)),
+  ];
+
   return (
     <div className="">
       <CommonHeader />
@@ -170,7 +189,6 @@ function Product() {
                 </span>
               </div>
             </div>
-
             <div className="mb-[1.5rem]">
               <h4 className="text-lg font-bold uppercase text-[0.875rem] text-[#111111] mb-[0.9375rem]">
                 Availability <span>(2)</span>
@@ -197,7 +215,6 @@ function Product() {
                 </label>
               </div>
             </div>
-
             {loading ? (
               <div className="flex items-center justify-center p-4">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
@@ -238,6 +255,38 @@ function Product() {
               </div>
             )}
 
+            {/* do not remove this below code */}
+            {/* {loading ? (
+              <div className="flex items-center justify-center p-4">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+              </div>
+            ) : uniqueSizes.length > 0 ? (
+              <div className="mb-[1.5rem]">
+                <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
+                  Size <span>({uniqueSizes.length})</span>
+                </h4>
+                <div className="flex flex-wrap gap-5 lg:gap-[0.5rem] flex-row lg:flex-col">
+                  {uniqueSizes.map((size) => (
+                    <label
+                      key={size}
+                      className="flex items-center text-[0.875rem]"
+                    >
+                      <input
+                        type="checkbox"
+                        className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
+                        checked={filters.sizes?.includes(size)}
+                        onChange={() => handleCheckboxChange("sizes", size)}
+                      />
+                      <span className="ml-2">{size}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center p-4">
+                <p className="text-sm text-gray-500">No sizes found</p>
+              </div>
+            )} */}
             <div>
               <h4 className="text-lg font-bold uppercase text-[0.875rem] text-[#111111] mb-[0.9375rem]">
                 Price Range
