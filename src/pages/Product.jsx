@@ -131,31 +131,9 @@ function Product() {
     return stockMatch && categoryMatch && priceMatch;
   });
 
-  const getFirstImageUrl = (imageString) => {
-    if (!imageString || typeof imageString !== "string") {
-      return "https://via.placeholder.com/200";
-    }
-
-    const images = imageString
-      .split(",")
-      .map((url) => {
-        let cleanUrl = url.trim();
-
-        cleanUrl = cleanUrl.replace(
-          "https://techsell.blr1.cdn.digitaloceanspaces.com/https://techsell.blr1.cdn.digitaloceanspaces.com/",
-          "https://techsell.blr1.cdn.digitaloceanspaces.com/"
-        );
-
-        return cleanUrl;
-      })
-      .filter((url) => url);
-
-    return images[0] || "https://via.placeholder.com/200";
-  };
-
-  const uniqueSizes = [
-    ...new Set(products.map((product) => product.size).filter(Boolean)),
-  ];
+  // const uniqueSizes = [
+  //   ...new Set(products.map((product) => product.size).filter(Boolean)),
+  // ];
 
   return (
     <div className="">
@@ -315,14 +293,7 @@ function Product() {
                 filteredProducts.map((product) => (
                   <CardComponent
                     key={product.id}
-                    productName={product.name}
-                    // category={categories.find(cat => cat.id === product.sub_category_id)?.sub_category_name || 'Uncategorized'}
-                    price={product.final_price}
-                    // oldPrice={product.old_price}
-                    // in_stock={product.quantity > 0}
-                    imageSrc={getFirstImageUrl(product.product_images)}
-                    // productId={product.id}
-                    // slug={product.slug}
+                    product={product}
                   />
                 ))
               ) : (
