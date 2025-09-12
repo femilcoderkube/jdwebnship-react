@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchStoreInfo } from "../redux/slices/storeInfoSlice";
 import s05 from "../assets/images/s-05.jpg";
 import close from "../assets/images/close.png";
+import copy_icon from "../assets/images/copy_icon.png";
+import { gsap } from "gsap";
 
 function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
   const { theme, headerTextColor } = useTheme();
@@ -565,7 +567,119 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
           </a>
         </div>
       </div> */}
-      
+<<<<<<< Updated upstream
+      {/* Cart POP up End*/}
+
+      {/* Order POP up Start*/}
+      {/* <div className="overlay w-full h-full fixed top-0 left-0 bg-[rgba(0,0,0,.65)] z-99"></div>
+      <div className="fixed top-0 right-0 z-100 w-full max-w-[50rem]">
+        <div className="relative bg-white border border-white/20 w-full max-w-[50rem] h-dvh overflow-y-auto sm:p-7.5 p-4 mx-auto">
+
+          <div className="relative pb-6 mb-6 border-b border-[#11111126]">
+            <div className="flex items-start justify-between">
+              <div>
+                <h1 className="text-2xl font-bold text-[#111111]">
+                  Order Details
+                </h1>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#111111] font-mono text-lg">
+                    #80879571220
+                  </span>
+                  <img className="cursor-pointer w-4 h-4" src={copy_icon} alt="" />
+                </div>                
+              </div>
+                <img className="cursor-pointer w-4 h-4 mt-1.5" src={close} alt="" />
+            </div>
+          </div>
+
+          <div className="relative flex sm:flex-row flex-col sm:items-center justify-between gap-4 p-6 bg-[#FFF7F2] rounded-[0.625rem]">
+            <div className="">
+              <div className="text-[#000000] text-sm mb-1 uppercase">Order Date:</div>
+              <div className="text-[#000000] text-sm font-bold">08 September 2025</div>
+            </div>
+            <div className="">
+              <div className="text-[#000000] text-sm mb-1 uppercase">TOTAL:</div>
+              <div className="text-[#000000] text-sm font-bold">08 Sep, 2025</div>
+            </div>
+            <div className="">
+              <div className="text-[#000000] text-sm mb-1 uppercase">STATUS:</div>
+              <div className="text-[#000000] text-sm font-bold">
+                Order Placed
+              </div>
+            </div>
+          </div>
+
+          <div className="relative pt-6">
+            <div className="border border-[#00000026] rounded-[1.125rem] p-6">
+              <div className="flex items-start gap-3">
+                <div className="flex-1">
+                  <h3 className="text-[#000000] font-bold text-base mb-1">
+                    SHIP TO:
+                  </h3>
+                  <div className="space-y-1 text-[#000000]">
+                    <div className="text-[#000000]">John Doe</div>
+                    <div>john.doe@example.com</div>
+                    <div>9510207888</div>
+                    <div className="leading-relaxed">
+                      123 Main Street, City, Los Angeles, California, 395023
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative pt-6">
+            <div className="border border-[#00000026] rounded-[1.125rem] p-6">
+              <div className="flex items-start gap-3">
+                <div>
+                  <h3 className="text-[#000000] font-bold">
+                    PAYMENT:
+                  </h3>
+                  <div className="text-[#000000]">Pay on delivery</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative pt-6">
+            <div className="border border-[#00000026] rounded-[1.125rem] p-6">
+              <div className="flex items-start gap-3 mb-2">
+                <h3 className="text-[#000000] font-bold">
+                  ORDER SUMMARY:
+                </h3>
+              </div>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-[#000000]">Amount:</span>
+                  <span className="text-[#000000]">₹29,682</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-[#000000]">Subtotal:</span>
+                  <span className="text-[#000000]">₹29,682</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-[#000000]">Shipping Cost:</span>
+                  <span className="text-[#000000]">Free</span>
+                </div>
+                <div className="flex justify-between items-center text-lg">
+                  <span className="text-[#000000] font-bold">Total</span>
+                  <span className="text-[#000000] font-bold">₹29,682</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative pt-6 mt-6 border-t border-[#11111126]">
+            <button className="w-full btn py-4 px-6 rounded-2xl">
+              <span className="text-lg">BUY IT AGAIN</span>
+            </button>
+          </div>
+        </div>
+      </div> */}
+      {/* Order POP up End*/}
+=======
+>>>>>>> Stashed changes
     </div>
   );
 }
