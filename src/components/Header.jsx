@@ -88,7 +88,7 @@ function Header({ offsetY = 0, onHeightChange }) {
 
           <div className="left-nav hidden lg:flex items-center">
             <Link
-              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300 py-3"
+              className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-600 ease-in-out py-3"
               to="/"
               style={{
                 color: headerTextColor || "#111111",
@@ -105,7 +105,7 @@ function Header({ offsetY = 0, onHeightChange }) {
               onMouseLeave={() => setIsCategoryDropdownOpen(false)}
             >
               <Link
-                className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300 py-3 flex items-center"
+                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3 flex items-center"
                 to="/categories"
                 style={{
                   color: headerTextColor || "#111111",
@@ -184,7 +184,7 @@ function Header({ offsetY = 0, onHeightChange }) {
             </div>
 
             <Link
-              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300 py-3"
+              className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3"
               to="/shop"
               style={{
                 color: headerTextColor || "#111111",
@@ -218,7 +218,7 @@ function Header({ offsetY = 0, onHeightChange }) {
         <div className="right-nav flex items-center gap-3 sm:gap-4">
           <div className="hidden lg:flex items-center">
             <Link
-              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300 py-3"
+              className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3"
               to="/about"
               style={{
                 color: headerTextColor || "#111111",
@@ -228,7 +228,7 @@ function Header({ offsetY = 0, onHeightChange }) {
               About Us
             </Link>
             <Link
-              className="text-[0.875rem] xl:text-[1rem] font-medium uppercase transition-all duration-300 py-3"
+              className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3"
               to="/about"
               style={{
                 color: headerTextColor || "#111111",

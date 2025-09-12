@@ -19,7 +19,10 @@ function Product() {
 
   // State for price range and filters
   const [filters, setFilters] = useState({
-    inStock: searchParams.get("inStock") !== null ? searchParams.get("inStock") === "true" : true,
+    inStock:
+      searchParams.get("inStock") !== null
+        ? searchParams.get("inStock") === "true"
+        : true,
     // outOfStock: searchParams.get("outOfStock") === "true" || true,
     categories: searchParams.get("categories")
       ? searchParams.get("categories").split(",")
@@ -185,7 +188,7 @@ function Product() {
           <div className="lg:col-span-2 text-start fillters">
             <div className="flex flex-col border-b mb-[1rem] xl:mb-[1.5rem]">
               <div className="flex justify-between w-full">
-                <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
+                <h4 className="text-lg font-bold uppercase text-[0.875rem] text-[#111111]">
                   Filter By <span>(2)</span>
                 </h4>
                 <span
@@ -196,15 +199,16 @@ function Product() {
                 </span>
               </div>
               <div className="flex flex-wrap gap-[0.5rem] py-[1.5rem]">
-                <span className="bg-[#F8F8F8] inline-flex px-[0.9375rem] py-[0.375rem] gap-[0.375rem] rounded-lg">
-                  In stock <img src={cross} alt="" />
+                <span className="bg-[#F8F8F8] text-sm inline-flex px-[0.9375rem] py-[0.375rem] gap-[0.375rem] rounded-lg">
+                  In stock <img className="cursor-pointer" src={cross} alt="" />
                 </span>
-                <span className="bg-[#F8F8F8] inline-flex px-[0.9375rem] py-[0.375rem] gap-[0.375rem] rounded-lg">
-                  Out of Stock <img src={cross} alt="" />
+                <span className="bg-[#F8F8F8] text-sm inline-flex px-[0.9375rem] py-[0.375rem] gap-[0.375rem] rounded-lg">
+                  Out of Stock{" "}
+                  <img className="cursor-pointer" src={cross} alt="" />
                 </span>
-                <span className="bg-[#F8F8F8] inline-flex px-[0.9375rem] py-[0.375rem] gap-[0.375rem] rounded-lg">
+                <span className="bg-[#F8F8F8] text-sm inline-flex px-[0.9375rem] py-[0.375rem] gap-[0.375rem] rounded-lg">
                   Women’s Watch
-                  <img src={cross} alt="" />
+                  <img className="cursor-pointer" src={cross} alt="" />
                 </span>
               </div>
             </div>
@@ -317,7 +321,7 @@ function Product() {
                   </p>
                   <button
                     onClick={clearAllFilters}
-                    className="mt-4 px-4 py-2 bg-black text-white rounded hover:bg-[#007BFF] transition-colors"
+                    className="inline-flex gap-2 btn px-[1.5rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none items-center mt-5"
                   >
                     Clear all filters
                   </button>
