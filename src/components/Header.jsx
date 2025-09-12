@@ -76,7 +76,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
         }}
       >
         <nav
-          className="flex items-center relative justify-between px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] py-[1rem] lg:py-[1.5rem]"
+          className="flex items-center relative justify-between px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] h-[5rem]"
           style={{
             backgroundColor: theme?.headerBackgroundColor || "#ffffff",
             color: headerTextColor || "#ffffff",
@@ -109,9 +109,9 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
               </svg>
             </button>
 
-            <div className="left-nav hidden lg:flex items-center">
+            <div className="left-nav hidden lg:flex items-center h-[5rem]">
               <Link
-                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-600 ease-in-out py-3"
+                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-600 ease-in-out h-full flex items-center"
                 to="/"
                 style={{
                   color: headerTextColor || "#111111",
@@ -123,12 +123,12 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
 
               {/* Categories Dropdown */}
               <div
-                className="relative"
+                className="relative h-[5rem]"
                 onMouseEnter={() => setIsCategoryDropdownOpen(true)}
                 onMouseLeave={() => setIsCategoryDropdownOpen(false)}
               >
                 <Link
-                  className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3 flex items-center"
+                  className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 h-full flex items-center"
                   to="/categories"
                   style={{
                     color: headerTextColor || "#111111",
@@ -208,7 +208,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
               </div>
 
               <Link
-                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3"
+                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 h-full flex items-center"
                 to="/shop"
                 style={{
                   color: headerTextColor || "#111111",
