@@ -536,7 +536,7 @@ function Header({ offsetY = 0, onHeightChange }) {
           <button className="btn py-4 rounded-md cursor-pointer">
             CHECKOUT
           </button>
-          <button className="border border-black hover:bg-black hover:text-white transition-all duration-300 py-4 rounded-md cursor-pointer">
+          <button className="border border-black hover:bg-black hover:text-white transition-all duration-300 py-4 rounded-md cursor-pointer uppercase">
             View Cart
           </button>
           <a className="text-[#111111] text-lg underline hover:text-[#007BFF] cursor-pointer transition-all duration-300 text-center">
