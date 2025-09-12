@@ -29,14 +29,14 @@ function Advertisment() {
       }}
     >
       <Marquee>
-        <div className="flex gap-4 text-[0.875rem]">
-          <span>Step into style </span> • <span> Empower your look</span> •
-          <span>Step into style </span> • <span> Empower your look</span> •
-          <span>Step into style </span> • <span> Empower your look</span> •
-          <span>Step into style </span> • <span> Empower your look</span> •
-          <span>Step into style </span> • <span> Empower your look</span> •
-          <span>Step into style </span> • <span> Empower your look</span> •
-          <span>Step into style </span> • <span> Empower your look</span> •
+        <div className="flex gap-4 text-[0.875rem] mr-4">
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
         </div>
       </Marquee>
       <div
@@ -102,14 +102,14 @@ function Advertisment() {
         </div>
       </div>
       <Marquee>
-        <div className="flex gap-4 text-[0.875rem]">
-          <span>Step into style </span> • <span> Empower your look</span> •
-          <span>Step into style </span> • <span> Empower your look</span> •
-          <span>Step into style </span> • <span> Empower your look</span> •
-          <span>Step into style </span> • <span> Empower your look</span> •
-          <span>Step into style </span> • <span> Empower your look</span> •
-          <span>Step into style </span> • <span> Empower your look</span> •
-          <span>Step into style </span> • <span> Empower your look</span> •
+        <div className="flex gap-4 text-[0.875rem] mr-4">
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
+          <span className="uppercase">Step into style </span> • <span className="uppercase"> Empower your look</span> •
         </div>
       </Marquee>
     </div>

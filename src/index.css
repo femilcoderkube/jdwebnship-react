@@ -41,6 +41,11 @@ textarea {
   text-transform: uppercase;
 }
 
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+}
 
 
 /* Custom Checkbox Styling */
