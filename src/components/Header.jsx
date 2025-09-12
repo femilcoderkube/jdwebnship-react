@@ -567,7 +567,6 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
           </a>
         </div>
       </div> */}
-<<<<<<< Updated upstream
       {/* Cart POP up End*/}
 
       {/* Order POP up Start*/}
@@ -678,8 +677,6 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
         </div>
       </div> */}
       {/* Order POP up End*/}
-=======
->>>>>>> Stashed changes
     </div>
   );
 }
