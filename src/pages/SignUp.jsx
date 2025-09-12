@@ -134,7 +134,6 @@
 
 // export default SignUp;
 
-
 import React, { useState } from "react";
 import CommonHeader from "../components/CommonHeader";
 import { Link, useNavigate } from "react-router-dom";
@@ -223,7 +222,9 @@ function SignUp() {
                   onBlur={formik.handleBlur}
                 />
                 {formik.touched.firstName && formik.errors.firstName && (
-                  <p className="text-red-500 text-sm">{formik.errors.firstName}</p>
+                  <p className="text-red-500 text-sm">
+                    {formik.errors.firstName}
+                  </p>
                 )}
               </div>
               <div className="sm:w-1/2 w-full">
@@ -241,7 +242,9 @@ function SignUp() {
                   onBlur={formik.handleBlur}
                 />
                 {formik.touched.lastName && formik.errors.lastName && (
-                  <p className="text-red-500 text-sm">{formik.errors.lastName}</p>
+                  <p className="text-red-500 text-sm">
+                    {formik.errors.lastName}
+                  </p>
                 )}
               </div>
             </div>
@@ -285,7 +288,7 @@ function SignUp() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"
                 >
                   {showPassword ? (
                     <Eye className="h-5 w-5" />
@@ -333,7 +336,10 @@ function SignUp() {
                 onBlur={formik.handleBlur}
                 className="shrink-0 h-5 w-5 rounded border-gray-300 bg-white"
               />
-              <label htmlFor="terms" className="text-sm font-medium select-none">
+              <label
+                htmlFor="terms"
+                className="text-sm font-medium select-none"
+              >
                 By creating an account you agree with our Terms of Service,
                 Privacy Policy,
               </label>
@@ -355,7 +361,10 @@ function SignUp() {
           <div className="mt-4 text-center">
             <p className="text-sm uppercase">
               Already have an account?{" "}
-              <Link to={"/signin"} className="underline hover:text-[#007BFF] transition-all duration-300">
+              <Link
+                to={"/signin"}
+                className="underline hover:text-[#007BFF] transition-all duration-300"
+              >
                 Sign In
               </Link>
             </p>

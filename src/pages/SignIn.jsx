@@ -22,11 +22,10 @@ const validationSchema = Yup.object({
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
       "Password must contain at least one uppercase, one lowercase, one number, and one special character"
-    )
+    ),
 });
 
 function SignIn() {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -94,7 +93,7 @@ function SignIn() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"
                 >
                   {showPassword ? (
                     <Eye className="h-5 w-5" />
@@ -125,7 +124,10 @@ function SignIn() {
           <div className="mt-6 text-center">
             <p className="text-sm uppercase">
               Don't have an account?{" "}
-              <Link to={"/signup"} className="underline hover:text-[#007BFF] site-link transition-all duration-300">
+              <Link
+                to={"/signup"}
+                className="underline hover:text-[#007BFF] site-link transition-all duration-300"
+              >
                 Sign up
               </Link>
             </p>

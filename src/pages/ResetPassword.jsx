@@ -24,7 +24,10 @@ const validationSchema = Yup.object({
   confirm_password: Yup.string()
     .min(8, "Password must be at least 8 characters")
     .required("Password is required")
-    .oneOf([Yup.ref("password"), null], "New Passwords and Confirm Password must match"),
+    .oneOf(
+      [Yup.ref("password"), null],
+      "New Passwords and Confirm Password must match"
+    ),
 });
 
 function ResetPassword() {
@@ -36,8 +39,8 @@ function ResetPassword() {
     confirm_password: false,
   });
 
-  const queryParams = new URLSearchParams(location.search)
-  const token = queryParams.get("token")
+  const queryParams = new URLSearchParams(location.search);
+  const token = queryParams.get("token");
 
   const formik = useFormik({
     initialValues,
@@ -58,8 +61,16 @@ function ResetPassword() {
 
   // fields config
   const passwordFields = [
-    { name: "password", label: "New Password", placeholder: "Enter new password" },
-    { name: "confirm_password", label: "Confirm Password", placeholder: "Enter confirm password" },
+    {
+      name: "password",
+      label: "New Password",
+      placeholder: "Enter new password",
+    },
+    {
+      name: "confirm_password",
+      label: "Confirm Password",
+      placeholder: "Enter confirm password",
+    },
   ];
 
   return (
@@ -95,7 +106,7 @@ function ResetPassword() {
                         [field.name]: !prev[field.name],
                       }))
                     }
-                    className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                    className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"
                   >
                     {showPassword[field.name] ? (
                       <Eye className="h-5 w-5" />
@@ -105,7 +116,9 @@ function ResetPassword() {
                   </button>
                 </div>
                 {formik.touched[field.name] && formik.errors[field.name] && (
-                  <p className="text-red-500 text-sm">{formik.errors[field.name]}</p>
+                  <p className="text-red-500 text-sm">
+                    {formik.errors[field.name]}
+                  </p>
                 )}
               </div>
             ))}
