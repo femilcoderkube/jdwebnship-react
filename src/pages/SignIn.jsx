@@ -4,6 +4,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/slices/authSlice";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 const initialValues = {
   email: "",
@@ -15,13 +17,19 @@ const validationSchema = Yup.object({
     .email("Invalid email address")
     .required("Email is required"),
   password: Yup.string()
+    .required("Password is required")
     .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+      "Password must contain at least one uppercase, one lowercase, one number, and one special character"
+    )
 });
 
 function SignIn() {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
     initialValues,
@@ -68,27 +76,36 @@ function SignIn() {
                 </p>
               ) : null}
             </div>
-            <div className="form-group">
-              <label
-                className="block text-sm mb-2 font-bold uppercase"
-                htmlFor="password"
-              >
+            <div>
+              <label className="block text-sm mb-2 font-bold uppercase">
                 Password
               </label>
-              <input
-                id="password"
-                type="password"
-                className="w-full border border-[#AAAAAA] rounded-md px-4 py-[0.82rem] focus:outline-none form-control"
-                placeholder="Enter your password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {formik.touched.password && formik.errors.password ? (
-                <p className="text-red-600 text-sm mt-1 text-left">
-                  {formik.errors.password}
-                </p>
-              ) : null}
+              <div className="relative">
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  className="w-full border border-[#AAAAAA] rounded-md px-4 py-[0.82rem] focus:outline-none pr-12"
+                  placeholder="Enter your password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                >
+                  {showPassword ? (
+                    <Eye className="h-5 w-5" />
+                  ) : (
+                    <EyeOff className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
+              {formik.touched.password && formik.errors.password && (
+                <p className="text-red-500 text-sm">{formik.errors.password}</p>
+              )}
             </div>
             <div className="mt-4 text-right">
               <Link

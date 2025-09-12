@@ -163,8 +163,12 @@ const validationSchema = Yup.object({
     .email("Invalid email address")
     .required("Email is required"),
   password: Yup.string()
+    .required("Password is required")
     .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+      "Password must contain at least one uppercase, one lowercase, one number, and one special character"
+    ),
   mobile: Yup.string()
     .matches(/^[0-9]{10}$/, "Enter a valid 10-digit mobile number")
     .required("Mobile number is required"),

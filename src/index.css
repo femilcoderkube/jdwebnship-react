@@ -115,9 +115,9 @@ textarea {
     0px 8px 10px 0px #00000033,
     0px 6px 30px 0px #0000001F,
     0px 16px 24px 0px #00000024;
-    animation-delay: 300ms;
-    animation-timing-function: linear;
-    animation-duration: 4800ms;
+    animation-delay: 0ms;
+    animation-timing-function: ease-in-out;
+    animation-duration: 300ms;
     color: #111111;
 }
 
