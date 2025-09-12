@@ -11,22 +11,15 @@ function Product() {
   const { storeInfo, loading } = useSelector((state) => state.storeInfo);
   const { product } = useSelector((state) => state.products);
 
-  // Get categories from API response
-  const subCategories = product?.data?.sub_categories || [];
-  // const categories = subCategories.length > 0 ? subCategories : storeInfo?.sub_category_list || [];
   const categories = storeInfo?.sub_category_list || [];
-
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-
-  console.log("product", product);
-
   const [filters, setFilters] = useState({
-    inStock:
-      searchParams.get("inStock") !== null
-        ? searchParams.get("inStock") === "true"
+    in_stock:
+      searchParams.get("in_stock") !== null
+        ? searchParams.get("in_stock") === "true"
         : true,
-    outOfStock: searchParams.get("outOfStock") === "true" || true,
+    out_of_stock: searchParams.get("out_of_stock") === "true" || true,
     categories: searchParams.get("categories")
       ? searchParams.get("categories").split(",")
       : [],
@@ -44,8 +37,8 @@ function Product() {
 
   useEffect(() => {
     const params = new URLSearchParams();
-    if (filters.inStock) params.set("inStock", "true");
-    if (filters.outOfStock) params.set("outOfStock", "true");
+    if (filters.in_stock) params.set("in_stock", "true");
+    if (filters.out_of_stock) params.set("out_of_stock", "true");
     if (filters.categories.length > 0)
       params.set("categories", filters.categories.join(","));
     if (filters.priceRange[0] > 0)
@@ -56,67 +49,66 @@ function Product() {
     setSearchParams(params, { replace: true });
   }, [filters, setSearchParams]);
 
-  // Parse URL params on component mount
   useEffect(() => {
-    const inStock = searchParams.get("inStock") === "true";
-    const outOfStock = searchParams.get("outOfStock") === "true";
+    const in_stock = searchParams.get("in_stock") === "true";
+    const out_of_stock = searchParams.get("out_of_stock") === "true";
     const categories = searchParams.get("categories")
       ? searchParams.get("categories").split(",")
       : [];
 
     setFilters((prev) => ({
       ...prev,
-      inStock: inStock || prev.inStock,
-      outOfStock: outOfStock || prev.outOfStock,
+      in_stock: in_stock || prev.in_stock,
+      out_of_stock: out_of_stock || prev.out_of_stock,
       categories: categories.length > 0 ? categories : prev.categories,
     }));
   }, [searchParams]);
 
   const handleCheckboxChange = (filterType, value) => {
-    if (filterType === "inStock" || filterType === "outOfStock") {
+    if (filterType === "in_stock" || filterType === "out_of_stock") {
       setFilters((prev) => ({
         ...prev,
         [filterType]: !prev[filterType],
       }));
     } else if (filterType === "categories") {
+      const category = categories.find((cat) => cat.id.toString() === value);
+      const categoryName = category?.name || value;
+
       setFilters((prev) => ({
         ...prev,
-        categories: prev.categories.includes(value)
-          ? prev.categories.filter((cat) => cat !== value)
-          : [...prev.categories, value],
+        categories: prev.categories.includes(categoryName)
+          ? prev.categories.filter((cat) => cat !== categoryName)
+          : [...prev.categories, categoryName],
       }));
     }
   };
 
   const clearAllFilters = () => {
     setFilters({
-      inStock: false,
-      outOfStock: true,
+      in_stock: false,
+      out_of_stock: true,
       categories: [],
     });
     setSearchParams({});
   };
 
   const products = product?.data?.products?.data || [];
-  console.log("Products data:", products);
 
   const filteredProducts = products.filter((product) => {
-    const inStock = product.quantity > 0;
+    const in_stock = product.quantity > 0;
 
-    // Stock filter
     const stockMatch =
-      (filters.inStock && inStock) ||
-      (filters.outOfStock && !inStock) ||
-      (!filters.inStock && !filters.outOfStock);
+      (filters.in_stock && in_stock) ||
+      (filters.out_of_stock && !in_stock) ||
+      (!filters.in_stock && !filters.out_of_stock);
 
-    // Category filter - check if product's sub_category_id matches any selected category
     const categoryMatch =
       filters.categories.length === 0 ||
-      filters.categories.some(
-        (catId) => parseInt(catId) === product.sub_category_id
-      );
+      filters.categories.some((categoryName) => {
+        const category = categories.find((cat) => cat.name === categoryName);
+        return category && category.id === product.sub_category_id;
+      });
 
-    // Price range filter
     const priceMatch =
       product.final_price >= filters.priceRange[0] &&
       product.final_price <= filters.priceRange[1];
@@ -126,24 +118,23 @@ function Product() {
 
   const getFirstImageUrl = (imageString) => {
     if (!imageString || typeof imageString !== "string") {
-      return "https://via.placeholder.com/200"; // Fallback image
+      return "https://via.placeholder.com/200";
     }
 
-    // Split the comma-separated string and clean URLs
     const images = imageString
       .split(",")
-      .map(
-        (url) =>
-          url
-            .trim() // Remove extra spaces
-            .replace(
-              /^https:\/\/techsell\.blr1\.cdn\.digitaloceanspaces\.com\/https:\/\/techsell\.blr1\.cdn\.digitaloceanspaces\.com\//,
-              ""
-            ) // Remove redundant prefix
-      )
-      .filter((url) => url); // Remove empty URLs
+      .map((url) => {
+        let cleanUrl = url.trim();
 
-    // Return the first valid image or fallback
+        cleanUrl = cleanUrl.replace(
+          "https://techsell.blr1.cdn.digitaloceanspaces.com/https://techsell.blr1.cdn.digitaloceanspaces.com/",
+          "https://techsell.blr1.cdn.digitaloceanspaces.com/"
+        );
+
+        return cleanUrl;
+      })
+      .filter((url) => url);
+
     return images[0] || "https://via.placeholder.com/200";
   };
 
@@ -152,7 +143,6 @@ function Product() {
       <CommonHeader />
       <div className="mx-auto py-[3.125rem] lg:py-[100px]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-7.5 px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem]">
-          {/* Left Column: Filters */}
           <div className="lg:col-span-2 text-start fillters">
             <div className="flex flex-col border-b mb-[1rem] xl:mb-[1.5rem]">
               <div className="flex justify-between w-full">
@@ -181,41 +171,6 @@ function Product() {
               </div>
             </div>
 
-            {/* Category Filter */}
-            {/* <div className="flex flex-col">
-              <h4 className="text-lg font-bold uppercase text-[0.875rem] text-[#111111] mb-[0.9375rem]">
-                Category <span>({categories.length})</span>
-              </h4>
-              <div className="flex flex-col gap-[0.5rem] max-h-[300px] overflow-y-auto">
-                {categories.map((category) => (
-                  <label key={category.id} className="flex items-center py-1">
-                    <input
-                      type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                      checked={filters.categories.includes(
-                        category.id.toString()
-                      )}
-                      onChange={() =>
-                        handleCheckboxChange(
-                          "categories",
-                          category.id.toString()
-                        )
-                      }
-                    />
-                    <span className="ml-2 text-sm">{category.name}</span>
-                    <span className="ml-auto text-xs text-gray-500">
-                      {
-                        products.filter(
-                          (p) => p.sub_category_id === category.id
-                        ).length
-                      }
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div> */}
-
-            {/* Availability Filter */}
             <div className="mb-[1.5rem]">
               <h4 className="text-lg font-bold uppercase text-[0.875rem] text-[#111111] mb-[0.9375rem]">
                 Availability <span>(2)</span>
@@ -226,8 +181,8 @@ function Product() {
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
                     defaultChecked
-                    checked={filters.inStock}
-                    onChange={() => handleCheckboxChange("inStock")}
+                    checked={filters.in_stock}
+                    onChange={() => handleCheckboxChange("in_stock")}
                   />
                   <span className="ml-2">In Stock</span>
                 </label>
@@ -235,15 +190,14 @@ function Product() {
                   <input
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                    checked={filters.outOfStock}
-                    onChange={() => handleCheckboxChange("outOfStock")}
+                    checked={filters.out_of_stock}
+                    onChange={() => handleCheckboxChange("out_of_stock")}
                   />
                   <span className="ml-2">Out of Stock</span>
                 </label>
               </div>
             </div>
 
-            {/* Category Filter */}
             {loading ? (
               <div className="flex items-center justify-center p-4">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
@@ -264,9 +218,7 @@ function Product() {
                         <input
                           type="checkbox"
                           className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                          checked={filters.categories.includes(
-                            category.id.toString()
-                          )}
+                          checked={filters.categories.includes(category.name)}
                           onChange={() =>
                             handleCheckboxChange(
                               "categories",
@@ -286,7 +238,6 @@ function Product() {
               </div>
             )}
 
-            {/* Price Range Slider */}
             <div>
               <h4 className="text-lg font-bold uppercase text-[0.875rem] text-[#111111] mb-[0.9375rem]">
                 Price Range
@@ -300,7 +251,6 @@ function Product() {
             </div>
           </div>
 
-          {/* Right Column: Product Display */}
           <div className="lg:col-span-10 lg:pl-[1.875rem]">
             <div className="flex flex-wrap gap-2 justify-between mb-[1.5rem]">
               <select className="uppercase">
@@ -320,7 +270,7 @@ function Product() {
                     // category={categories.find(cat => cat.id === product.sub_category_id)?.sub_category_name || 'Uncategorized'}
                     price={product.final_price}
                     // oldPrice={product.old_price}
-                    // inStock={product.quantity > 0}
+                    // in_stock={product.quantity > 0}
                     imageSrc={getFirstImageUrl(product.product_images)}
                     // productId={product.id}
                     // slug={product.slug}
