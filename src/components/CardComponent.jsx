@@ -20,7 +20,7 @@ const CardComponent = ({ product }) => {
   const addToWishList = () => {
     if (isAuthenticated) {
       if (isWishlist) {
-        const payload = { 
+        const payload = {
           product_id: !product?.retailer_id ? product?.id : null,
           retailer_product_id: product?.retailer_id ? product?.id : null,
         }
@@ -114,11 +114,11 @@ const CardComponent = ({ product }) => {
                   e.stopPropagation();
                   addToWishList();
                 }}
-                className="bg-[#1111116b] p-[9px] w-[2.625rem] h-[2.625rem] inline-block rounded-[8px]">
+                className="bg-[#1111116b] w-[2.625rem] h-[2.625rem] rounded-[8px] flex items-center justify-center">
                 {/* <img src={save} alt="Save" /> */}
                 <svg
-                  width="30"
-                  height="30"
+                  width="40"
+                  height="40"
                   viewBox="0 0 25 25"
                   fill={isWishlist ? "red" : "none"}
                   xmlns="http://www.w3.org/2000/svg"
