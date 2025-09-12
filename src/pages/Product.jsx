@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import CommonHeader from "../components/CommonHeader";
-import s01 from "../assets/images/s-01.jpg";
-import s02 from "../assets/images/s-02.jpg";
-import s03 from "../assets/images/s-03.jpg";
-import s04 from "../assets/images/s-04.jpg";
-import s05 from "../assets/images/s-05.jpg";
 import cross from "../assets/x.svg";
 import CardComponent from "../components/CardComponent";
 import PriceRangeSlider from "../components/Pricerangeslider";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../redux/slices/productSlice";
 
 function Product() {
   const { storeInfo, loading } = useSelector((state) => state.storeInfo);
+  const { product } = useSelector((state) => state.products);
+
+  // Get categories from API response
+  const subCategories = product?.data?.sub_categories || [];
+  // const categories = subCategories.length > 0 ? subCategories : storeInfo?.sub_category_list || [];
   const categories = storeInfo?.sub_category_list || [];
 
+  const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // State for price range and filters
+  console.log("product", product);
+
   const [filters, setFilters] = useState({
     inStock:
       searchParams.get("inStock") !== null
         ? searchParams.get("inStock") === "true"
         : true,
-    // outOfStock: searchParams.get("outOfStock") === "true" || true,
+    outOfStock: searchParams.get("outOfStock") === "true" || true,
     categories: searchParams.get("categories")
       ? searchParams.get("categories").split(",")
       : [],
@@ -35,7 +38,10 @@ function Product() {
     ],
   });
 
-  // Update URL when filters change
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
   useEffect(() => {
     const params = new URLSearchParams();
     if (filters.inStock) params.set("inStock", "true");
@@ -91,93 +97,55 @@ function Product() {
     setSearchParams({});
   };
 
-  // Dummy product data
-  const products = [
-    {
-      id: 1,
-      productName: "Women's Classic Watch",
-      category: "Women's Watch",
-      price: 199.99,
-      inStock: true,
-      imageSrc: s01,
-    },
-    {
-      id: 2,
-      productName: "Men's Sport Perfume",
-      category: "Perfumes for Men",
-      price: 49.99,
-      inStock: false,
-      imageSrc: s02,
-    },
-    {
-      id: 3,
-      productName: "Graphic T-Shirt",
-      category: "T-Shirts",
-      price: 29.99,
-      inStock: true,
-      imageSrc: s03,
-    },
-    {
-      id: 4,
-      productName: "Luxury Women's Watch",
-      category: "Women's Watch",
-      price: 299.99,
-      inStock: true,
-      imageSrc: s04,
-    },
-    {
-      id: 5,
-      productName: "Casual T-Shirt",
-      category: "T-Shirts",
-      price: 19.99,
-      inStock: false,
-      imageSrc: s05,
-    },
-    {
-      id: 1,
-      productName: "Women's Classic Watch",
-      category: "Women's Watch",
-      price: 1299.99,
-      inStock: true,
-      imageSrc: s01,
-    },
-    {
-      id: 2,
-      productName: "Men's Sport Perfume",
-      category: "Perfumes for Men",
-      price: 49.99,
-      inStock: false,
-      imageSrc: s02,
-    },
-    {
-      id: 3,
-      productName: "Graphic T-Shirt",
-      category: "T-Shirts",
-      price: 29.99,
-      inStock: true,
-      imageSrc: s03,
-    },
-  ];
+  const products = product?.data?.products?.data || [];
+  console.log("Products data:", products);
 
-  // Filter products based on selected filters
   const filteredProducts = products.filter((product) => {
-    // Check stock status
-    const stockMatch =
-      (filters.inStock && product.inStock) ||
-      (filters.outOfStock && !product.inStock);
+    const inStock = product.quantity > 0;
 
-    // Check category
+    // Stock filter
+    const stockMatch =
+      (filters.inStock && inStock) ||
+      (filters.outOfStock && !inStock) ||
+      (!filters.inStock && !filters.outOfStock);
+
+    // Category filter - check if product's sub_category_id matches any selected category
     const categoryMatch =
       filters.categories.length === 0 ||
-      filters.categories.includes(product.category);
+      filters.categories.some(
+        (catId) => parseInt(catId) === product.sub_category_id
+      );
 
-    // Check price range
+    // Price range filter
     const priceMatch =
-      product.price >= filters.priceRange[0] &&
-      product.price <= filters.priceRange[1];
+      product.final_price >= filters.priceRange[0] &&
+      product.final_price <= filters.priceRange[1];
 
     return stockMatch && categoryMatch && priceMatch;
   });
+
+  const getFirstImageUrl = (imageString) => {
+    if (!imageString || typeof imageString !== "string") {
+      return "https://via.placeholder.com/200"; // Fallback image
+    }
+
+    // Split the comma-separated string and clean URLs
+    const images = imageString
+      .split(",")
+      .map(
+        (url) =>
+          url
+            .trim() // Remove extra spaces
+            .replace(
+              /^https:\/\/techsell\.blr1\.cdn\.digitaloceanspaces\.com\/https:\/\/techsell\.blr1\.cdn\.digitaloceanspaces\.com\//,
+              ""
+            ) // Remove redundant prefix
+      )
+      .filter((url) => url); // Remove empty URLs
+
+    // Return the first valid image or fallback
+    return images[0] || "https://via.placeholder.com/200";
+  };
 
   return (
     <div className="">
@@ -212,6 +180,40 @@ function Product() {
                 </span>
               </div>
             </div>
+
+            {/* Category Filter */}
+            {/* <div className="flex flex-col">
+              <h4 className="text-lg font-bold uppercase text-[0.875rem] text-[#111111] mb-[0.9375rem]">
+                Category <span>({categories.length})</span>
+              </h4>
+              <div className="flex flex-col gap-[0.5rem] max-h-[300px] overflow-y-auto">
+                {categories.map((category) => (
+                  <label key={category.id} className="flex items-center py-1">
+                    <input
+                      type="checkbox"
+                      className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
+                      checked={filters.categories.includes(
+                        category.id.toString()
+                      )}
+                      onChange={() =>
+                        handleCheckboxChange(
+                          "categories",
+                          category.id.toString()
+                        )
+                      }
+                    />
+                    <span className="ml-2 text-sm">{category.name}</span>
+                    <span className="ml-auto text-xs text-gray-500">
+                      {
+                        products.filter(
+                          (p) => p.sub_category_id === category.id
+                        ).length
+                      }
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div> */}
 
             {/* Availability Filter */}
             <div className="mb-[1.5rem]">
@@ -262,9 +264,14 @@ function Product() {
                         <input
                           type="checkbox"
                           className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
-                          checked={filters.categories.includes(name)}
+                          checked={filters.categories.includes(
+                            category.id.toString()
+                          )}
                           onChange={() =>
-                            handleCheckboxChange("categories", name)
+                            handleCheckboxChange(
+                              "categories",
+                              category.id.toString()
+                            )
                           }
                         />
                         <span className="ml-2">{name}</span>
@@ -301,17 +308,22 @@ function Product() {
                 <option value="">In Stock</option>
               </select>
               <span className="text-[#808080] uppercase">
-                Showing 1-15 Of 1348 Results.
+                Showing {products.length} results
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-y-[4.375rem]">
-              {filteredProducts.length > 0 ? (
-                filteredProducts.map((product, index) => (
+              {filteredProducts?.length > 0 ? (
+                filteredProducts.map((product) => (
                   <CardComponent
-                    key={index}
-                    productName={product.productName}
-                    price={product.price}
-                    imageSrc={product.imageSrc}
+                    key={product.id}
+                    productName={product.name}
+                    // category={categories.find(cat => cat.id === product.sub_category_id)?.sub_category_name || 'Uncategorized'}
+                    price={product.final_price}
+                    // oldPrice={product.old_price}
+                    // inStock={product.quantity > 0}
+                    imageSrc={getFirstImageUrl(product.product_images)}
+                    // productId={product.id}
+                    // slug={product.slug}
                   />
                 ))
               ) : (
