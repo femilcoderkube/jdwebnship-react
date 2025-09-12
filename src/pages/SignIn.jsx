@@ -110,14 +110,14 @@ function SignIn() {
             <div className="mt-4 text-right">
               <Link
                 to={"/forgot-password"}
-                className="text-sm underline hover:text-[#007BFF] site-link uppercase"
+                className="text-sm underline hover:text-[#007BFF] site-link uppercase transition-all duration-300"
               >
                 Forgot Password?
               </Link>
             </div>
             <button
               type="submit"
-              className="w-full bg-black text-white rounded-[0.625rem] cursor-pointer py-4 uppercase"
+              className="w-full btn rounded-[0.625rem] cursor-pointer py-4 uppercase"
             >
               Sign in
             </button>
@@ -125,7 +125,7 @@ function SignIn() {
           <div className="mt-6 text-center">
             <p className="text-sm uppercase">
               Don't have an account?{" "}
-              <Link to={"/signup"} className="underline hover:text-[#007BFF] site-link">
+              <Link to={"/signup"} className="underline hover:text-[#007BFF] site-link transition-all duration-300">
                 Sign up
               </Link>
             </p>

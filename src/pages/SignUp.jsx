@@ -345,7 +345,7 @@ function SignUp() {
             {/* Submit */}
             <button
               type="submit"
-              className="w-full bg-black text-white rounded-[0.625rem] cursor-pointer py-4 uppercase"
+              className="w-full btn rounded-[0.625rem] cursor-pointer py-4 uppercase"
             >
               Sign up
             </button>
@@ -355,7 +355,7 @@ function SignUp() {
           <div className="mt-4 text-center">
             <p className="text-sm uppercase">
               Already have an account?{" "}
-              <Link to={"/signin"} className="underline hover:text-[#007BFF]">
+              <Link to={"/signin"} className="underline hover:text-[#007BFF] transition-all duration-300">
                 Sign In
               </Link>
             </p>

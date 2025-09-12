@@ -97,7 +97,7 @@ function Cart() {
                   <div className="flex items-center gap-8 h-12 border border-[#AAAAAA] rounded-[0.625rem] w-fit md:mx-auto md:ml-[0] ml-[6rem]">
                     <button
                       onClick={() => decreaseQty(it.id)}
-                      className="text-2xl font-normal text-[#111111] focus:outline-none"
+                      className="text-2xl font-normal text-[#111111] focus:outline-none cursor-pointer"
                       style={{ minWidth: "2.5rem" }}
                     >
                       –
@@ -105,7 +105,7 @@ function Cart() {
                     <span className="text-base font-normal text-[#111111] select-none">{it.quantity}</span>
                     <button
                       onClick={() => increaseQty(it.id)}
-                      className="text-2xl font-normal text-[#111111] focus:outline-none"
+                      className="text-2xl font-normal text-[#111111] focus:outline-none cursor-pointer"
                       style={{ minWidth: "2.5rem" }}
                     >
                       +
@@ -137,12 +137,12 @@ function Cart() {
             <button
               onClick={proceedToCheckout}
               disabled={items.length === 0}
-              className="mt-6 w-full sm:text-lg font-normal bg-black text-white rounded-[0.625rem] sm:py-4 py-3 uppercase disabled:opacity-60 cursor-pointer"
+              className="mt-6 w-full sm:text-lg font-normal btn rounded-[0.625rem] sm:py-4 py-3 uppercase disabled:opacity-60 cursor-pointer"
             >
               Checkout
             </button>
             <div className="text-center mt-6">
-            <a className="sm:text-lg uppercase font-normal underline hover:text-[#007BFF]" href="">Continue Shopping</a>
+            <a className="sm:text-lg uppercase font-normal underline hover:text-[#007BFF] transition-all duration-300" href="">Continue Shopping</a>
             </div>
           </aside>
         </div>
