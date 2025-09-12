@@ -7,40 +7,40 @@ const initialState = {
   error: null,
 };
 
-export const fetchStoreInfo = createAsyncThunk(
-  "storeInfo/fetchStoreInfo",
+export const fetchProducts = createAsyncThunk(
+  "product/fetchProducts",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post("/store-info");
+      const response = await axiosInstance.post("/get-products");
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data?.message || "Failed to fetch store information"
+        error.response?.data?.message || "Failed to fetch products information"
       );
     }
   }
 );
 
 const productSlice = createSlice({
-  name: "product",
+  name: "products",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchStoreInfo.pending, (state) => {
+      .addCase(fetchProducts.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchStoreInfo.fulfilled, (state, action) => {
+      .addCase(fetchProducts.fulfilled, (state, action) => {
         state.loading = false;
-        state.storeInfo = action.payload;
+        state.product = action.payload;
       })
-      .addCase(fetchStoreInfo.rejected, (state, action) => {
+      .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || "Failed to fetch store information";
+        state.error = action.payload || "Failed to fetch products information";
       });
   },
 });
 
-export const { clearStoreInfo } = productSlice.actions;
+export const { clearProducts } = productSlice.actions;
 export default productSlice.reducer;
