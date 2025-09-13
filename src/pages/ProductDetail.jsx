@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CommonHeader from "../components/CommonHeader";
 import ProductSliderSection from "../components/ProductSliderSection";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,39 +7,39 @@ import "swiper/css"; // Core Swiper styles
 import "swiper/css/mousewheel"; // Mousewheel styles
 import "swiper/css/navigation"; // Navigation styles
 import whatsapp from "../assets/whatsapp-og.svg";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchProductsDetails } from "../redux/slices/productSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function ProductDetail() {
+
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { productDetails } = useSelector((state) => state.products)
+  const product = productDetails?.product
+  const productImg = product?.product_images ? product?.product_images.split(',') : []
+
+  console.log("product", product);
+
   // Dummy product data with unique image URLs
+  const [quantity, setQuantity] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0); // New: Track main Swiper's active slide index
   const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
-   const [activeIndex, setActiveIndex] = useState(0); // New: Track main Swiper's active slide index
-  const product = {
-    name: "Women's Classic Watch",
-    price: 199.99,
-    oldPrice: 299.99,
-    description:
-      " Trait is a particular characteristic, quality or tendency that a person or an object has. It is something that makes you be you. This demo store does not offer goods for purchase. All products and images kindly provided by Trait Store.",
-    sizes: ["S", "M", "L", "XL"],
-    images: [
-      "https://picsum.photos/600/400?random=1",
-      "https://picsum.photos/600/400?random=2",
-      "https://picsum.photos/600/400?random=3",
-      "https://picsum.photos/600/400?random=4",
-      "https://picsum.photos/600/400?random=5",
-      "https://picsum.photos/600/400?random=6",
-      "https://picsum.photos/600/400?random=7",
-      "https://picsum.photos/600/400?random=8",
-    ],
-  };
+  // const [selectedImage, setSelectedImage] = useState(product.images[0]);
+
+  useEffect(() => {
+    if (slug) {
+      dispatch(fetchProductsDetails({ slug }));
+    } else {
+      navigate("/shop");
+    }
+  }, [slug]);
 
   const discount =
-    product.oldPrice && product.price
-      ? (((product.oldPrice - product.price) / product.oldPrice) * 100).toFixed(0)
+    product.old_price && product.new_price
+      ? (((product.old_price - product.new_price) / product.old_price) * 100).toFixed(0)
       : 0;
-
-  // State for selected image
-  const [selectedImage, setSelectedImage] = useState(product.images[0]);
-  // State for quantity
-  const [quantity, setQuantity] = useState(1);
 
   // Handle quantity increment and decrement
   const handleIncrement = () => {
@@ -88,12 +88,11 @@ function ProductDetail() {
                   }}
                   className="h-[100px] w-[calc(100%-96px)] mx-4 md:w-full md:h-[calc(100px*5+(24px/2*5)))]"
                 >
-                  {product.images.map((src, index) => (
+                  {productImg.map((src, index) => (
                     <SwiperSlide key={index}>
-                      <div className={`slider__image w-full h-full rounded-[10px] overflow-hidden transition duration-250 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 swiper-slide-thumb-active:grayscale-0 swiper-slide-thumb-active:opacity-100 ${
-                          activeIndex === index
-                            ? "grayscale-0 opacity-100"
-                            : "grayscale opacity-50"
+                      <div className={`slider__image w-full h-full rounded-[10px] overflow-hidden transition duration-250 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 swiper-slide-thumb-active:grayscale-0 swiper-slide-thumb-active:opacity-100 ${activeIndex === index
+                        ? "grayscale-0 opacity-100"
+                        : "grayscale opacity-50"
                         }`}>
                         <img src={src} alt="" className="w-full h-full object-cover block" />
                       </div>
@@ -122,7 +121,7 @@ function ProductDetail() {
                 onSlideChange={handleSlideChange}
                 className="mySwiper md:flex-1"
               >
-                {product.images.map((src, index) => (
+                {productImg.map((src, index) => (
                   <SwiperSlide key={index}>
                     <div className="slider__image w-full h-full rounded-[10px] overflow-hidden relative before:content-[''] before:block before:float-left before:pt-[100%] after:content-[''] after:table after:clear-both bg-[#f2f2f2]">
                       <img
@@ -139,19 +138,22 @@ function ProductDetail() {
 
           {/* Right Column: Product Details */}
           <div className="w-full max-w-[40.625rem] text-left">
-            <h3 className="text-[2rem] font-bold mb-3.5">{product.name}</h3>
+            <h3 className="text-[2rem] font-bold mb-3.5">{product?.name}</h3>
             <div className="text-xl mb-3.5 price-wrapper inline-flex items-center border border-gray-300 rounded-lg p-4 w-auto flex-auto">
-              <span className="mr-3 text-[1.5rem] font-bold">${product.price.toFixed(2)}</span>
+              <span className="mr-3 text-[1.5rem] font-bold">${product?.new_price.toFixed(2)}</span>
               <span className="mr-1 text-[1rem] text-[#808080]">MRP</span>
-              <span className="mr-3 line-through text-[1rem] text-[#808080]">${product.oldPrice.toFixed(2)}</span>
+              <span className="mr-3 line-through text-[1rem] text-[#808080]">${product?.old_price.toFixed(2)}</span>
               <span className="mr-1 text-[0.875rem] discount bg-[#111111] px-[0.375rem] text-[#FFFFFF] rounded-sm">{discount}%</span>
-              <span class="mr-1 text-[0.75rem] text-[#808080]">(Incl. of all taxes)</span>
+              <span class="mr-1 text-[0.75rem] text-[#808080] uppercase">off</span>
             </div>
             <div className="item-stock-status mb-6">
-              <p class="text-2xl flex items-center"><span class="indicator rounded-lg inline-block h-[0.625rem] w-[0.625rem] bg-[#25D366] mr-2"></span>Item in stock (12)</p>
+              <p class="text-2xl flex items-center uppercase">
+                <span class="indicator rounded-lg inline-block h-[0.625rem] w-[0.625rem] bg-[#25D366] mr-2">
+                </span>{product?.quantity.length !== 0 ? "Item in stock" : "Out of stock"}
+              </p>
             </div>
             {/* Available Sizes */}
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <h4 className="text-sm font-bold mb-2 uppercase">Size</h4>
               <div className="flex gap-2">
                 {product.sizes.map((size, index) => (
@@ -163,7 +165,7 @@ function ProductDetail() {
                   </button>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Action Buttons */}
             <div className="flex gap-4 mb-3.5">
@@ -215,22 +217,23 @@ function ProductDetail() {
               </div>
               <button className="flex-1 btn sm:px-[1.5rem] px-[0.9rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none">
                 Add to Cart
-              </button> 
+              </button>
             </div>
             {/* Whatsapp Button*/}
             <div className="text-xl mb-6 price-wrapper flex flex-wrap rounded-lg w-auto flex-auto gap-3.5">
               <button className="flex-1 btn btn-outline sm:px-[1.5rem] px-[0.9rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none flex items-center justify-center">
                 <span className="max-w-[1.5rem] mr-2"><img className="w-full h-auto" src={whatsapp} alt="WhatsApp" /></span>Enquiry on whatsapp
-              </button> 
+              </button>
               <button className="flex-1 btn btn-outline sm:px-[1.5rem] px-[0.9rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none">
                 Wishlist
-              </button> 
+              </button>
             </div>
-            {/* Product Descriptions */}
-            <div className="description-wrapper">
-              <h4 className="text-sm font-bold mb-2 uppercase">Description</h4>
-              <p className="mb-4">{product.description}</p>
-            </div>
+            {product.description &&
+              <div className="description-wrapper">
+                <h4 className="text-sm font-bold mb-2 uppercase">Description</h4>
+                <p className="mb-4">{product.description}</p>
+              </div>
+            }
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import CardComponent from "./CardComponent";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,72 +14,21 @@ import s02 from "../assets/images/s-02.jpg";
 import s03 from "../assets/images/s-03.jpg";
 import s04 from "../assets/images/s-04.jpg";
 import s05 from "../assets/images/s-05.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { postNewArrivals } from "../redux/slices/newArrivalsSlice";
 
 function ProductSliderSection() {
-  const { theme, buttonTextColor } = useTheme();
+  const { buttonTextColor } = useTheme();
+  const dispatch = useDispatch();
+  const { newArrivals } = useSelector((state) => state.newArrivals);
+  const newTreniding = newArrivals?.products
 
-  const products = [
-    {
-      productName: "Chanel Jumbo Paris Glossy bag with...",
-      price: "3,298",
-      oldPrice: "3,898",
-      imageSrc: s01,
-    },
-    {
-      productName: "Sample Product 2",
-      price: "49.99",
-      oldPrice: "59.99",
-      imageSrc: s02,
-    },
-    {
-      productName: "Sample Product 3",
-      price: "19.99",
-      oldPrice: "29.99",
-      imageSrc: s03,
-    },
-    {
-      productName: "Sample Product 1",
-      price: "29.99",
-      oldPrice: "39.99",
-      imageSrc: s04,
-    },
-    {
-      productName: "Sample Product 2",
-      price: "49.99",
-      oldPrice: "59.99",
-      imageSrc: s05,
-    },
-    {
-      productName: "Chanel Jumbo Paris Glossy bag with...",
-      price: "3,298",
-      oldPrice: "3,898",
-      imageSrc: s01,
-    },
-    {
-      productName: "Sample Product 2",
-      price: "49.99",
-      oldPrice: "59.99",
-      imageSrc: s02,
-    },
-    {
-      productName: "Sample Product 3",
-      price: "19.99",
-      oldPrice: "29.99",
-      imageSrc: s03,
-    },
-    {
-      productName: "Sample Product 1",
-      price: "29.99",
-      oldPrice: "39.99",
-      imageSrc: s04,
-    },
-    {
-      productName: "Sample Product 2",
-      price: "49.99",
-      oldPrice: "59.99",
-      imageSrc: s05,
-    },
-  ];
+
+  console.log("newArrivals",newTreniding);
+
+  useEffect(() => {
+    dispatch(postNewArrivals());
+  }, [dispatch])
 
   return (
     <div className="py-[3.125rem] lg:py-[100px]">
@@ -90,11 +39,11 @@ function ProductSliderSection() {
       <section className="px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem]">
         <Swiper
           modules={[Navigation, Pagination]}
-        //   loop={true}
+          //   loop={true}
           spaceBetween={24}
           slidesPerView={1}
           navigation
-        //   pagination={{ clickable: true }}
+          //   pagination={{ clickable: true }}
           breakpoints={{
             640: {
               slidesPerView: 2,
@@ -115,13 +64,10 @@ function ProductSliderSection() {
           }}
           className="mySwiper"
         >
-          {products.map((product, index) => (
+          {newTreniding && newTreniding.map((product, index) => (
             <SwiperSlide key={index}>
               <CardComponent
-                productName={product.productName}
-                price={product.price}
-                oldPrice={product.oldPrice}
-                imageSrc={product.imageSrc}
+                product={product}
               />
             </SwiperSlide>
           ))}

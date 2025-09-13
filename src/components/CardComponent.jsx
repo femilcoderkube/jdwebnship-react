@@ -123,7 +123,6 @@ const CardComponent = ({ product }) => {
                 }}
                 className="bg-[#1111116b] w-[2.625rem] h-[2.625rem] rounded-[8px] flex items-center justify-center cursor-pointer"
               >
-                {/* <img src={save} alt="Save" /> */}
                 <svg
                   width="24"
                   height="24"
