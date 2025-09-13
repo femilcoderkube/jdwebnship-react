@@ -1,89 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CommonHeader from "../components/CommonHeader";
 import { useTheme } from "../contexts/ThemeContext";
-import watch from "../assets/watch.png";
 import CardComponent from "../components/CardComponent";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../redux/slices/authSlice";
-
-import w01 from "../assets/images/w01.jpg";
-import w02 from "../assets/images/w02.jpg";
-import w03 from "../assets/images/w03.jpg";
-import empty from "../assets/images/empty-state.svg";
 import UpdatePasswordForm from "../forms/UpdatePasswordForm";
 import UpdateAddressForm from "../forms/UpdateAddressForm";
 import AccountDetails from "../forms/AccountDetails";
 import Orders from "../components/Orders";
+import { fetchWishList } from "../redux/slices/WishListSlice";
 
-const products = [
-  {
-    id: 1,
-    productName: "Women's Classic Watch",
-    category: "Women's Watch",
-    price: 199.99,
-    inStock: true,
-    imageSrc: w01,
-  },
-  {
-    id: 2,
-    productName: "Men's Sport Perfume",
-    category: "Perfumes for Men",
-    price: 49.99,
-    inStock: false,
-    imageSrc: w02,
-  },
-  {
-    id: 3,
-    productName: "Graphic T-Shirt",
-    category: "T-Shirts",
-    price: 29.99,
-    inStock: true,
-    imageSrc: w03,
-  },
-  {
-    id: 4,
-    productName: "Luxury Women's Watch",
-    category: "Women's Watch",
-    price: 299.99,
-    inStock: true,
-    imageSrc: w01,
-  },
-  {
-    id: 5,
-    productName: "Casual T-Shirt",
-    category: "T-Shirts",
-    price: 19.99,
-    inStock: false,
-    imageSrc: w02,
-  },
-  {
-    id: 1,
-    productName: "Women's Classic Watch",
-    category: "Women's Watch",
-    price: 199.99,
-    inStock: true,
-    imageSrc: w02,
-  },
-  {
-    id: 2,
-    productName: "Men's Sport Perfume",
-    category: "Perfumes for Men",
-    price: 49.99,
-    inStock: false,
-    imageSrc: w03,
-  },
-  {
-    id: 3,
-    productName: "Graphic T-Shirt",
-    category: "T-Shirts",
-    price: 29.99,
-    inStock: true,
-    imageSrc: w01,
-  },
-];
-
-const renderContent = (selected) => {
+const renderContent = (selected, wishlistData) => {
   switch (selected) {
     case "orders":
       return <Orders />;
@@ -92,96 +20,18 @@ const renderContent = (selected) => {
         <div className="w-full">
           <div className="flex justify-between w-full pb-[1.25rem] items-center">
             <h3 className="text-2xl font-bold">Wishlist</h3>
-            <p className="text-sm text-[#808080]">
-              Showing 1-10 Of 20 Results.
-            </p>
           </div>
           <hr className="opacity-10" />
           {/* Card */}
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-[1.5rem] gap-y-[1.375rem] lg:gap-y-[4.375rem] mt-[1.875rem]">
-            {products.map((product, index) => (
+            {wishlistData?.map((wishlist, index) => (
               <CardComponent
                 key={index}
-                productName={product.productName}
-                price={product.price}
-                imageSrc={product.imageSrc}
+                product={wishlist}
+                isWishlistKey={true}
               />
             ))}
           </div>
-          <nav
-            className="mt-[2.375rem] md:mt-[4.375rem]"
-            aria-label="Page navigation"
-          >
-            <ul class="flex items-center justify-center -space-x-px h-8 text-sm text-[1rem]">
-              {/* <li>
-                  <a href="#" class="px-3 h-8">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="32"
-                      height="32"
-                      viewBox="0 0 32 32"
-                      fill="none"
-                    >
-                      <path
-                        d="M20 8L12 16L20 24"
-                        stroke="#111111"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </a>
-                </li> */}
-              <li>
-                <a href="#" class="px-3 h-8">
-                  1
-                </a>
-              </li>
-              <li>
-                <a href="#" class="px-3 h-8">
-                  2
-                </a>
-              </li>
-              <li>
-                <a href="#" aria-current="page" class="px-3 h-8">
-                  3
-                </a>
-              </li>
-              <li>
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="11"
-                    height="3"
-                    viewBox="0 0 11 3"
-                    fill="none"
-                  >
-                    <path
-                      d="M1.31475 2.176C0.77075 2.176 0.30675 1.728 0.30675 1.2C0.30675 0.656 0.77075 0.192 1.31475 0.192C1.85875 0.192 2.32275 0.656 2.32275 1.2C2.32275 1.728 1.85875 2.176 1.31475 2.176ZM5.50225 2.176C4.95825 2.176 4.49425 1.728 4.49425 1.2C4.49425 0.656 4.95825 0.192 5.50225 0.192C6.04625 0.192 6.51025 0.656 6.51025 1.2C6.51025 1.728 6.04625 2.176 5.50225 2.176ZM9.68975 2.176C9.14575 2.176 8.68175 1.728 8.68175 1.2C8.68175 0.656 9.14575 0.192 9.68975 0.192C10.2338 0.192 10.6978 0.656 10.6978 1.2C10.6978 1.728 10.2338 2.176 9.68975 2.176Z"
-                      fill="#111111"
-                    />
-                  </svg>
-                </span>
-              </li>
-              <li>
-                <a href="#" class="px-3 h-8">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                  >
-                    <path
-                      d="M12 24L20 16L12 8"
-                      stroke="#111111"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </a>
-              </li>
-            </ul>
-          </nav>
         </div>
       );
     case "address":
@@ -208,6 +58,10 @@ const renderContent = (selected) => {
 };
 
 const MyAccount = () => {
+  const { wishlist } = useSelector((state) => state.wishlist);
+
+  const wishlistData = wishlist?.data?.wishlist || [];
+
   const [selected, setSelected] = useState("orders");
   const { theme, bottomFooterTextColor } = useTheme();
   const dispatch = useDispatch();
@@ -216,6 +70,15 @@ const MyAccount = () => {
   const handleLogout = async () => {
     dispatch(logoutUser({ navigate }));
   };
+
+  const hasFetchedWishlist = useRef(false);
+
+  useEffect(() => {
+    if (selected === "wishlist" && !hasFetchedWishlist.current) {
+      dispatch(fetchWishList());
+      hasFetchedWishlist.current = true;
+    }
+  }, [dispatch, selected]);
 
   const menuItems = [
     {
@@ -409,7 +272,7 @@ const MyAccount = () => {
             </ul>
           </nav>
           {/* Right Content */}
-          <div className="w-full">{renderContent(selected)}</div>
+          <div className="w-full">{renderContent(selected, wishlistData)}</div>
         </div>
       </div>
     </div>
