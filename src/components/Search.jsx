@@ -67,11 +67,11 @@ function Search() {
   };
 
   return (
-    <div className="relative" ref={searchContainerRef}>
+    <div className="relative h-[5rem]" ref={searchContainerRef}>
       {/* Search Icon Button */}
       <button
         onClick={handleSearchClick}
-        className="p-2 hover:bg-black/5 rounded-md transition-colors duration-200"
+        className="p-2 h-full flex items-center cursor-pointer"
         aria-label="Search"
         type="button"
       >
@@ -93,16 +93,23 @@ function Search() {
 
       {/* Search Box */}
       {isSearchOpen && (
-        <div className="absolute top-full right-0 mt-2 w-96 max-w-[95vw] z-50 search-box">
+        <div
+          className={`
+            absolute top-full z-50 search-box
+            w-[90vw] max-w-[28.125rem]
+            left-1/2 sm:left-auto sm:right-0
+             sm:translate-x-0
+          `}
+        >
           <div
-            className="bg-white border border-gray-200 rounded-lg shadow-xl p-6"
+            className="bg-white border border-gray-200 rounded-lg shadow-xl p-4 sm:p-6"
             style={{
               backgroundColor: theme?.headerBackgroundColor || "#ffffff",
               borderColor: theme?.borderColor || "#e5e7eb",
             }}
           >
             <form onSubmit={handleSearch} className="relative">
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <input
                   ref={searchInputRef}
                   type="text"
@@ -117,36 +124,38 @@ function Search() {
                     borderColor: theme?.borderColor || "#d1d5db",
                   }}
                 />
-                <button
-                  type="submit"
-                  className="search-button px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-base font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={!searchQuery.trim()}
-                >
-                  Search
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsSearchOpen(false);
-                    setSearchQuery("");
-                  }}
-                  className="p-3 hover:bg-gray-100 rounded-lg transition-colors duration-200"
-                  aria-label="Close search"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                <div className="flex flex-row gap-2 sm:gap-3 mt-2 sm:mt-0">
+                  <button
+                    type="submit"
+                    className="search-button px-6 py-3 bg-[#111111] text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-base font-medium disabled:opacity-50 disabled:cursor-not-allowed outline-none cursor-pointer w-full sm:w-auto"
+                    disabled={!searchQuery.trim()}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
+                    Search
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsSearchOpen(false);
+                      setSearchQuery("");
+                    }}
+                    className="p-3 border border-[#AAAAAA] hover:bg-gray-100 rounded-lg transition-colors duration-200 cursor-pointer"
+                    aria-label="Close search"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </form>
           </div>

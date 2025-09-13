@@ -379,10 +379,10 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
               </h1>
             )}
           </Link>
-          <div className="right-nav flex items-center gap-3 sm:gap-4">
-            <div className="hidden lg:flex items-center">
+          <div className="right-nav flex items-center gap-3 sm:gap-4 h-[5rem]">
+            <div className="hidden lg:flex items-center h-[5rem]">
               <Link
-                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3 outline-none"
+                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3 h-full flex items-center outline-none"
                 to="/about"
                 style={{
                   color: headerTextColor || "#111111",
@@ -392,7 +392,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
                 About Us
               </Link>
               <Link
-                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3 outline-none"
+                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3 h-full flex items-center outline-none"
                 to="/about"
                 style={{
                   color: headerTextColor || "#111111",
