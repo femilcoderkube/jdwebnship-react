@@ -37,7 +37,7 @@ function Profile() {
             setIsProfileDropdownOpen((prev) => !prev);
           }
         }}
-        className="lg:p-2 h-full flex items-center"
+        className="h-full flex items-center cursor-pointer"
         aria-label="Profile"
         type="button"
       >

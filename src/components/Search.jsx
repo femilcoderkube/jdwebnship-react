@@ -71,7 +71,7 @@ function Search() {
       {/* Search Icon Button */}
       <button
         onClick={handleSearchClick}
-        className="lg:p-2 h-full flex items-center cursor-pointer"
+        className="h-full flex items-center cursor-pointer"
         aria-label="Search"
         type="button"
       >
