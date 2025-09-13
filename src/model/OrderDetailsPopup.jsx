@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react"; // Add useState and useEffect
 import { useDispatch, useSelector } from "react-redux";
 import { closeOrderPopup } from "../redux/slices/orderPopupSlice";
 import close from "../assets/images/close.png";
@@ -14,17 +14,52 @@ const OrderDetailsPopup = () => {
   const dispatch = useDispatch();
   const status = toTitleCase(orderPopup?.order?.status);
 
+  // NEW: Track open state for animation (derive from Redux; adjust if your slice has an explicit isOpen)
+  const [isOpen, setIsOpen] = useState(false);
+  const isPopupOpen = !!orderPopup?.order; // Assuming popup is "open" if order exists; customize as needed
+
+  // NEW: Effect to handle enter/exit animation timing
+  useEffect(() => {
+    if (isPopupOpen) {
+      // Delay setting isOpen to true for enter animation (allows initial render off-screen)
+      const timer = setTimeout(() => setIsOpen(true), 10);
+      return () => clearTimeout(timer);
+    } else {
+      // Exit animation: Slide out first, then close after transition
+      setIsOpen(false);
+      const timer = setTimeout(() => dispatch(closeOrderPopup()), 300); // Match transition duration
+      return () => clearTimeout(timer);
+    }
+  }, [isPopupOpen, dispatch]);
+
+  // NEW: Handle overlay click to close (with animation)
+  const handleOverlayClick = () => {
+    setIsOpen(false);
+    setTimeout(() => dispatch(closeOrderPopup()), 300);
+  };
+
+  // Early return if not open (prevents rendering during exit)
+  if (!isPopupOpen) return null;
+
   const { orders } = useSelector((state) => state.customerOrders);
   const shippingAddress = orders?.customerData[0];
   return (
     <>
+      {/* Overlay with fade transition for extra smoothness */}
       <div
-        className="overlay w-full h-full fixed top-0 left-0 bg-[rgba(0,0,0,.65)] z-99"
-        onClick={() => dispatch(closeOrderPopup())}
+        className={`overlay w-full h-full fixed top-0 left-0 bg-[rgba(0,0,0,.65)] z-99 transition-opacity duration-300 ${
+          isOpen ? "opacity-100" : "opacity-0"
+        }`} // NEW: Fade in/out
+        onClick={handleOverlayClick} // UPDATED: Use animated close handler
       ></div>
-      <div className="fixed top-0 right-0 z-100 w-full max-w-[50rem]">
+      {/* Main popup with slide animation */}
+      <div
+        className={`fixed top-0 right-0 z-100 w-full max-w-[50rem] transition-transform duration-300 ease-in-out ${
+          isOpen ? "" : "translate-x-full" // NEW: Slide from right (hidden when !isOpen)
+        }`}
+      >
         <div
-          className="relative  border border-white/20 w-full max-w-[50rem] h-dvh overflow-y-auto sm:p-7.5 p-4 mx-auto"
+          className="relative border border-white/20 w-full max-w-[50rem] h-dvh overflow-y-auto sm:p-7.5 p-4 mx-auto"
           style={{ backgroundColor: theme.backgroundColor }}
         >
           <div className="relative pb-6 mb-6 border-b ">
@@ -46,7 +81,7 @@ const OrderDetailsPopup = () => {
                 className="cursor-pointer w-4 h-4 mt-1.5"
                 src={close}
                 alt=""
-                onClick={() => dispatch(closeOrderPopup())}
+                onClick={handleOverlayClick} // UPDATED: Use animated close handler
               />
             </div>
           </div>
