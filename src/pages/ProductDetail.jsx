@@ -10,23 +10,27 @@ import whatsapp from "../assets/whatsapp-og.svg";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchProductsDetails } from "../redux/slices/productSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { getWhatsappLink, isInWishlist } from "../utils/common";
+import { addtowishList, removeFromwishList } from "../redux/slices/WishListSlice";
 
 function ProductDetail() {
 
   const { slug } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { productDetails } = useSelector((state) => state.products)
-  const product = productDetails?.product
-  const productImg = product?.product_images ? product?.product_images.split(',') : []
-
-  console.log("product", product);
-
-  // Dummy product data with unique image URLs
   const [quantity, setQuantity] = useState(1);
-  const [activeIndex, setActiveIndex] = useState(0); // New: Track main Swiper's active slide index
+  const [activeIndex, setActiveIndex] = useState(0);
   const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
-  // const [selectedImage, setSelectedImage] = useState(product.images[0]);
+  const { productDetails } = useSelector((state) => state.products);
+  const { wishlist } = useSelector((state) => state.wishlist);
+  const { storeInfo } = useSelector((state) => state.storeInfo);
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const phone_number = storeInfo?.storeinfo?.retailer?.phone_number;
+  const product = productDetails?.product
+  const wishlistData = wishlist?.data?.wishlist;
+  const productImg = product?.product_images ? product?.product_images.split(',') : []
+  const isWishlist =
+    (isAuthenticated && isInWishlist(product?.id, wishlistData)) || false;
 
   useEffect(() => {
     if (slug) {
@@ -36,9 +40,30 @@ function ProductDetail() {
     }
   }, [slug]);
 
+  const addToWishList = () => {
+    if (isAuthenticated) {
+      if (isWishlist) {
+        const payload = {
+          product_id: !product?.retailer_id ? product?.id : null,
+          retailer_product_id: product?.retailer_id ? product?.id : null,
+        };
+        dispatch(removeFromwishList(payload, dispatch));
+      } else {
+        const payload = {
+          product_id: product?.id,
+          retailer_id: product?.wholesaler_id ? null : product?.retailer_id,
+          wholesaler_id: product?.retailer_id ? null : product?.wholesaler_id,
+        };
+        dispatch(addtowishList(payload, dispatch));
+      }
+    } else {
+      navigate("/signin");
+    }
+  };
+
   const discount =
-    product.old_price && product.new_price
-      ? (((product.old_price - product.new_price) / product.old_price) * 100).toFixed(0)
+    product?.old_price && product?.new_price
+      ? (((product?.old_price - product?.new_price) / product?.old_price) * 100).toFixed(0)
       : 0;
 
   // Handle quantity increment and decrement
@@ -153,19 +178,21 @@ function ProductDetail() {
               </p>
             </div>
             {/* Available Sizes */}
-            {/* <div className="mb-6">
-              <h4 className="text-sm font-bold mb-2 uppercase">Size</h4>
-              <div className="flex gap-2">
-                {product.sizes.map((size, index) => (
-                  <button
-                    key={index}
-                    className="px-4 py-2 border border-gray-300 rounded-md cursor-pointer hover:bg-[#111111] hover:text-[#FFFFFF]"
-                  >
-                    {size}
-                  </button>
-                ))}
+            {product?.productVariations.length > 0 &&
+              <div className="mb-6">
+                <h4 className="text-sm font-bold mb-2 uppercase">Size</h4>
+                <div className="flex gap-2">
+                  {product?.productVariations.map((size, index) => (
+                    <button
+                      key={index}
+                      className="px-4 py-2 border border-gray-300 rounded-md cursor-pointer hover:bg-[#111111] hover:text-[#FFFFFF]"
+                    >
+                      {size?.product_variation}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div> */}
+            }
 
             {/* Action Buttons */}
             <div className="flex gap-4 mb-3.5">
@@ -221,17 +248,29 @@ function ProductDetail() {
             </div>
             {/* Whatsapp Button*/}
             <div className="text-xl mb-6 price-wrapper flex flex-wrap rounded-lg w-auto flex-auto gap-3.5">
-              <button className="flex-1 btn btn-outline sm:px-[1.5rem] px-[0.9rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none flex items-center justify-center">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  getWhatsappLink(e, product, phone_number);
+                }}
+                className="flex-1 btn btn-outline sm:px-[1.5rem] px-[0.9rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none flex items-center justify-center">
                 <span className="max-w-[1.5rem] mr-2"><img className="w-full h-auto" src={whatsapp} alt="WhatsApp" /></span>Enquiry on whatsapp
               </button>
-              <button className="flex-1 btn btn-outline sm:px-[1.5rem] px-[0.9rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  addToWishList();
+                }}
+                className="flex-1 btn btn-outline sm:px-[1.5rem] px-[0.9rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none">
                 Wishlist
               </button>
             </div>
-            {product.description &&
+            {product?.description &&
               <div className="description-wrapper">
                 <h4 className="text-sm font-bold mb-2 uppercase">Description</h4>
-                <p className="mb-4">{product.description}</p>
+                <p className="mb-4">{product?.description}</p>
               </div>
             }
           </div>

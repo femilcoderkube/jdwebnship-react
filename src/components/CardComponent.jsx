@@ -95,12 +95,11 @@ const CardComponent = ({ product }) => {
 
         <div className="hover-content absolute left-0 right-0 h-100">
           <div className="flex justify-between h-100">
-            {product?.stock_status && (
+            {product?.stock_status === "in_stock" && (
               <span className="bg-[#1111116b] uppercase text-[0.875rem] px-[0.9375rem] py-[8px] rounded-[8px] absolute top-[0.9375rem] left-[8px] font-bold text-white backdrop-blur-md transition-all duration-150 ease-in-out">
                 {formatStatus(product?.stock_status)}
               </span>
             )}
-
             <div className="social-icon absolute top-[0.9375rem] flex flex-col gap-2 right-[0.9375rem]">
               {storeInfo?.storeinfo?.enquiry_whatsapp === 1 && (
                 <button
@@ -114,7 +113,6 @@ const CardComponent = ({ product }) => {
                   <img src={whatsapp} alt="WhatsApp" />
                 </button>
               )}
-
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -161,7 +159,7 @@ const CardComponent = ({ product }) => {
               >
                 ₹{product?.new_price}
               </p>
-              {product?.old_price && (
+              {product?.old_price !== 0 && (
                 <p
                   className="font-regular line-through"
                   style={{ margin: 0, fontSize: "1.125rem", color: "#555" }}

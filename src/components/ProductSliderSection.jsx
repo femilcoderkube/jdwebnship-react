@@ -1,24 +1,19 @@
 import { useEffect } from "react";
 import { useTheme } from "../contexts/ThemeContext";
-import CardComponent from "./CardComponent";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { postNewArrivals } from "../redux/slices/newArrivalsSlice";
+import CardComponent from "./CardComponent";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css";
 
 function ProductSliderSection() {
   const { buttonTextColor } = useTheme();
   const dispatch = useDispatch();
   const { newArrivals } = useSelector((state) => state.newArrivals);
   const newTreniding = newArrivals?.products
-
-
-  console.log("newArrivals",newTreniding);
 
   useEffect(() => {
     dispatch(postNewArrivals());
@@ -60,15 +55,13 @@ function ProductSliderSection() {
         >
           {newTreniding && newTreniding.map((product, index) => (
             <SwiperSlide key={index}>
-              <CardComponent
-                product={product}
-              />
+              <CardComponent product={product} />
             </SwiperSlide>
           ))}
         </Swiper>
         <div className="mt-[30px] lg:mt-[3.125rem] text-center">
           <a
-            href=""
+            href="#"
             className="inline-flex gap-2 btn px-[1.5rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none items-center"
           >
             Shop ALL New Trending
