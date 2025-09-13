@@ -11,6 +11,9 @@ import w01 from "../assets/images/w01.jpg";
 import w02 from "../assets/images/w02.jpg";
 import w03 from "../assets/images/w03.jpg";
 import empty from "../assets/images/empty-state.svg";
+import UpdatePasswordForm from "../forms/UpdatePasswordForm";
+import UpdateAddressForm from "../forms/UpdateAddressForm";
+import AccountDetails from "../forms/AccountDetails";
 
 const products = [
   {
@@ -332,183 +335,11 @@ const renderContent = (selected) => {
         </div>
       );
     case "address":
-      return (
-        <div className="w-full text-start">
-          <div className="flex justify-between w-full pb-[1.25rem] items-center">
-            <h3 className="text-2xl font-bold">Update Address</h3>
-            {/* <p className="text-sm text-[#808080]">
-              Showing 1-10 Of 20 Results.
-            </p> */}
-          </div>
-          <hr className="opacity-10" />
-          <div className="mt-[1.875rem]">
-            <form action="">
-              <div className="mb-6">
-                <label
-                  className="block text-sm mb-2 font-bold uppercase"
-                  htmlFor="address"
-                >
-                  Address
-                </label>
-                <input
-                  id="address"
-                  type="text"
-                  className="w-full border border-[#AAAAAA] rounded-lg p-[0.82rem] focus:outline-none"
-                  placeholder="Enter your address"
-                />
-              </div>
-              <div className="mb-6">
-                <label
-                  className="block text-sm mb-2 font-bold uppercase"
-                  htmlFor="zipcode"
-                >
-                  Your zipcode
-                </label>
-                <input
-                  id="zipcode"
-                  type="text"
-                  className="w-full border border-[#AAAAAA] rounded-lg p-[0.82rem] focus:outline-none"
-                  placeholder="Enter your zipcode"
-                />
-              </div>
-              <div className="mb-6 flex flex-col sm:flex-row">
-                <div className="w-full sm:w-1/2 mb-6 md:mb-0 sm:pr-3">
-                  <label className="block text-sm font-medium mb-1">CITY</label>
-                  <input
-                    type="text"
-                    className="w-full border border-[#AAAAAA] rounded-lg p-[0.82rem] focus:outline-none"
-                    placeholder="Enter your city"
-                  />
-                </div>
-                <div className="w-full sm:w-1/2 sm:pl-3">
-                  <label className="block text-sm font-medium mb-1">
-                    STATE
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full border border-[#AAAAAA] rounded-lg p-[0.82rem] focus:outline-none"
-                    placeholder="Enter your state"
-                  />
-                </div>
-              </div>
-              <button className="inline-flex gap-2 btn px-[1.5rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none items-center">
-                Save Address
-              </button>
-            </form>
-          </div>
-        </div>
-      );
+      return <UpdateAddressForm />;
     case "password":
-      return (
-        <div className="w-full text-start">
-          <div className="flex justify-between w-full pb-[1.25rem] items-center">
-            <h3 className="text-2xl font-bold">Update Password</h3>
-            {/* <p className="text-sm text-[#808080]">
-            Showing 1-10 Of 20 Results.
-          </p> */}
-          </div>
-          <hr className="opacity-10" />
-          <div className="mt-[1.875rem]">
-            <form action="">
-              <div className="mb-6">
-                <label
-                  className="block text-sm mb-2 font-bold uppercase"
-                  htmlFor="address"
-                >
-                  Old Password
-                </label>
-                <input
-                  id="oldpass"
-                  type="text"
-                  className="w-full border border-[#AAAAAA] rounded-lg p-[0.82rem] focus:outline-none"
-                  placeholder="Enter old password"
-                />
-              </div>
-              <div className="mb-6">
-                <label
-                  className="block text-sm mb-2 font-bold uppercase"
-                  htmlFor="zipcode"
-                >
-                  New Password
-                </label>
-                <input
-                  id="newpass"
-                  type="text"
-                  className="w-full border border-[#AAAAAA] rounded-lg p-[0.82rem] focus:outline-none"
-                  placeholder="Enter new password"
-                />
-              </div>
-
-              <div className="mb-6">
-                <label
-                  className="block text-sm mb-2 font-bold uppercase"
-                  htmlFor="conpass"
-                >
-                  Confirm Password
-                </label>
-                <input
-                  id="conpass"
-                  type="text"
-                  className="w-full border border-[#AAAAAA] rounded-lg p-[0.82rem] focus:outline-none"
-                  placeholder="Enter confirm password"
-                />
-              </div>
-
-              <button className="inline-flex gap-2 btn px-[1.5rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none items-center">
-                Save Password
-              </button>
-            </form>
-          </div>
-        </div>
-      );
+      return <UpdatePasswordForm />;
     case "account":
-      return (
-        <div className="w-full text-start">
-          <div className="flex justify-between w-full pb-[1.25rem] items-center">
-            <h3 className="text-2xl font-bold">Update Address</h3>
-            {/* <p className="text-sm text-[#808080]">
-            Showing 1-10 Of 20 Results.
-          </p> */}
-          </div>
-          <hr className="opacity-10" />
-          <div className="mt-[1.875rem]">
-            <form action="">
-              <div className="mb-6">
-                <label
-                  className="block text-sm mb-2 font-bold uppercase"
-                  htmlFor="fname"
-                >
-                  First name
-                </label>
-                <input
-                  id="fname"
-                  type="text"
-                  className="w-full border border-[#AAAAAA] rounded-lg p-[0.82rem] focus:outline-none"
-                  placeholder="Enter your first name"
-                />
-              </div>
-              <div className="mb-6">
-                <label
-                  className="block text-sm mb-2 font-bold uppercase"
-                  htmlFor="zipcode"
-                >
-                  Last Name
-                </label>
-                <input
-                  id="zipcode"
-                  type="text"
-                  className="w-full border border-[#AAAAAA] rounded-lg p-[0.82rem] focus:outline-none"
-                  placeholder="Enter your last Name"
-                />
-              </div>
-
-              <button className="inline-flex gap-2 btn px-[1.5rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none items-center">
-                Save Address
-              </button>
-            </form>
-          </div>
-        </div>
-      );
+      return <AccountDetails />;
     case "logout":
       return (
         <div>

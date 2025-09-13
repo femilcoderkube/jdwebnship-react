@@ -6,6 +6,9 @@ import productSlice from "../redux/slices/productSlice";
 import homeSectionsSlice from "../redux/slices/homeSectionsSlice";
 import wishlistSlice from "../redux/slices/WishListSlice";
 import newArrivalsSlice from "../redux/slices/newArrivalsSlice";
+import resetPasswordSlice from "../redux/slices/resetPasswordSlice";
+import shippingAddressSlice from "../redux/slices/shippingAddressSlice";
+import accountDetailsSlice from "../redux/slices/accountDetailsSlice";
 // import cartReducer from "./slices/cartSlice";
 // import wishlistReducer from "./slices/wishlistSlice";
 // import storeReducer from "./slices/storeSlice";
@@ -24,6 +27,9 @@ const appReducer = combineReducers({
   homeSections: homeSectionsSlice,
   wishlist: wishlistSlice,
   newArrivals: newArrivalsSlice,
+  resetPassword: resetPasswordSlice,
+  shippingAddress: shippingAddressSlice,
+  accountDetails: accountDetailsSlice,
   // cart: cartReducer,
   // orders: ordersReducer,
   // accountDetails: accountDetailsReducer,
