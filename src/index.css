@@ -264,3 +264,97 @@ textarea {
     max-width: 17rem;
   }
 }
+
+/* Search Box Animation */
+.search-box {
+  animation: slideDown 0.3s ease-out;
+  transform-origin: top;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Search input focus styles */
+.search-input:focus {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+  border-color: #3b82f6;
+  transform: scale(1.02);
+}
+
+/* Search button disabled state */
+.search-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Search box enhanced styling */
+.search-box .bg-white {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Search input enhanced styling */
+.search-input {
+  font-size: 16px;
+  min-height: 48px;
+}
+
+/* Search button enhanced styling */
+.search-button {
+  min-height: 48px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Profile Dropdown Animation */
+.profile-dropdown {
+  animation: slideDown 0.3s ease-out;
+  transform-origin: top;
+}
+
+/* Profile menu item styling */
+.profile-menu-item {
+  transition: all 0.2s ease-in-out;
+}
+
+.profile-menu-item:hover {
+  transform: translateX(4px);
+}
+
+/* Profile dropdown enhanced styling */
+.profile-dropdown .bg-white {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Profile dropdown matches Search component exactly */
+
+/* Category Dropdown Animation */
+.category-dropdown {
+  animation: slideDown 0.3s ease-out;
+  transform-origin: top;
+}
+
+/* Category menu item styling */
+.category-menu-item {
+  transition: all 0.2s ease-in-out;
+}
+
+.category-menu-item:hover {
+  transform: translateX(4px);
+}
+
+/* Category dropdown enhanced styling */
+.category-dropdown .bg-white {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}

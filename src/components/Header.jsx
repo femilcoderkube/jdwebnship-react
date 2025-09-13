@@ -117,7 +117,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
 
             <div className="left-nav hidden lg:flex items-center h-[5rem]">
               <Link
-                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-600 ease-in-out h-full flex items-center"
+                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-600 ease-in-out h-full flex items-center outline-none"
                 to="/"
                 style={{
                   color: headerTextColor || "#111111",
@@ -134,7 +134,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
                 onMouseLeave={() => setIsCategoryDropdownOpen(false)}
               >
                 <Link
-                  className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 h-full flex items-center"
+                  className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 h-full flex items-center outline-none"
                   to="/categories"
                   style={{
                     color: headerTextColor || "#111111",
@@ -221,7 +221,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
                 onMouseLeave={() => setIsShopMegaMenuOpen()} // Fixed: should be false on mouse leave
               >
                 <Link
-                  className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 h-full flex items-center"
+                  className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 h-full flex items-center outline-none"
                   to="/shop"
                   style={{
                     color: headerTextColor || "#111111",
@@ -382,7 +382,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
           <div className="right-nav flex items-center gap-3 sm:gap-4">
             <div className="hidden lg:flex items-center">
               <Link
-                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3"
+                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3 outline-none"
                 to="/about"
                 style={{
                   color: headerTextColor || "#111111",
@@ -392,7 +392,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
                 About Us
               </Link>
               <Link
-                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3"
+                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3 outline-none"
                 to="/about"
                 style={{
                   color: headerTextColor || "#111111",

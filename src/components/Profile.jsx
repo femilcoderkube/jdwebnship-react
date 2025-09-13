@@ -15,10 +15,7 @@ function Profile() {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsProfileDropdownOpen(false);
       }
     }
@@ -31,8 +28,8 @@ function Profile() {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      {/* Profile Icon */}
-      <div
+      {/* Profile Icon Button */}
+      <button
         onClick={() => {
           if (!isAuthenticated) {
             navigate("/signin");
@@ -40,7 +37,9 @@ function Profile() {
             setIsProfileDropdownOpen((prev) => !prev);
           }
         }}
-        className="cursor-pointer"
+        className="p-2 hover:bg-black/5 rounded-md transition-colors duration-200"
+        aria-label="Profile"
+        type="button"
       >
         <svg
           className="w-5 h-5 sm:w-6 sm:h-6 md:w-[1.625rem] md:h-[1.625rem]"
@@ -70,38 +69,147 @@ function Profile() {
             strokeLinejoin="round"
           />
         </svg>
-      </div>
+      </button>
 
-      {/* Dropdown Menu */}
+      {/* Profile Dropdown Menu */}
       {isProfileDropdownOpen && isAuthenticated && (
-        <div
-          className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50"
-          style={{
-            backgroundColor: headerBackgroundColor || "#ffffff",
-          }}
-        >
-          <Link
-            to="/my-account"
-            className="block px-4 py-2 text-sm hover:bg-gray-100 transition-colors duration-200"
+        <div className="absolute top-full right-0 mt-2 w-96 max-w-[95vw] z-50 profile-dropdown">
+          <div
+            className="bg-white border border-gray-200 rounded-lg shadow-xl p-6"
             style={{
-              color: headerTextColor || "#111111",
+              backgroundColor: headerBackgroundColor || "#ffffff",
+              borderColor: headerBackgroundColor || "#e5e7eb",
             }}
           >
-            My Orders
-          </Link>
+            <div className="space-y-3">
+              {/* User Info Section */}
+              <div className="pb-3 border-b border-gray-200">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <svg
+                      className="w-5 h-5 text-blue-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <p
+                      className="font-semibold text-gray-900"
+                      style={{ color: headerTextColor || "#111111" }}
+                    >
+                      My Account
+                    </p>
+                    <p className="text-sm text-gray-500">Manage your profile</p>
+                  </div>
+                </div>
+              </div>
 
-          <button
-            onClick={() => {
-              dispatch(logoutUser({ navigate }));
-              setIsProfileDropdownOpen(false);
-            }}
-            className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors duration-200"
-            style={{
-              color: headerTextColor || "#111111",
-            }}
-          >
-            Logout
-          </button>
+              {/* Menu Items */}
+              <div className="space-y-2">
+                <Link
+                  to="/my-account"
+                  onClick={() => setIsProfileDropdownOpen(false)}
+                  className="profile-menu-item flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-50 transition-all duration-200 group"
+                  style={{ color: headerTextColor || "#111111" }}
+                >
+                  <svg
+                    className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors duration-200"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                    />
+                  </svg>
+                  <span className="font-medium">My Orders</span>
+                </Link>
+
+                <Link
+                  to="/my-account"
+                  onClick={() => setIsProfileDropdownOpen(false)}
+                  className="profile-menu-item flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-50 transition-all duration-200 group"
+                  style={{ color: headerTextColor || "#111111" }}
+                >
+                  <svg
+                    className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors duration-200"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                  <span className="font-medium">Profile Settings</span>
+                </Link>
+
+                <Link
+                  to="/my-account"
+                  onClick={() => setIsProfileDropdownOpen(false)}
+                  className="profile-menu-item flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-50 transition-all duration-200 group"
+                  style={{ color: headerTextColor || "#111111" }}
+                >
+                  <svg
+                    className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors duration-200"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
+                    />
+                  </svg>
+                  <span className="font-medium">Wishlist</span>
+                </Link>
+
+                <div className="pt-2 border-t border-gray-200">
+                  <button
+                    onClick={() => {
+                      dispatch(logoutUser({ navigate }));
+                      setIsProfileDropdownOpen(false);
+                    }}
+                    className="profile-menu-item w-full flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-red-50 transition-all duration-200 group text-left"
+                    style={{ color: headerTextColor || "#111111" }}
+                  >
+                    <svg
+                      className="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-colors duration-200"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                      />
+                    </svg>
+                    <span className="font-medium text-red-600 group-hover:text-red-700">
+                      Logout
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
