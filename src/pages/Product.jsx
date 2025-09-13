@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import CommonHeader from "../components/CommonHeader";
 import cross from "../assets/x.svg";
@@ -7,11 +7,15 @@ import PriceRangeSlider from "../components/Pricerangeslider";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/slices/productSlice";
 import ReactPaginate from "react-paginate";
-import { debounce } from "lodash"; // Ensure lodash is installed: npm install lodash
+import { debounce } from "lodash";
 
 function Product() {
   const { storeInfo, loading } = useSelector((state) => state.storeInfo);
-  const { product } = useSelector((state) => state.products);
+  const { product, loading: ProductLoading } = useSelector(
+    (state) => state.products
+  );
+
+  console.log("product", product);
 
   const categories = storeInfo?.sub_category_list || [];
   const dispatch = useDispatch();
@@ -44,8 +48,7 @@ function Product() {
   const currentPage = getPageFromUrl() - 1;
   const currentPageNum = getPageFromUrl();
 
-  // Memoize subcategory IDs
-  const subcategoryIds = React.useMemo(() => {
+  const subcategoryIds = useMemo(() => {
     return filters.categories
       .map((catName) => {
         const category = categories.find((cat) => cat.name === catName);
@@ -54,18 +57,14 @@ function Product() {
       .filter(Boolean);
   }, [filters.categories, categories]);
 
-  // Debounce the fetchProducts call to prevent multiple rapid calls
-  const debouncedFetchProducts = React.useCallback(
+  const debouncedFetchProducts = useCallback(
     debounce((params, dispatch) => {
-      console.log("Fetching products with params:", params); // Debugging
       dispatch(fetchProducts(params));
     }, 300),
     []
   );
 
-  // Single effect to handle API calls and URL updates
   useEffect(() => {
-    // Prepare request parameters
     const requestParams = {
       page: currentPageNum,
     };
@@ -89,25 +88,34 @@ function Product() {
       requestParams.out_of_stock = "0";
     }
 
-    // Update URL params
     const params = new URLSearchParams();
     params.set("page", currentPageNum.toString());
+    // params.set("page", "1");
     if (filters.categories.length > 0) {
       params.set("categories", filters.categories.join(","));
+      params.set("page", "1");
     }
     if (filters.sizes.length > 0) {
       params.set("sizes", filters.sizes.join(","));
+      params.set("page", "1");
     }
     if (filters.priceRange[0] > 0) {
       params.set("min_price", filters.priceRange[0]);
+      params.set("page", "1");
     }
     if (filters.priceRange[1] < 10000) {
       params.set("max_price", filters.priceRange[1]);
+      params.set("page", "1");
     }
-    if (filters.in_stock) params.set("in_stock", "true");
-    if (filters.out_of_stock) params.set("out_of_stock", "true");
+    if (filters.in_stock) {
+      params.set("in_stock", "true");
+      // params.set("page", "1");
+    }
+    if (filters.out_of_stock) {
+      params.set("out_of_stock", "true");
+      // params.set("page", "1");
+    }
 
-    // Update URL and make API call
     setSearchParams(params, { replace: true });
     debouncedFetchProducts(requestParams, dispatch);
   }, [
@@ -172,6 +180,8 @@ function Product() {
   const products = product?.data?.products?.data || [];
   const totalPages = product?.data?.products?.last_page || 1;
   const totalItems = product?.data?.products?.total || 0;
+  const pageForm = product?.data?.products?.from;
+  const pageTo = product?.data?.products?.to;
 
   const filteredProducts = products.filter((product) => {
     const in_stock = product.quantity > 0;
@@ -368,6 +378,39 @@ function Product() {
                 <p className="text-sm text-gray-500">No categories found</p>
               </div>
             )}
+
+            {/* do not remove this below code */}
+            {/* {loading ? (
+              <div className="flex items-center justify-center p-4">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+              </div>
+            ) : uniqueSizes.length > 0 ? (
+              <div className="mb-[1.5rem]">
+                <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
+                  Size <span>({uniqueSizes.length})</span>
+                </h4>
+                <div className="flex flex-wrap gap-5 lg:gap-[0.5rem] flex-row lg:flex-col">
+                  {uniqueSizes.map((size) => (
+                    <label
+                      key={size}
+                      className="flex items-center text-[0.875rem]"
+                    >
+                      <input
+                        type="checkbox"
+                        className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-transparent focus:ring-blue-500 dark:focus:ring-blue-400 appearance-none custom-checkbox"
+                        checked={filters.sizes?.includes(size)}
+                        onChange={() => handleCheckboxChange("sizes", size)}
+                      />
+                      <span className="ml-2">{size}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center p-4">
+                <p className="text-sm text-gray-500">No sizes found</p>
+              </div>
+            )} */}
             <div>
               <h4 className="text-lg font-bold uppercase text-[0.875rem] text-[#111111] mb-[0.9375rem]">
                 Price Range
@@ -388,57 +431,66 @@ function Product() {
                 <option value="in_stock">In Stock</option>
               </select>
               <span className="text-[#808080] uppercase">
-                {/* Showing {filteredProducts.length} results */}
-                Showing {filteredProducts.length} of {totalItems} products
+                {ProductLoading ? (
+                  "Loading..."
+                ) : pageForm && pageTo ? (
+                  <>
+                    Showing {pageForm}-{pageTo} of {totalItems}
+                  </>
+                ) : (
+                  "No products found"
+                )}
               </span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-y-[4.375rem]">
-              {filteredProducts.length > 0 ? (
-                filteredProducts.map((product) => (
+            {ProductLoading ? (
+              <div className="flex items-center justify-center p-4 h-screen">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+              </div>
+            ) : filteredProducts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-y-[4.375rem]">
+                {filteredProducts.map((product) => (
                   <CardComponent key={product.id} product={product} />
-                ))
-              ) : (
-                <div className="col-span-full text-center py-8">
-                  <p className="text-lg text-gray-600">
-                    No products match the selected filters.
-                  </p>
-                  <button
-                    onClick={clearAllFilters}
-                    className="inline-flex gap-2 btn px-[1.5rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none items-center mt-5"
-                  >
-                    Clear all filters
-                  </button>
-                </div>
-              )}
-            </div>
-            <div className="mt-auto">
-              <div className="flex justify-center items-center flex-wrap my-8 gap-4">
-                <ReactPaginate
-                  breakLabel="..."
-                  nextLabel=""
-                  onPageChange={handlePageClick}
-                  pageRangeDisplayed={3}
-                  marginPagesDisplayed={2}
-                  pageCount={totalPages}
-                  previousLabel=""
-                  renderOnZeroPageCount={null}
-                  containerClassName="flex items-center flex-wrap gap-2 custom-pagination"
-                  pageClassName="px-3 py-1"
-                  pageLinkClassName="block w-full h-full"
-                  previousClassName="px-2 cursor-pointer"
-                  nextClassName="px-2 cursor-pointer"
-                  previousLinkClassName=""
-                  nextLinkClassName=""
-                  activeClassName="border-b"
-                  disabledClassName="opacity-50 cursor-not-allowed"
-                  forcePage={currentPage}
-                />
-                <div className="text-sm text-gray-600">
-                  {/* Showing {filteredProducts.length} of {totalItems} products */}
-                  {loading && <div>Loading...</div>}
+                ))}
+              </div>
+            ) : (
+              <div className="col-span-full text-center py-8 h-screen">
+                <p className="text-lg text-gray-600">
+                  No products match the selected filters.
+                </p>
+                <button
+                  onClick={clearAllFilters}
+                  className="inline-flex gap-2 btn px-[1.5rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none items-center mt-5"
+                >
+                  Clear all filters
+                </button>
+              </div>
+            )}
+            {filteredProducts.length > 0 && (
+              <div className="mt-auto">
+                <div className="flex justify-center my-8">
+                  <ReactPaginate
+                    breakLabel="..."
+                    nextLabel=""
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={3}
+                    marginPagesDisplayed={2}
+                    pageCount={totalPages}
+                    previousLabel=""
+                    renderOnZeroPageCount={null}
+                    containerClassName="flex items-center flex-wrap gap-2 custom-pagination cursor-pointer"
+                    pageClassName="px-3 py-1"
+                    pageLinkClassName="block w-full h-full"
+                    previousClassName="px-2 cursor-pointer"
+                    nextClassName="px-2 cursor-pointer"
+                    previousLinkClassName=""
+                    nextLinkClassName=""
+                    activeClassName="border-b"
+                    disabledClassName="opacity-50 cursor-not-allowed"
+                    forcePage={currentPage}
+                  />
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
