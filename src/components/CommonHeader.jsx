@@ -103,6 +103,22 @@ function CommonHeader({ className = "", ...props }) {
       title: "Women's Watch",
       breadcrumb: true,
     },
+    "/faq": {
+      title: "FAQ",
+      breadcrumb: true,
+    },
+    "/terms-use": {
+      title: "Terms & Conditions",
+      breadcrumb: true,
+    },
+    "/privacy-policy": {
+      title: "Privacy Policy",
+      breadcrumb: true,
+    },
+    "/support": {
+      title: "Support",
+      breadcrumb: true,
+    },
   };
 
   // Breadcrumb component for reusability

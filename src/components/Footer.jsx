@@ -72,7 +72,7 @@ function Footer() {
             <ul className="font-regular flex flex-col gap-1">
               <li className="mb-1">
                 <a
-                  href="#"
+                  href="/faq"
                   className="hover:!text-[#007BFF] transition-all duration-600 ease-in-out "
                 >
                   FAQ
@@ -80,7 +80,7 @@ function Footer() {
               </li>
               <li className="mb-1">
                 <a
-                  href="#"
+                  href="/terms-use"
                   className="hover:!text-[#007BFF] transition-all duration-600 ease-in-out"
                 >
                   Terms of use
@@ -88,7 +88,7 @@ function Footer() {
               </li>
               <li className="mb-1">
                 <a
-                  href="#"
+                  href="privacy-policy"
                   className="hover:!text-[#007BFF] transition-all duration-600 ease-in-out"
                 >
                   Privacy Policy
@@ -118,7 +118,7 @@ function Footer() {
               </li>
               <li className="mb-1">
                 <a
-                  href="#"
+                  href="/support"
                   className="hover:!text-[#007BFF] transition-all duration-600 ease-in-out"
                 >
                   Support
