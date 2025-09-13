@@ -42,7 +42,10 @@ const OrderDetailsPopup = () => {
   if (!isPopupOpen) return null;
 
   const { orders } = useSelector((state) => state.customerOrders);
-  const shippingAddress = orders?.customerData[0];
+
+  /* The above code is a snippet of JavaScript React code that represents a popup component displaying
+  order details. Here is a breakdown of what the code is doing: */
+  const shippingAddress = orders?.customerData?.[0] || {};
   return (
     <>
       {/* Overlay with fade transition for extra smoothness */}
@@ -173,7 +176,8 @@ const OrderDetailsPopup = () => {
               className="w-full btn py-4 px-6 rounded-2xl"
               onClick={(e) => {
                 e.preventDefault();
-                navigate(`/products/${orderPopup?.order.product_slug}`);
+                handleOverlayClick();
+                navigate(`/products/${orderPopup?.order?.product_slug}`);
               }}
             >
               <span className="text-lg">BUY IT AGAIN</span>
