@@ -35,7 +35,7 @@ const customerOrdersSlice = createSlice({
   initialState,
   reducers: {
     clearOrders: (state) => {
-      state.orders = [];
+      state.orders = {};
       state.loading = false;
       state.error = null;
     },
