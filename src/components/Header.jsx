@@ -91,7 +91,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
             {/* Hamburger for mobile */}
             <button
               type="button"
-              className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md bg-black/10 hover:bg-black/15 transition"
+              className="lg:hidden inline-flex items-center justify-center w-10 h-10"
               aria-label="Open menu"
               aria-expanded={isMenuOpen}
               aria-controls="mobile-drawer"
@@ -365,7 +365,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
               <img
                 src={storeInfo.storeinfo.logo}
                 alt={storeInfo?.storeinfo?.store_name || "Store logo"}
-                className="w-12 h-12"
+                className="sm:w-16 sm:h-16 w-14 h-14"
               />
             ) : (
               <h1
@@ -437,7 +437,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
             </span>
             <button
               type="button"
-              className="inline-flex items-center justify-center w-9 h-9 rounded-md bg-black/10 hover:bg-black/15 transition"
+              className="inline-flex items-center justify-center w-10 h-10"
               aria-label="Close menu"
               onClick={() => setIsMenuOpen(false)}
               autoFocus
@@ -457,7 +457,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
               </svg>
             </button>
           </div>
-          <nav className="flex flex-col p-4 gap-2 items-start h-dvh bg-white">
+          <nav className="flex flex-col p-4 gap-2 items-start h-dvh bg-white overflow-y-auto">
             <Link
               to="/"
               className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"

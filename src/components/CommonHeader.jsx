@@ -10,10 +10,10 @@ function CommonHeader({ className = "", ...props }) {
   const routeConfigs = {
     "/": {
       content: (
-        <div className="py-[2.5rem] lg:py-[4.6875rem] -mt-[40px] z-10 relative rounded-b-none rounded-3xl">
+        <div className="py-[2.5rem] lg:py-15 -mt-[40px] z-10 relative rounded-b-none rounded-3xl">
           <div className="flex items-center md:justify-between justify-center md:max-w-[90rem] max-w-full ml-auto mr-auto">
             <div className="flex xxl:px-[248px] md:gap-6 gap-4 md:flex-row flex-col">
-              <div className="flex-1 md:px-[1.8rem] px-[1rem] lg:px-[3.75rem] md:py-[30px] py-[0] lg:py-[3.75rem]">
+              <div className="flex-1 md:px-[1.8rem] px-[1rem] lg:px-[3.75rem] md:py-6 py-[0] lg:py-7.5">
                 <h1 className="mb-4 text-[1.125rem] lg:text-[1.5rem] font-bold">
                   Free Shipping
                 </h1>
@@ -23,7 +23,7 @@ function CommonHeader({ className = "", ...props }) {
                 </p>
               </div>
               <span className="seperator md:border-r"></span>
-              <div className="flex-1 md:px-[1.8rem] px-[1rem] lg:px-[3.75rem] md:py-[30px] py-[0] lg:py-[3.75rem]">
+              <div className="flex-1 md:px-[1.8rem] px-[1rem] lg:px-[3.75rem] md:py-6 py-[0] lg:py-7.5">
                 <h1 className="mb-4 text-[1.125rem] lg:text-[1.5rem] font-bold">
                   Secure Payment
                 </h1>
@@ -33,7 +33,7 @@ function CommonHeader({ className = "", ...props }) {
                 </p>
               </div>
               <span className="seperator md:border-r"></span>
-              <div className="flex-1 md:px-[1.8rem] px-[1rem] lg:px-[3.75rem] md:py-[30px] py-[0] lg:py-[3.75rem]">
+              <div className="flex-1 md:px-[1.8rem] px-[1rem] lg:px-[3.75rem] md:py-6 py-[0] lg:py-7.5">
                 <h1 className="mb-4 text-[1.125rem] lg:text-[1.5rem] font-bold">
                   Satisfaction Guarantee
                 </h1>
