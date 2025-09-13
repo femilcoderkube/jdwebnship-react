@@ -2,10 +2,11 @@ import React from "react";
 import CommonHeader from "../components/CommonHeader";
 import { Headset, Mail, Phone, Clock, MessageCircle } from "lucide-react";
 import { useSelector } from "react-redux";
+import { useTheme } from "../contexts/ThemeContext";
 
 const Support = () => {
   const { storeInfo } = useSelector((state) => state.storeInfo);
-  console.log("storeInfo", storeInfo);
+  const { theme, bottomFooterTextColor, textColor } = useTheme();
   return (
     <>
       <CommonHeader title="Support Center" />
@@ -23,8 +24,14 @@ const Support = () => {
           </div>
 
           {/* Why Contact Us Section */}
-          <div className="bg-[#fff7f2] rounded-xl p-8 mb-12">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 text-left">
+          <div
+            className="rounded-xl p-8 mb-12"
+            style={{
+              backgroundColor: theme?.bottomFooterBackgroundColor || "#1f2937",
+              color: bottomFooterTextColor || "#ffffff",
+            }}
+          >
+            <h2 className="text-2xl font-bold  mb-6 text-left">
               Why Contact Us?
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
@@ -35,10 +42,15 @@ const Support = () => {
                 "Feedback or suggestions for improvement",
               ].map((item, index) => (
                 <div key={index} className="flex items-start">
-                  <div className="bg-[#0000003a] p-1 rounded-full mr-3 mt-1">
-                    <div className="w-2 h-2 bg-[#111111] rounded-full"></div>
+                  <div
+                    className=" p-1 rounded-full mr-3 mt-1"
+                    style={{
+                      backgroundColor: bottomFooterTextColor,
+                    }}
+                  >
+                    <div className="w-2 h-2 rounded-full"></div>
                   </div>
-                  <p className="text-gray-700 text-left">{item}</p>
+                  <p className=" text-left">{item}</p>
                 </div>
               ))}
             </div>
@@ -70,23 +82,34 @@ const Support = () => {
             ].map((option, index) => (
               <div
                 key={index}
-                className="bg-[#fff7f2] rounded-xl p-6 transition-shadow"
+                className=" rounded-xl p-6 transition-shadow"
+                style={{
+                  backgroundColor:
+                    theme?.bottomFooterBackgroundColor || "#1f2937",
+                  color: bottomFooterTextColor || "#ffffff",
+                }}
               >
                 <div className="bg-white w-12 h-12 rounded-full flex items-center justify-center mb-4 text-start">
                   {option.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-2 text-start">
+                <h3 className="text-lg font-semibold  mb-2 text-start">
                   {option.title}
                 </h3>
-                <p className="text-gray-600 text-start">{option.description}</p>
+                <p className="text-start">{option.description}</p>
               </div>
             ))}
           </div>
 
-          <div className="bg-[#f7efea] rounded-xl p-6 mb-12">
+          <div
+            className=" rounded-xl p-6 mb-12"
+            style={{
+              backgroundColor: theme?.bottomFooterBackgroundColor || "#1f2937",
+              color: bottomFooterTextColor || "#ffffff",
+            }}
+          >
             <div className="flex items-start">
               <Headset className="w-5 h-5 mt-1 mr-3 flex-shrink-0" />
-              <p className="text-gray-700">
+              <p className="">
                 <span className="font-medium">Need urgent help?</span> Try our
                 live chat for the fastest response.
               </p>
