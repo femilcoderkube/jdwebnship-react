@@ -447,7 +447,7 @@ function Product() {
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
               </div>
             ) : filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-y-[4.375rem]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-7.5 md:gap-y-[4.375rem]">
                 {filteredProducts.map((product) => (
                   <CardComponent key={product.id} product={product} />
                 ))}
@@ -477,7 +477,7 @@ function Product() {
                     pageCount={totalPages}
                     previousLabel=""
                     renderOnZeroPageCount={null}
-                    containerClassName="flex items-center flex-wrap gap-2 custom-pagination cursor-pointer"
+                    containerClassName="flex items-center flex-wrap sm:gap-2 custom-pagination cursor-pointer"
                     pageClassName="px-3 py-1"
                     pageLinkClassName="block w-full h-full"
                     previousClassName="px-2 cursor-pointer"

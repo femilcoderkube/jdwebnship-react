@@ -94,7 +94,7 @@ const CardComponent = ({ product, isWishlistKey = false }) => {
           height: "auto",
           display: "flex",
           flexDirection: "column",
-          gap: "0.625rem",
+          gap: "1rem",
         }}
       >
         {getProductImage(productData) && (
