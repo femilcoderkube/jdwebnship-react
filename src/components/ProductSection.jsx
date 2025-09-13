@@ -81,7 +81,7 @@ function ProductSection() {
         New Trending
       </h2>
       <section className="px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem]">
-        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 xxl:grid-cols-5 gap-[1.5rem] md:gap-y-[4.375rem]">
+        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-[1.5rem] xl:gap-y-[4.375rem]">
           {products.map((product, index) => (
             <CardComponent
               key={index}

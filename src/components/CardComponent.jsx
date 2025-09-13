@@ -2,9 +2,17 @@ import React from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import whatsapp from "../assets/Whatsapp.svg";
 import { useNavigate } from "react-router-dom";
-import { formatStatus, getProductImage, getWhatsappLink, isInWishlist } from "../utils/common";
+import {
+  formatStatus,
+  getProductImage,
+  getWhatsappLink,
+  isInWishlist,
+} from "../utils/common";
 import { useDispatch, useSelector } from "react-redux";
-import { addtowishList, removeFromwishList } from "../redux/slices/WishListSlice";
+import {
+  addtowishList,
+  removeFromwishList,
+} from "../redux/slices/WishListSlice";
 
 const CardComponent = ({ product }) => {
   const { textColor } = useTheme();
@@ -14,8 +22,9 @@ const CardComponent = ({ product }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { isAuthenticated } = useSelector((state) => state.auth);
   const phone_number = storeInfo?.storeinfo?.retailer?.phone_number;
-  const wishlistData = wishlist?.data?.wishlist
-  const isWishlist = (isAuthenticated && isInWishlist(product?.id, wishlistData)) || false;
+  const wishlistData = wishlist?.data?.wishlist;
+  const isWishlist =
+    (isAuthenticated && isInWishlist(product?.id, wishlistData)) || false;
 
   const addToWishList = () => {
     if (isAuthenticated) {
@@ -23,28 +32,26 @@ const CardComponent = ({ product }) => {
         const payload = {
           product_id: !product?.retailer_id ? product?.id : null,
           retailer_product_id: product?.retailer_id ? product?.id : null,
-        }
-        dispatch(removeFromwishList(payload, dispatch))
+        };
+        dispatch(removeFromwishList(payload, dispatch));
       } else {
         const payload = {
           product_id: product?.id,
           retailer_id: product?.wholesaler_id ? null : product?.retailer_id,
-          wholesaler_id: product?.retailer_id ? null : product?.wholesaler_id
-        }
-        dispatch(addtowishList(payload, dispatch))
+          wholesaler_id: product?.retailer_id ? null : product?.wholesaler_id,
+        };
+        dispatch(addtowishList(payload, dispatch));
       }
     } else {
-      navigate("/signin")
+      navigate("/signin");
     }
-  }
+  };
 
   return (
     <>
       <div
         className="text-start relative card-element"
-        onClick={() =>
-          navigate(`/products/${product?.slug}`)
-        }
+        onClick={() => navigate(`/products/${product?.slug}`)}
         style={{
           height: "auto",
           display: "flex",
@@ -71,7 +78,8 @@ const CardComponent = ({ product }) => {
           }}
         > */}
 
-            <img className="absolute top-0 left-0"
+            <img
+              className="absolute top-0 left-0"
               src={getProductImage(product)}
               alt={product?.name || "Product Image"}
               style={{
@@ -84,7 +92,6 @@ const CardComponent = ({ product }) => {
             />
           </div>
         )}
-
 
         <div className="hover-content absolute left-0 right-0 h-100">
           <div className="flex justify-between h-100">
@@ -114,18 +121,19 @@ const CardComponent = ({ product }) => {
                   e.stopPropagation();
                   addToWishList();
                 }}
-                className="bg-[#1111116b] w-[2.625rem] h-[2.625rem] rounded-[8px] flex items-center justify-center">
+                className="bg-[#1111116b] w-[2.625rem] h-[2.625rem] rounded-[8px] flex items-center justify-center"
+              >
                 {/* <img src={save} alt="Save" /> */}
                 <svg
-                  width="40"
-                  height="40"
+                  width="24"
+                  height="24"
                   viewBox="0 0 25 25"
                   fill={isWishlist ? "red" : "none"}
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M12.5048 19.5L5.291 13.0513C1.37045 9.18258 7.13333 1.75337 12.5048 7.76384C17.8763 1.75337 23.6141 9.20729 19.72 13.0513L12.5048 19.5Z"
-                    stroke={isWishlist ? "red" : "#5C5F6A"}
+                    stroke={isWishlist ? "red" : "#ffffff"}
                     strokeWidth="1.42857"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -173,6 +181,5 @@ const CardComponent = ({ product }) => {
     </>
   );
 };
-
 
 export default CardComponent;
