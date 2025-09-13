@@ -160,7 +160,7 @@ function CommonHeader({ className = "", ...props }) {
     routeConfig.content ||
     (routeConfig.title ? (
       <div className="xxl:px-[248px]">
-        <div className="px-[2.5rem] lg:px-[4.6875rem] py-[30px] lg:py-[4.6875rem] md:border-0 md:border-r">
+        <div className="px-[2.5rem] lg:px-[4.6875rem] py-[30px] lg:py-[4.6875rem]">
           {routeConfig.breadcrumb && (
             <Breadcrumb currentPage={routeConfig.title} />
           )}
@@ -175,7 +175,7 @@ function CommonHeader({ className = "", ...props }) {
   return (
     <section
       className={`z-10 relative ${
-        location.pathname === "/" ? "rounded-b-none rounded-3xl" : ""
+        location.pathname === "/" ? "rounded-b-none rounded-3xl" : "rounded-b-none rounded-3xl"
       } ${className}`}
       style={{
         backgroundColor: theme?.bottomFooterBackgroundColor || "#ffffff",

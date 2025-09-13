@@ -79,7 +79,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
         }}
       >
         <nav
-          className="flex items-center relative justify-between px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] h-[5rem] shadow-sm"
+          className="flex items-center relative justify-between px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem] h-[5rem]"
           style={{
             backgroundColor: theme?.headerBackgroundColor || "#ffffff",
             color: headerTextColor || "#ffffff",
