@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import empty from "../assets/images/empty-state.svg";
 import watch from "../assets/watch.png";
 import {
@@ -8,17 +8,24 @@ import {
   fetchCustomerOrders,
 } from "../redux/slices/customerOrdersSlice";
 import { toTitleCase } from "../utils/common";
+import { openOrderPopup } from "../redux/slices/orderPopupSlice";
+import { useTheme } from "../contexts/ThemeContext";
 
 const Orders = () => {
   const dispatch = useDispatch();
+  const { theme, bottomFooterTextColor } = useTheme();
   const { orders } = useSelector((state) => state.customerOrders);
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(fetchCustomerOrders());
     return () => {
       dispatch(clearOrders());
     };
   }, [dispatch]);
+
+  const handleViewOrderDetails = (order) => {
+    dispatch(openOrderPopup(order)); // Dispatch action with the full order object
+  };
   return (
     <div className="w-full">
       <div className="flex justify-between w-full pb-[1.25rem] items-center">
@@ -27,14 +34,20 @@ const Orders = () => {
       </div>
       <hr className="opacity-10" />
 
-      {orders?.length > 0 ? (
+      {orders?.orders?.length > 0 ? (
         <>
-          {orders?.map((val) => {
+          {orders?.orders?.map((val) => {
             const status = toTitleCase(val?.status);
             return (
               <div className="flex flex-col mt-[1.875rem] text-start">
                 <div className="rounded-2xl border border-[#AAAAAA] overflow-auto">
-                  <div className="top-card bg-[#fff7f2] p-[0.82rem]">
+                  <div
+                    className="top-card  p-[0.82rem]"
+                    style={{
+                      backgroundColor: theme?.bottomFooterBackgroundColor,
+                      color: bottomFooterTextColor,
+                    }}
+                  >
                     <div className="flex flex-wrap gap-[1.25rem] justify-between">
                       <div className="flex flex-wrap gap-[1.25rem]">
                         <div>
@@ -69,15 +82,24 @@ const Orders = () => {
                           {val?.product_name}
                         </h6>
                         <div className="flex flex-wrap gap-[0.82rem] items-center mt-[0.5rem]">
-                          <a
-                            href=""
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              navigate(`/products/${val.product_slug}`);
+                            }}
                             className="inline-flex text-sm gap-2 btn px-[1.5rem] py-[0.5rem] rounded-lg font-medium focus:outline-none items-center"
                           >
                             Buy it Again
-                          </a>
-                          <a href="" className="underline">
+                          </Link>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleViewOrderDetails(val);
+                            }}
+                            className="underline"
+                          >
                             View order details
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>

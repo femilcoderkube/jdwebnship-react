@@ -3,7 +3,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { toast } from "react-toastify";
 
 const initialState = {
-  orders: [],
+  orders: {},
   loading: false,
   error: null,
 };
@@ -15,7 +15,7 @@ export const fetchCustomerOrders = createAsyncThunk(
       const response = await axiosInstance.get("/customer/orders");
 
       if (response?.data?.success) {
-        return response.data.data.orders || [];
+        return response.data.data || [];
       } else {
         return rejectWithValue(
           response?.data?.message || "Failed to fetch orders"
