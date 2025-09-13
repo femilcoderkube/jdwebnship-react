@@ -11,6 +11,10 @@ import s05 from "../assets/images/s-05.jpg";
 import close from "../assets/images/close.png";
 import copy_icon from "../assets/images/copy_icon.png";
 import { gsap } from "gsap";
+import 'swiper/css'; 
+import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
 
 function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
   const { theme, headerTextColor } = useTheme();
@@ -21,6 +25,8 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
   const dispatch = useDispatch();
   const { storeInfo, loading } = useSelector((state) => state.storeInfo);
   const categories = storeInfo?.sub_category_list || [];
+  const [isShopMegaMenuOpen, setIsShopMegaMenuOpen] = useState(false);
+
 
   useEffect(() => {
     dispatch(fetchStoreInfo());
@@ -207,16 +213,113 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
                 )}
               </div>
 
-              <Link
-                className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 h-full flex items-center"
-                to="/shop"
-                style={{
-                  color: headerTextColor || "#111111",
-                  margin: "0 1rem",
-                }}
+              {/* Shop Mega Menu */}
+            
+              <div
+                className="relative h-[5rem]"
+                onMouseEnter={() => setIsShopMegaMenuOpen(true)}
+                onMouseLeave={() => setIsShopMegaMenuOpen(false)}
               >
-                Shop
-              </Link>
+                <Link
+                  className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 h-full flex items-center"
+                  to="/shop"
+                  style={{
+                    color: headerTextColor || "#111111",
+                    margin: "0 1rem",
+                  }}
+                >
+                  Shop
+                </Link>
+                {isShopMegaMenuOpen && (
+                  <div
+                    className="fixed left-0 top-[100%] px-8 py-15 bg-white border border-gray-200 shadow-2xl z-50 w-[100vw]"
+                    style={{
+                      backgroundColor: theme?.headerBackgroundColor || "#fff",
+                    }}
+                  >
+                    {/* Mega menu content */}
+                    <div className="flex items-center justify-between">
+                      {/* Left arrow (Swiper navigation) */}
+                      <button
+                        className="swiper-button-prev w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition"
+                        aria-label="Scroll left"
+                        tabIndex={0}
+                        type="button"
+                      >
+                        <svg width="20" height="20" fill="none" stroke="#111" strokeWidth="2" viewBox="0 0 24 24">
+                          <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </button>
+                      {/* Swiper Slider of cards */}
+                      <div className="flex-1 flex items-center justify-center min-h-[160px]">
+                        {loading ? (
+                          <div className="flex items-center justify-center p-4 w-full">
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                          </div>
+                        ) : categories.length > 0 ? (
+                          <Swiper
+                            modules={[Navigation]}
+                            slidesPerView={Math.min(5, categories.length)}
+                            spaceBetween={32}
+                            navigation={{
+                              nextEl: '.swiper-button-next',
+                              prevEl: '.swiper-button-prev',
+                            }}
+                            breakpoints={{
+                              320: { slidesPerView: 2 },
+                              640: { slidesPerView: 3 },
+                              1024: { slidesPerView: 5 },
+                            }}
+                            style={{ width: '100%' }}
+                          >
+                            {categories.slice(0, 8).map((category, idx) => (
+                              <SwiperSlide key={category.id || idx}>
+                                <div className="flex flex-col items-center group w-full" style={{ minWidth: 110, maxWidth: 150 }}>
+                                  <Link
+                                    to={`/shop?categories=${encodeURIComponent(category.name)}`}
+                                    className="flex flex-col items-center w-full"
+                                    style={{ textDecoration: "none" }}
+                                  >
+                                    <div className="w-[5rem] h-[5rem] rounded-2xl bg-[#F7F7F7] flex items-center justify-center mb-2 overflow-hidden">
+                                      {category.image ? (
+                                        <img
+                                          src={category.image}
+                                          alt={category.name}
+                                          className="object-contain w-12 h-12 transition-transform duration-200 group-hover:scale-105"
+                                        />
+                                      ) : (
+                                        <div className="w-12 h-12 bg-gray-200 rounded" />
+                                      )}
+                                    </div>
+                                    <span className="text-sm text-center text-[#111] group-hover:text-[#007BFF] transition-colors duration-200 block w-full break-words">
+                                      {category.name}
+                                    </span>
+                                  </Link>
+                                </div>
+                              </SwiperSlide>
+                            ))}
+                          </Swiper>
+                        ) : (
+                          <div className="flex items-center justify-center p-4 w-full">
+                            <p className="text-sm text-gray-500">No categories found</p>
+                          </div>
+                        )}
+                      </div>
+                      {/* Right arrow (Swiper navigation) */}
+                      <button
+                        className="swiper-button-next w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition"
+                        aria-label="Scroll right"
+                        tabIndex={0}
+                        type="button"
+                      >
+                        <svg width="20" height="20" fill="none" stroke="#111" strokeWidth="2" viewBox="0 0 24 24">
+                          <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -320,7 +423,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
               </svg>
             </button>
           </div>
-          <nav className="flex flex-col p-4 gap-2 items-start">
+          <nav className="flex flex-col p-4 gap-2 items-start h-dvh bg-white">
             <Link
               to="/"
               className="px-3 py-2 rounded hover:bg-black/10 transition uppercase text-sm"
