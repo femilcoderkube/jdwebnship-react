@@ -84,7 +84,7 @@ const CardComponent = ({ product, isWishlistKey = false }) => {
   return (
     <>
       <div
-        className="text-start relative card-element"
+        className="text-start relative card-element cursor-pointer"
         onClick={() =>
           !isWishlistKey
             ? navigate(`/products/${productData?.slug}`)

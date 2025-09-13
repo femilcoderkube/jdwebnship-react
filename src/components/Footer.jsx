@@ -87,7 +87,10 @@ function Footer() {
                 </a>
               </li>
               <li className="mb-1">
-                <a href="#" className="">
+                <a
+                  href="#"
+                  className="hover:!text-[#007BFF] transition-all duration-600 ease-in-out"
+                >
                   Privacy Policy
                 </a>
               </li>

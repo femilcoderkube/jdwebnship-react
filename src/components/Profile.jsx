@@ -37,7 +37,7 @@ function Profile() {
             setIsProfileDropdownOpen((prev) => !prev);
           }
         }}
-        className="p-2 h-full flex items-center"
+        className="p-2 h-full flex items-center cursor-pointer"
         aria-label="Profile"
         type="button"
       >
@@ -73,9 +73,11 @@ function Profile() {
 
       {/* Profile Dropdown Menu */}
       {isProfileDropdownOpen && isAuthenticated && (
-        <div className="absolute top-full w-80 z-50 profile-dropdown
+        <div
+          className="absolute top-full w-80 z-50 profile-dropdown
             left-1/2 sm:left-auto sm:right-0
-             sm:translate-x-0">
+             sm:translate-x-0"
+        >
           <div
             className="bg-white border border-gray-200 rounded-lg shadow-xl p-6"
             style={{
@@ -115,7 +117,7 @@ function Profile() {
               </div>
 
               {/* Menu Items */}
-              <div className="space-y-2">                
+              <div className="space-y-2">
                 <Link
                   to="/my-account"
                   onClick={() => setIsProfileDropdownOpen(false)}
@@ -144,7 +146,7 @@ function Profile() {
                       dispatch(logoutUser({ navigate }));
                       setIsProfileDropdownOpen(false);
                     }}
-                    className="profile-menu-item w-full flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-red-50 transition-all duration-200 group text-left"
+                    className="profile-menu-item w-full flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-red-50 transition-all duration-200 group text-left cursor-pointer"
                     style={{ color: headerTextColor || "#111111" }}
                   >
                     <svg

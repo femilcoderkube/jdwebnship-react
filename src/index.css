@@ -290,11 +290,11 @@ textarea {
 }
 
 /* Search input focus styles */
-.search-input:focus {
+/* .search-input:focus {
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
   border-color: #3b82f6;
   transform: scale(1.02);
-}
+} */
 
 /* Search button disabled state */
 .search-button:disabled {

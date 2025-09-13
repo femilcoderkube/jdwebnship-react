@@ -345,7 +345,7 @@ function Product() {
               </div>
             ) : categories.length > 0 ? (
               <div className="mb-[1.5rem]">
-                <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
+                <h4 className="text-lg font-bold mb-[0.9375rem] uppercase text-[0.875rem] text-[#111111]">
                   Category <span>({categories.length})</span>
                 </h4>
                 <div className="flex lg:flex-nowrap flex-wrap gap-5 lg:gap-[0.5rem] flex-row lg:flex-col max-h-[30rem] overflow-y-auto">
@@ -386,7 +386,7 @@ function Product() {
               </div>
             ) : uniqueSizes.length > 0 ? (
               <div className="mb-[1.5rem]">
-                <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
+                <h4 className="text-lg font-bold mb-[0.9375rem] uppercase text-[0.875rem] text-[#111111]">
                   Size <span>({uniqueSizes.length})</span>
                 </h4>
                 <div className="flex flex-wrap gap-5 lg:gap-[0.5rem] flex-row lg:flex-col">
@@ -413,7 +413,7 @@ function Product() {
             )} */}
             <div>
               <h4 className="text-lg font-bold uppercase text-[0.875rem] text-[#111111] mb-[0.9375rem]">
-                Price Range
+                Price
               </h4>
               <PriceRangeSlider
                 value={filters.priceRange}
