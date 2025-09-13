@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import CardComponent from "./CardComponent";
 
@@ -7,72 +7,28 @@ import s02 from "../assets/images/s-02.jpg";
 import s03 from "../assets/images/s-03.jpg";
 import s04 from "../assets/images/s-04.jpg";
 import s05 from "../assets/images/s-05.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { postNewArrivals } from "../redux/slices/newArrivalsSlice";
 
 function ProductSection() {
   const { theme, buttonTextColor } = useTheme();
 
-  const products = [
-    {
-      productName: "Chanel Jumbo Paris Glossy bag with...",
-      price: "3,298",
-      oldPrice: "3,898",
-      imageSrc: s01,
-    },
-    {
-      productName: "Sample Product 2",
-      price: "49.99",
-      oldPrice: "59.99",
-      imageSrc: s02,
-    },
-    {
-      productName: "Sample Product 3",
-      price: "19.99",
-      oldPrice: "29.99",
-      imageSrc: s03,
-    },
-    {
-      productName: "Sample Product 1",
-      price: "29.99",
-      oldPrice: "39.99",
-      imageSrc: s04,
-    },
-    {
-      productName: "Sample Product 2",
-      price: "49.99",
-      oldPrice: "59.99",
-      imageSrc: s05,
-    },
-    {
-      productName: "Chanel Jumbo Paris Glossy bag with...",
-      price: "3,298",
-      oldPrice: "3,898",
-      imageSrc: s01,
-    },
-    {
-      productName: "Sample Product 2",
-      price: "49.99",
-      oldPrice: "59.99",
-      imageSrc: s02,
-    },
-    {
-      productName: "Sample Product 3",
-      price: "19.99",
-      oldPrice: "29.99",
-      imageSrc: s03,
-    },
-    {
-      productName: "Sample Product 1",
-      price: "29.99",
-      oldPrice: "39.99",
-      imageSrc: s04,
-    },
-    {
-      productName: "Sample Product 2",
-      price: "49.99",
-      oldPrice: "59.99",
-      imageSrc: s05,
-    },
-  ];
+  const dispatch = useDispatch();
+
+  const { newArrivals, loading, error } = useSelector(
+    (state) => state.newArrivals
+  );
+
+  useEffect(() => {
+    getData();
+  }, [dispatch]);
+  const getData = async () => {
+    try {
+      dispatch(postNewArrivals());
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
   return (
     <div className="py-[3.125rem] lg:py-[100px]">
@@ -82,14 +38,8 @@ function ProductSection() {
       </h2>
       <section className="px-4 sm:px-6 lg:px-10 xl:px-[4.6875rem]">
         <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-[1.5rem] xl:gap-y-[4.375rem]">
-          {products.map((product, index) => (
-            <CardComponent
-              key={index}
-              productName={product.productName}
-              price={product.price}
-              oldPrice={product.oldPrice}
-              imageSrc={product.imageSrc}
-            />
+          {newArrivals?.products?.map((product) => (
+            <CardComponent key={product.id} product={product} />
           ))}
         </div>
         <div className="mt-[30px] lg:mt-[3.125rem]">
