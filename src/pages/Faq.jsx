@@ -64,43 +64,32 @@ const Faq = () => {
   return (
     <>
       <CommonHeader title="Frequently Asked Questions" />
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <h1 className="text-3xl font-bold mb-6 text-center">
-              Frequently Asked Questions
-            </h1>
-            <div className="border-b border-gray-200 mb-8"></div>
-
-            <div className="space-y-4">
+      <div className="px-5 mx-auto py-[3.125rem] lg:py-[100px] min-h-screen flex flex-col">
+        <div className="container mx-auto">
+          <div className="rounded-lg">
+            <div className="space-y-4 lg:space-y-6">
               {faqItems.map((item, index) => (
                 <div
                   key={index}
-                  className={`border border-gray-200 shadow-sm rounded-xl transition-all duration-300 transform ${
-                    activeIndex === index
-                      ? "scale-[1.01]"
-                      : "hover:scale-[1.02]"
+                  className={`border border-gray-300  rounded-xl bg-[#f6eee9] transition-all duration-500 transform overflow-hidden ${
+                    activeIndex === index ? "scale-[1]" : "hover:scale-[1]"
                   }`}
                 >
                   <button
-                    className="w-full text-left px-6 py-4 bg-white hover:bg-gray-50 flex cursor-pointer justify-between items-center focus:outline-none"
+                    className="w-full text-left px-6 py-4 bg-[#f6eee9] hover:bg-[#f6eee9] flex cursor-pointer justify-between items-center focus:outline-none"
                     onClick={() => toggleAccordion(index)}
                     aria-expanded={activeIndex === index}
                     aria-controls={`faq-${index}`}
                   >
-                    <span className="text-base font-medium text-gray-800">
-                      {item.question}
-                    </span>
-                    <span className="text-2xl text-gray-500">
+                    <span className="text-lg font-bold">{item.question}</span>
+                    <span className="text-3xl">
                       {activeIndex === index ? "−" : "+"}
                     </span>
                   </button>
                   <div
                     id={`faq-${index}`}
-                    className={`bg-gray-50 px-6 overflow-hidden transition-all duration-300 ${
-                      activeIndex === index
-                        ? "max-h-96 py-4 border-t border-gray-200"
-                        : "max-h-0 py-0 border-t-0"
+                    className={`bg-white px-6 overflow-hidden transition-all duration-300 text-left ${
+                      activeIndex === index ? "max-h-96 py-4" : "max-h-0 py-0"
                     }`}
                   >
                     <p className="text-gray-700">{item.answer}</p>
