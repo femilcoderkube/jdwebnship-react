@@ -371,17 +371,28 @@ textarea {
 
   .search-box,
   .profile-dropdown {
-    transform: translate(calc(-50% + -3.5rem), 0);
+    transform: translate(calc(-50% + -8.5rem), 0);
+  }
+
+  .search-box {
+    transform: translate(calc(-50% + -8.5rem), 0);
+  }
+}
+
+@media only screen and (max-width: 575px) {
+
+  .search-box {
+    transform: translate(calc(-50% + -7.9rem), 0);
   }
 }
 
 @media only screen and (max-width: 425px) {
   .search-box {
-    transform: translate(calc(-50% + -1.4rem), 0);
+    transform: translate(calc(-50% + -6rem), 0);
   }
 
   .profile-dropdown {
-    transform: translate(calc(-50% + -2.5rem), 0);
+    transform: translate(calc(-50% + -6.5rem), 0);
   }
 }
 
@@ -392,6 +403,6 @@ textarea {
   }
 
   .search-box  {
-    transform: translate(calc(-50% + 0rem), 0);
+    transform: translate(calc(-50% + -4.5rem), 0);
   }
 }
