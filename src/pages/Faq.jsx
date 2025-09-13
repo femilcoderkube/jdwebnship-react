@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CommonHeader from "../components/CommonHeader";
+import { useTheme } from "../contexts/ThemeContext";
 
 const Faq = () => {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -61,6 +62,8 @@ const Faq = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  const { theme, bottomFooterTextColor, textColor } = useTheme();
+
   return (
     <>
       <CommonHeader title="Frequently Asked Questions" />
@@ -71,12 +74,17 @@ const Faq = () => {
               {faqItems.map((item, index) => (
                 <div
                   key={index}
-                  className={`border border-gray-300  rounded-xl bg-[#f6eee9] transition-all duration-500 transform overflow-hidden ${
+                  className={`border border-gray-300  rounded-xl transition-all duration-500 transform overflow-hidden ${
                     activeIndex === index ? "scale-[1]" : "hover:scale-[1]"
                   }`}
+                  style={{
+                    backgroundColor:
+                      theme?.bottomFooterBackgroundColor || "#1f2937",
+                    color: bottomFooterTextColor || "#ffffff",
+                  }}
                 >
                   <button
-                    className="w-full text-left px-6 py-4 bg-[#f6eee9] hover:bg-[#f6eee9] flex cursor-pointer justify-between items-center focus:outline-none"
+                    className="w-full text-left px-6 py-4 hover flex cursor-pointer justify-between items-center focus:outline-none"
                     onClick={() => toggleAccordion(index)}
                     aria-expanded={activeIndex === index}
                     aria-controls={`faq-${index}`}
@@ -88,11 +96,15 @@ const Faq = () => {
                   </button>
                   <div
                     id={`faq-${index}`}
-                    className={`bg-white px-6 overflow-hidden transition-all duration-300 text-left ${
+                    className={`px-6 overflow-hidden transition-all duration-300 text-left ${
                       activeIndex === index ? "max-h-96 py-4" : "max-h-0 py-0"
                     }`}
+                    style={{
+                      backgroundColor: theme.backgroundColor,
+                      color: textColor,
+                    }}
                   >
-                    <p className="text-gray-700">{item.answer}</p>
+                    <p className="">{item.answer}</p>
                   </div>
                 </div>
               ))}
