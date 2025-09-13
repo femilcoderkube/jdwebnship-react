@@ -368,18 +368,20 @@ textarea {
 }
 
 @media only screen and (max-width: 639px) {
-  .search-box,.profile-dropdown {
+
+  .search-box,
+  .profile-dropdown {
     transform: translate(calc(-50% + -3.5rem), 0);
   }
 }
 
 @media only screen and (max-width: 425px) {
-  .search-box{
+  .search-box {
     transform: translate(calc(-50% + -1.4rem), 0);
   }
 
-  .profile-dropdown{
-    transform: translate(calc(-50% + -2rem), 0);
+  .profile-dropdown {
+    transform: translate(calc(-50% + -2.5rem), 0);
   }
 }
 
@@ -388,7 +390,8 @@ textarea {
   .view-collection {
     max-width: 17rem;
   }
-  .search-box{
-    transform: translate(calc(-50% + -1rem), 0);
+
+  .search-box  {
+    transform: translate(calc(-50% + 0rem), 0);
   }
 }

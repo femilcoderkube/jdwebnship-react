@@ -7,7 +7,7 @@ function BottomFooter({}) {
 
   return (
     <section
-      className="text-center py-[2.5rem] lg:py-[70px] rounded-t-none rounded-3xl -mb-[70px] z-1"
+      className="text-center py-[2.5rem] px-[1rem] lg:py-[70px] rounded-t-none rounded-3xl -mb-[70px] z-1"
       style={{
         backgroundColor: theme?.bottomFooterBackgroundColor || "#1f2937",
         color: bottomFooterTextColor || "#ffffff",
