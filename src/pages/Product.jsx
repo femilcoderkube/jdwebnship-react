@@ -411,7 +411,7 @@ function Product() {
               )}
             </div>
             <div className="mt-auto">
-              <div className="flex justify-center my-8">
+              <div className="flex justify-center items-center flex-wrap my-8 gap-4">
                 <ReactPaginate
                   breakLabel="..."
                   nextLabel="Next"
@@ -421,7 +421,7 @@ function Product() {
                   pageCount={totalPages}
                   previousLabel="Previous"
                   renderOnZeroPageCount={null}
-                  containerClassName="flex items-center gap-2"
+                  containerClassName="flex items-center flex-wrap gap-2"
                   pageClassName="px-3 py-1 border rounded-md"
                   pageLinkClassName="block w-full h-full"
                   previousClassName="px-3 py-1 border rounded-md"
@@ -432,7 +432,7 @@ function Product() {
                   disabledClassName="opacity-50 cursor-not-allowed"
                   forcePage={currentPage}
                 />
-                <div className="ml-4 text-sm text-gray-600">
+                <div className="text-sm text-gray-600">
                   Showing {filteredProducts.length} of {totalItems} products
                   {loading && <div>Loading...</div>}
                 </div>
