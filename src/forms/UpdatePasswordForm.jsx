@@ -62,7 +62,7 @@ const UpdatePasswordForm = () => {
             <Form>
               <div className="mb-6">
                 <label
-                  className="block text-sm mb-2 font-bold uppercase"
+                  className="block text-sm mb-2.5 font-bold uppercase"
                   htmlFor="oldpass"
                 >
                   Old Password
@@ -82,7 +82,7 @@ const UpdatePasswordForm = () => {
               </div>
               <div className="mb-6">
                 <label
-                  className="block text-sm mb-2 font-bold uppercase"
+                  className="block text-sm mb-2.5 font-bold uppercase"
                   htmlFor="newpass"
                 >
                   New Password
@@ -102,7 +102,7 @@ const UpdatePasswordForm = () => {
               </div>
               <div className="mb-6">
                 <label
-                  className="block text-sm mb-2 font-bold uppercase"
+                  className="block text-sm mb-2.5 font-bold uppercase"
                   htmlFor="conpass"
                 >
                   Confirm Password

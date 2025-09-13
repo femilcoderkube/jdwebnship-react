@@ -75,7 +75,7 @@ const UpdateAddressForm = () => {
             <Form>
               <div className="mb-6">
                 <label
-                  className="block text-sm mb-2 font-bold uppercase"
+                  className="block text-sm mb-2.5 font-bold uppercase"
                   htmlFor="address"
                 >
                   Address
@@ -99,7 +99,7 @@ const UpdateAddressForm = () => {
               </div>
               <div className="mb-6">
                 <label
-                  className="block text-sm mb-2 font-bold uppercase"
+                  className="block text-sm mb-2.5 font-bold uppercase"
                   htmlFor="pincode"
                 >
                   Your Pincode

@@ -52,7 +52,7 @@ const AccountDetails = () => {
         <form onSubmit={formik.handleSubmit}>
           <div className="mb-6">
             <label
-              className="block text-sm mb-2 font-bold uppercase"
+              className="block text-sm mb-2.5 font-bold uppercase"
               htmlFor="fname"
             >
               First name
@@ -76,7 +76,7 @@ const AccountDetails = () => {
           </div>
           <div className="mb-6">
             <label
-              className="block text-sm mb-2 font-bold uppercase"
+              className="block text-sm mb-2.5 font-bold uppercase"
               htmlFor="lname"
             >
               Last Name
