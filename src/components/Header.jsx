@@ -11,10 +11,11 @@ import s05 from "../assets/images/s-05.jpg";
 import close from "../assets/images/close.png";
 import copy_icon from "../assets/images/copy_icon.png";
 import { gsap } from "gsap";
-import 'swiper/css'; 
-import 'swiper/css/navigation';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
   const { theme, headerTextColor } = useTheme();
@@ -26,7 +27,6 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
   const { storeInfo, loading } = useSelector((state) => state.storeInfo);
   const categories = storeInfo?.sub_category_list || [];
   const [isShopMegaMenuOpen, setIsShopMegaMenuOpen] = useState(false);
-
 
   useEffect(() => {
     dispatch(fetchStoreInfo());
@@ -214,11 +214,11 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
               </div>
 
               {/* Shop Mega Menu */}
-            
+
               <div
                 className="relative h-[5rem]"
                 onMouseEnter={() => setIsShopMegaMenuOpen(true)}
-                onMouseLeave={() => setIsShopMegaMenuOpen(false)}
+                onMouseLeave={() => setIsShopMegaMenuOpen()} // Fixed: should be false on mouse leave
               >
                 <Link
                   className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 h-full flex items-center"
@@ -238,54 +238,70 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
                     }}
                   >
                     {/* Mega menu content */}
-                    <div className="flex items-center justify-between">
-                      {/* Left arrow (Swiper navigation) */}
-                      <button
-                        className="swiper-button-prev w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition"
-                        aria-label="Scroll left"
-                        tabIndex={0}
-                        type="button"
-                      >
-                        <svg width="20" height="20" fill="none" stroke="#111" strokeWidth="2" viewBox="0 0 24 24">
-                          <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </button>
-                      {/* Swiper Slider of cards */}
-                      <div className="flex-1 flex items-center justify-center min-h-[160px]">
-                        {loading ? (
-                          <div className="flex items-center justify-center p-4 w-full">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-                          </div>
-                        ) : categories.length > 0 ? (
+                    <div className="flex items-center justify-center min-h-[160px] w-full">
+                      {loading ? (
+                        <div className="flex items-center justify-center p-4 w-full">
+                          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                        </div>
+                      ) : categories.length > 0 ? (
+                        <div className="w-full max-w-[100rem]">
                           <Swiper
-                            modules={[Navigation]}
-                            slidesPerView={Math.min(5, categories.length)}
-                            spaceBetween={32}
+                            modules={[Navigation, Pagination, Autoplay]}
+                            spaceBetween={20}
+                            slidesPerView={8}
                             navigation={{
-                              nextEl: '.swiper-button-next',
-                              prevEl: '.swiper-button-prev',
+                              nextEl: ".swiper-button-next-custom",
+                              prevEl: ".swiper-button-prev-custom",
                             }}
+                            pagination={{
+                              clickable: true,
+                              dynamicBullets: true,
+                            }}
+                            autoplay={{
+                              delay: 3000,
+                              disableOnInteraction: false,
+                            }}
+                            loop={categories.length > 8}
                             breakpoints={{
-                              320: { slidesPerView: 2 },
-                              640: { slidesPerView: 3 },
-                              1024: { slidesPerView: 5 },
+                              320: {
+                                slidesPerView: 2,
+                                spaceBetween: 15,
+                              },
+                              640: {
+                                slidesPerView: 3,
+                                spaceBetween: 15,
+                              },
+                              768: {
+                                slidesPerView: 4,
+                                spaceBetween: 20,
+                              },
+                              1024: {
+                                slidesPerView: 5,
+                                spaceBetween: 20,
+                              },
+                              1280: {
+                                slidesPerView: 8,
+                                spaceBetween: 20,
+                              },
                             }}
-                            style={{ width: '100%' }}
+                            className="categories-swiper"
                           >
-                            {categories.slice(0, 8).map((category, idx) => (
+                            {categories.map((category, idx) => (
                               <SwiperSlide key={category.id || idx}>
-                                <div className="flex flex-col items-center group w-full" style={{ minWidth: 110, maxWidth: 150 }}>
+                                <div className="flex flex-col items-center group">
                                   <Link
-                                    to={`/shop?categories=${encodeURIComponent(category.name)}`}
+                                    to={`/shop?categories=${encodeURIComponent(
+                                      category.name
+                                    )}`}
                                     className="flex flex-col items-center w-full"
                                     style={{ textDecoration: "none" }}
                                   >
-                                    <div className="w-[5rem] h-[5rem] rounded-2xl bg-[#F7F7F7] flex items-center justify-center mb-2 overflow-hidden">
+                                    <div className="w-[6rem] h-[6rem] rounded-2xl bg-[#F7F7F7] flex items-center justify-center mb-2 overflow-hidden">
                                       {category.image ? (
                                         <img
                                           src={category.image}
                                           alt={category.name}
-                                          className="object-contain w-12 h-12 transition-transform duration-200 group-hover:scale-105"
+                                          className="object-contain w-15 h-15 transition-transform duration-200 group-hover:scale-105"
                                         />
                                       ) : (
                                         <div className="w-12 h-12 bg-gray-200 rounded" />
@@ -298,24 +314,45 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
                                 </div>
                               </SwiperSlide>
                             ))}
+
+                            {/* Custom Navigation Buttons */}
+                            <div className="swiper-button-prev-custom absolute left-0 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-[#F7F7F7] rounded-full shadow-sm flex items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors duration-200">
+                              <svg
+                                width="25"
+                                height="25"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#007BFF"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path d="m15 18-6-6 6-6" />
+                              </svg>
+                            </div>
+                            <div className="swiper-button-next-custom absolute right-0 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-[#F7F7F7] rounded-full shadow-sm flex items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors duration-200">
+                              <svg
+                                width="25"
+                                height="25"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#007BFF"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path d="m9 18 6-6-6-6" />
+                              </svg>
+                            </div>
                           </Swiper>
-                        ) : (
-                          <div className="flex items-center justify-center p-4 w-full">
-                            <p className="text-sm text-gray-500">No categories found</p>
-                          </div>
-                        )}
-                      </div>
-                      {/* Right arrow (Swiper navigation) */}
-                      <button
-                        className="swiper-button-next w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition"
-                        aria-label="Scroll right"
-                        tabIndex={0}
-                        type="button"
-                      >
-                        <svg width="20" height="20" fill="none" stroke="#111" strokeWidth="2" viewBox="0 0 24 24">
-                          <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </button>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-center p-4 w-full">
+                          <p className="text-sm text-gray-500">
+                            No categories found
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}

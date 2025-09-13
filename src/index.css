@@ -213,3 +213,19 @@ textarea {
 /* .Toastify__toast-container{
   
 } */
+.categories-swiper .swiper-pagination {
+  bottom: -40px !important;
+}
+
+.categories-swiper .swiper-pagination-bullet {
+  background: #007BFF;
+  opacity: 0.3;
+}
+
+.categories-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+.categories-swiper .swiper-slide {
+  height: auto;
+}
