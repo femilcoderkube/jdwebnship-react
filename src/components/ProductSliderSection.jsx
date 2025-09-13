@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import CardComponent from "./CardComponent";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,12 +8,6 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
-import s01 from "../assets/images/s-01.jpg";
-import s02 from "../assets/images/s-02.jpg";
-import s03 from "../assets/images/s-03.jpg";
-import s04 from "../assets/images/s-04.jpg";
-import s05 from "../assets/images/s-05.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { postNewArrivals } from "../redux/slices/newArrivalsSlice";
 
