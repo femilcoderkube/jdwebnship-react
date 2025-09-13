@@ -348,7 +348,7 @@ function Product() {
                 <h4 className="text-lg font-bold mb-2 uppercase text-[0.875rem] text-[#111111]">
                   Category <span>({categories.length})</span>
                 </h4>
-                <div className="flex flex-wrap gap-5 lg:gap-[0.5rem] flex-row lg:flex-col">
+                <div className="flex lg:flex-nowrap flex-wrap gap-5 lg:gap-[0.5rem] flex-row lg:flex-col max-h-[30rem] overflow-y-auto">
                   {categories.map((category) => {
                     const name = category?.name || "Unnamed";
                     return (
