@@ -422,8 +422,8 @@ function Product() {
                   pageCount={totalPages}
                   previousLabel=""
                   renderOnZeroPageCount={null}
-                  containerClassName="flex items-center flex-wrap gap-2"
-                  pageClassName="px-3 py-1 border rounded-md"
+                  containerClassName="flex items-center flex-wrap gap-2 custom-pagination"
+                  pageClassName="px-3 py-1"
                   pageLinkClassName="block w-full h-full"
                   previousClassName="px-2 cursor-pointer"
                   nextClassName="px-2 cursor-pointer"
@@ -436,7 +436,7 @@ function Product() {
                 <div className="text-sm text-gray-600">
                   {/* Showing {filteredProducts.length} of {totalItems} products */}
                   {loading && <div>Loading...</div>}
-                </div> 
+                </div>
               </div>
             </div>
           </div>
