@@ -388,7 +388,8 @@ function Product() {
                 <option value="in_stock">In Stock</option>
               </select>
               <span className="text-[#808080] uppercase">
-                Showing {filteredProducts.length} results
+                {/* Showing {filteredProducts.length} results */}
+                Showing {filteredProducts.length} of {totalItems} products
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-y-[4.375rem]">
@@ -414,28 +415,28 @@ function Product() {
               <div className="flex justify-center items-center flex-wrap my-8 gap-4">
                 <ReactPaginate
                   breakLabel="..."
-                  nextLabel="Next"
+                  nextLabel=""
                   onPageChange={handlePageClick}
                   pageRangeDisplayed={3}
                   marginPagesDisplayed={2}
                   pageCount={totalPages}
-                  previousLabel="Previous"
+                  previousLabel=""
                   renderOnZeroPageCount={null}
                   containerClassName="flex items-center flex-wrap gap-2"
                   pageClassName="px-3 py-1 border rounded-md"
                   pageLinkClassName="block w-full h-full"
-                  previousClassName="px-3 py-1 border rounded-md"
-                  nextClassName="px-3 py-1 border rounded-md"
-                  previousLinkClassName="block w-full h-full"
-                  nextLinkClassName="block w-full h-full"
-                  activeClassName="bg-black text-white"
+                  previousClassName="px-2 cursor-pointer"
+                  nextClassName="px-2 cursor-pointer"
+                  previousLinkClassName=""
+                  nextLinkClassName=""
+                  activeClassName="border-b"
                   disabledClassName="opacity-50 cursor-not-allowed"
                   forcePage={currentPage}
                 />
                 <div className="text-sm text-gray-600">
-                  Showing {filteredProducts.length} of {totalItems} products
+                  {/* Showing {filteredProducts.length} of {totalItems} products */}
                   {loading && <div>Loading...</div>}
-                </div>
+                </div> 
               </div>
             </div>
           </div>

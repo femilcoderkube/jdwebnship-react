@@ -109,7 +109,7 @@ const CardComponent = ({ product }) => {
                     e.stopPropagation();
                     getWhatsappLink(e, product, phone_number);
                   }}
-                  className="bg-[#25D366] p-[9px] w-[2.625rem] h-[2.625rem] inline-block rounded-[8px]"
+                  className="bg-[#25D366] p-[9px] w-[2.625rem] h-[2.625rem] inline-block rounded-[8px] cursor-pointer"
                 >
                   <img src={whatsapp} alt="WhatsApp" />
                 </button>
@@ -121,7 +121,7 @@ const CardComponent = ({ product }) => {
                   e.stopPropagation();
                   addToWishList();
                 }}
-                className="bg-[#1111116b] w-[2.625rem] h-[2.625rem] rounded-[8px] flex items-center justify-center"
+                className="bg-[#1111116b] w-[2.625rem] h-[2.625rem] rounded-[8px] flex items-center justify-center cursor-pointer"
               >
                 {/* <img src={save} alt="Save" /> */}
                 <svg
