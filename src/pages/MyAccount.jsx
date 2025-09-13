@@ -4,7 +4,7 @@ import { useTheme } from "../contexts/ThemeContext";
 import watch from "../assets/watch.png";
 import CardComponent from "../components/CardComponent";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../redux/slices/authSlice";
 
 import w01 from "../assets/images/w01.jpg";
@@ -100,12 +100,12 @@ const renderContent = (selected) => {
               alt=""
             />
             <p>Your order history is waiting to be filled.</p>
-            <a
-              href=""
+            <Link
+              to="/shop"
               className="inline-flex text-sm sm:text-lg gap-2 btn px-16 py-4 rounded-lg w-max mx-auto focus:outline-none items-center"
             >
               Start Shopping
-            </a>
+            </Link>
           </div>
           <div className="flex flex-col mt-[1.875rem] text-start">
             <div className="rounded-2xl border border-[#AAAAAA] overflow-auto">
@@ -693,7 +693,9 @@ const MyAccount = () => {
                 <li className="lg:text-lg" key={item.key}>
                   <button
                     onClick={() =>
-                      item.key === "logout" ? handleLogout() : setSelected(item.key)
+                      item.key === "logout"
+                        ? handleLogout()
+                        : setSelected(item.key)
                     }
                     style={{
                       display: "flex",

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CommonHeader from "../components/CommonHeader";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "../contexts/ThemeContext";
 import watch from "../assets/watch.png";
 
@@ -400,12 +400,12 @@ function Checkout() {
               Place Order
             </button>
             <div className="text-center mt-6">
-              <a
+              <Link
                 className="sm:text-lg uppercase font-normal underline hover:text-[#007BFF]"
-                href=""
+                to={"/shop"}
               >
                 Continue Shopping
-              </a>
+              </Link>
             </div>
           </div>
         </div>
