@@ -425,7 +425,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
           id="mobile-drawer"
           role="dialog"
           aria-modal="true"
-          className={`fixed top-0 left-0 h-full w-72 max-w-[80%] z-50 lg:hidden transform transition-transform duration-300 ease-out border-r border-black/10`}
+          className={`fixed top-0 left-0 h-[100vh] w-72 max-w-[80%] z-50 lg:hidden transform transition-transform duration-300 ease-out border-r border-black/10`}
           style={{
             backgroundColor: theme?.headerBackgroundColor || "#ffffff",
             color: headerTextColor || "#111111",
