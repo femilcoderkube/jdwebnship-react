@@ -188,7 +188,7 @@ const CardComponent = ({ product, isWishlistKey = false }) => {
         <div className="flex flex-col gap-[0.1875rem] text-start">
           {productData?.name && (
             <h3
-              className="line-clamp-1 mb-[6px]"
+              className="line-clamp-1 mb-[0.375rem]"
               style={{ margin: 0, fontSize: "1.125rem" }}
             >
               {productData?.name}
