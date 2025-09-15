@@ -60,16 +60,12 @@ const AccountDetails = () => {
             <input
               id="fname"
               type="text"
-              className={`w-full border border-[#AAAAAA] rounded-lg p-[0.82rem] focus:outline-none ${
-                formik.touched.firstname && formik.errors.firstname
-                  ? "border-red-500"
-                  : ""
-              }`}
+              className="w-full border rounded-lg p-[0.82rem] focus:outline-none border-[#AAAAAA]"
               placeholder="Enter your first name"
               {...formik.getFieldProps("firstname")}
             />
             {formik.touched.firstname && formik.errors.firstname && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="text-red-500 text-sm absolute">
                 {formik.errors.firstname}
               </p>
             )}
@@ -84,16 +80,12 @@ const AccountDetails = () => {
             <input
               id="lname"
               type="text"
-              className={`w-full border border-[#AAAAAA] rounded-lg p-[0.82rem] focus:outline-none ${
-                formik.touched.lastname && formik.errors.lastname
-                  ? "border-red-500"
-                  : ""
-              }`}
+              className="w-full border rounded-lg p-[0.82rem] focus:outline-none border-[#AAAAAA]"
               placeholder="Enter your last name"
               {...formik.getFieldProps("lastname")}
             />
             {formik.touched.lastname && formik.errors.lastname && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="text-red-500 text-sm absolute">
                 {formik.errors.lastname}
               </p>
             )}

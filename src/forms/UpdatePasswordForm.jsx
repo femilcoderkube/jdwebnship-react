@@ -77,7 +77,7 @@ const UpdatePasswordForm = () => {
                 <ErrorMessage
                   name="old_password"
                   component="p"
-                  className="text-red-500 text-sm mt-1"
+                  className="text-red-500 text-sm absolute"
                 />
               </div>
               <div className="mb-6">
@@ -97,7 +97,7 @@ const UpdatePasswordForm = () => {
                 <ErrorMessage
                   name="new_password"
                   component="p"
-                  className="text-red-500 text-sm mt-1"
+                  className="text-red-500 text-sm absolute"
                 />
               </div>
               <div className="mb-6">
@@ -117,7 +117,7 @@ const UpdatePasswordForm = () => {
                 <ErrorMessage
                   name="confirm_password"
                   component="p"
-                  className="text-red-500 text-sm mt-1"
+                  className="text-red-500 text-sm absolute"
                 />
               </div>
               <button

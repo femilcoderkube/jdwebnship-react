@@ -119,6 +119,10 @@ function CommonHeader({ className = "", ...props }) {
       title: "Support",
       breadcrumb: true,
     },
+    "/contact": {
+      title: "Contact",
+      breadcrumb: true,
+    },
   };
 
   // Breadcrumb component for reusability
@@ -175,7 +179,9 @@ function CommonHeader({ className = "", ...props }) {
   return (
     <section
       className={`z-10 relative ${
-        location.pathname === "/" ? "rounded-b-none rounded-3xl" : "rounded-b-none rounded-3xl"
+        location.pathname === "/"
+          ? "rounded-b-none rounded-3xl"
+          : "rounded-b-none rounded-3xl"
       } ${className}`}
       style={{
         backgroundColor: theme?.bottomFooterBackgroundColor || "#ffffff",

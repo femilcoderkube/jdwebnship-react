@@ -608,7 +608,7 @@ function Product() {
             )}
             {filteredProducts.length > 0 && (
               <div className="mt-auto">
-                <div className="flex justify-center my-8">
+                <div className="flex justify-center mt-[2.375rem] lg:mt-[4.375rem]">
                   <ReactPaginate
                     breakLabel="..."
                     nextLabel=""

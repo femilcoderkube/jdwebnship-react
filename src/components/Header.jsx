@@ -92,7 +92,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
             {/* Hamburger for mobile */}
             <button
               type="button"
-              className="lg:hidden inline-flex items-center justify-center w-10 h-10"
+              className="lg:hidden"
               aria-label="Open menu"
               aria-expanded={isMenuOpen}
               aria-controls="mobile-drawer"
@@ -391,7 +391,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
               </Link>
               <Link
                 className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 py-3 h-full flex items-center outline-none"
-                to="/about"
+                to="/contact"
                 style={{
                   color: headerTextColor || "#111111",
                   margin: "0 1rem",
