@@ -106,7 +106,7 @@ function SignIn() {
                 <p className="text-red-500 text-sm">{formik.errors.password}</p>
               )}
             </div>
-            <div className="mt-4 text-right">
+            <div className="mt-6 text-right">
               <Link
                 to={"/forgot-password"}
                 className="text-sm underline hover:text-[#007BFF] site-link uppercase transition-all duration-300"

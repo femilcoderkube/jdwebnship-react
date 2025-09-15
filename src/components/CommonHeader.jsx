@@ -131,7 +131,7 @@ function CommonHeader({ className = "", ...props }) {
           </Link>
         </li>
         <li aria-current="page">
-          <div className="flex items-center border-l opacity-35 font-medium ps-2">
+          <div className="flex items-center border-l opacity-50 font-medium ps-2">
             <span className="text-sm">{currentPage}</span>
           </div>
         </li>
@@ -160,7 +160,7 @@ function CommonHeader({ className = "", ...props }) {
     routeConfig.content ||
     (routeConfig.title ? (
       <div className="xxl:px-[248px]">
-        <div className="px-[2.5rem] lg:px-[4.6875rem] py-[30px] lg:py-[4.6875rem]">
+        <div className="px-[1.875rem] lg:px-15 py-[2.5rem] lg:py-15">
           {routeConfig.breadcrumb && (
             <Breadcrumb currentPage={routeConfig.title} />
           )}
