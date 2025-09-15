@@ -86,7 +86,6 @@ function Product() {
 
     if (sortBy) {
       requestParams.sort_by = sortBy;
-      console.log("Sort by parameter:", sortBy);
     }
 
     if (subcategoryIds.length > 0) {

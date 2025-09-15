@@ -14,6 +14,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import OrderDetailsPopup from "../model/OrderDetailsPopup";
+import CartPopup from "./CartPopup";
+import { closeCartPopup } from "../redux/slices/cartSlice";
 
 function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
   const { theme, headerTextColor } = useTheme();
@@ -23,12 +25,15 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
   const ref = useRef(null);
   const dispatch = useDispatch();
   const { storeInfo, loading } = useSelector((state) => state.storeInfo);
+  const { isCartOpen, cartItems } = useSelector((state) => state.cart);
   const categories = storeInfo?.sub_category_list || [];
   const [isShopMegaMenuOpen, setIsShopMegaMenuOpen] = useState(false);
   const orderPopup = useSelector((state) => state.orderPopup);
   useEffect(() => {
     dispatch(fetchStoreInfo());
   }, [dispatch]);
+
+  console.log("cartItems", cartItems);
 
   // Prevent background scroll when drawer is open
   useEffect(() => {
@@ -216,7 +221,7 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
               <div
                 className="relative h-[5rem]"
                 onMouseEnter={() => setIsShopMegaMenuOpen(true)}
-                onMouseLeave={() => setIsShopMegaMenuOpen()} // Fixed: should be false on mouse leave
+                onMouseLeave={() => setIsShopMegaMenuOpen(false)}
               >
                 <Link
                   className="text-[0.875rem] xl:text-[1rem] font-medium hover:!text-[#007BFF] uppercase transition-all duration-300 h-full flex items-center outline-none"
@@ -559,7 +564,15 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
           </nav>
         </aside>
       </header>
-      {/* Cart POP up Start*/}
+      {/* Cart POP up */}
+      {isCartOpen && (
+        <CartPopup
+          items={cartItems}
+          onClose={() => dispatch(closeCartPopup())}
+          // onRemove={handleRemove}
+          // onQtyChange={handleQtyChange}
+        />
+      )}
       {/* <div className="overlay w-full h-full fixed top-0 left-0 bg-[rgba(0,0,0,.65)] z-99"></div>
       <div className="cart-popup flex flex-col justify-between fixed right-0 top-0 z-100 w-full max-w-[31.25rem] h-dvh bg-white shadow-lg p-7.5 overflow-y-auto">
         <div>
@@ -710,7 +723,6 @@ function Header({ offsetY = 0, onHeightChange, hasShadow = false }) {
 
       {/* Order POP up Start*/}
       {orderPopup?.open && <OrderDetailsPopup />}
-      {/* Order POP up End*/}
     </div>
   );
 }

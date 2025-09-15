@@ -14,13 +14,14 @@ import { getWhatsappLink, isInWishlist } from "../utils/common";
 import { addtowishList, removeFromwishList } from "../redux/slices/WishListSlice";
 import useVariantQuery from "../hooks/useVariantQuery";
 import { toast } from "react-toastify";
-import { addToCart } from "../redux/slices/cartSlice";
+import { addToCart, openCartPopup } from "../redux/slices/cartSlice";
+import useCartQuantity from "../hooks/useCartQuantity";
 
 function ProductDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
   const [activeIndex, setActiveIndex] = useState(0);
   const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
   const [productVariations, setProductVariations] = useState([]);
@@ -32,7 +33,7 @@ function ProductDetail() {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
   const phone_number = storeInfo?.storeinfo?.retailer?.phone_number;
-  const product = productDetails?.product
+  const product = productDetails?.product;
   const wishlistData = wishlist?.data?.wishlist;
   const productImg = product?.product_images ? product?.product_images.split(',') : []
   const isWishlist =
@@ -42,8 +43,6 @@ function ProductDetail() {
   const [mainHeight, setMainHeight] = useState("400px"); // Initial fallback
   const mainContainerRef = useRef(null);
   const thumbContainerRef = useRef(null);
-
-  
 
   const addToWishList = () => {
     if (isAuthenticated) {
@@ -82,17 +81,19 @@ function ProductDetail() {
       if (product.productVariations.length === 1) {
         setVariant(product.productVariations[0].product_variation);
       }
+    }else{
+      setProductVariations([]);
     }
   }, [product?.productVariations]);
 
   const handleVariantSelect = (selectedVariant) => {
     setVariant(selectedVariant);
-    setQuantity(1); // Reset quantity when variant changes
+    // setQuantity(1); // Reset quantity when variant changes
   };
 
   const discount =
-    product?.old_price && product?.new_price
-      ? (((product?.old_price - product?.new_price) / product?.old_price) * 100).toFixed(0)
+    product?.old_price && product?.final_price
+      ? (((product?.old_price - product?.final_price) / product?.old_price) * 100).toFixed(0)
       : 0;
 
   const selectedVariant = productVariations.find(
@@ -107,23 +108,34 @@ function ProductDetail() {
     )
     .reduce((sum, item) => sum + item.quantity, 0);
 
-  console.log("cartQuantity", cartQuantity);
-
-  const MAX_LIMIT = 5;
   const availableStock = selectedVariant?.stock ?? product?.quantity ?? 0;
+  const {
+    quantity,
+    increase,
+    decrease,
+    canIncrease,
+    canDecrease
+  } = useCartQuantity(
+    1,                     // initial
+    5,                     // maxLimit
+    availableStock,        // stock from API
+    cartQuantity,          // already in cart
+    selectedVariant?.id    // resetKey → resets quantity when variant changes
+  );
 
-  const increaseQuantity = () => {
-    setQuantity((prev) =>
-      Math.min(prev + 1, Math.min(availableStock - cartQuantity, MAX_LIMIT))
-    );
-  };
 
-  const decreaseQuantity = () => {
-    setQuantity((prev) => Math.max(1, prev - 1));
-  };
+  // const increaseQuantity = () => {
+  //   setQuantity((prev) =>
+  //     Math.min(prev + 1, Math.min(availableStock - cartQuantity, MAX_LIMIT))
+  //   );
+  // };
+
+  // const decreaseQuantity = () => {
+  //   setQuantity((prev) => Math.max(1, prev - 1));
+  // };
 
   const handleAddToCart = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     if (availableStock === 0) {
       toast.warning("Product is not avaliable");
     } else if (cartQuantity + quantity > availableStock) {
@@ -384,7 +396,7 @@ function ProductDetail() {
           <div className="w-full lg:max-w-[calc((((100vw-5rem)+2rem)/12)*5-2rem)] xl:max-w-[calc((((100vw-7.5rem)+3.125rem)/12)*5-3.125rem)] 2xl:max-w-[calc((((100vw-7.5rem)+6.25rem)/12)*5-6.25rem)] text-left px-3.5">
             <h3 className="text-[1.5rem] lg:text-[2rem] font-bold mb-3.5">{product.name}</h3>
             <div className="text-xl mb-3.5 price-wrapper inline-flex items-center border border-gray-300 rounded-lg p-4 w-auto flex-auto">
-              <span className="mr-3 text-[1.5rem] font-bold">₹{product.new_price.toFixed(2)}</span>
+              <span className="mr-3 text-[1.5rem] font-bold">₹{product.final_price.toFixed(2)}</span>
               <span className="mr-3 line-through text-[1rem] text-[#808080]">₹{product.old_price.toFixed(2)}</span>
               <span className="mr-1 text-[0.875rem] discount bg-[#111111] px-[0.375rem] text-[#FFFFFF] rounded-sm">{discount}%</span>
               <span className="mr-1 text-[0.75rem] text-[#808080] uppercase">off</span>
@@ -405,9 +417,8 @@ function ProductDetail() {
                       key={item.id}
                       disabled={!item?.stock}
                       onClick={() => handleVariantSelect(item?.product_variation)}
-                      className={`px-4 disabled:opacity-50 relative overflow-hidden py-2.5 text-[#5C5F6A] cursor-pointer text-[12px] font-medium border border-[#E6E7E8] rounded ${
-                        variant === item?.product_variation ? "border-black" : ""
-                      }`}
+                      className={`px-4 disabled:opacity-50 relative overflow-hidden py-2.5 text-[#5C5F6A] cursor-pointer text-[12px] font-medium border border-[#E6E7E8] rounded ${variant === item?.product_variation ? "border-black" : ""
+                        }`}
                     >
                       {item?.product_variation}
                       {item?.stock <= 0 && (
@@ -422,9 +433,9 @@ function ProductDetail() {
               <div className="quantity-wrapper">
                 <div className="inline-flex items-center border border-gray-300 rounded-md py-2 h-full">
                   <button
-                    onClick={decreaseQuantity}
+                    onClick={decrease}
                     className="w-10 h-full text-gray-800 rounded-md flex items-center justify-center cursor-pointer transition"
-                    disabled={quantity === 1}
+                    disabled={!canDecrease}
                   >
                     <svg
                       className="w-5 h-5"
@@ -444,12 +455,9 @@ function ProductDetail() {
                     {quantity}
                   </span>
                   <button
-                    onClick={increaseQuantity}
-                    className="w-10 h-full text-gray-800 rounded-md flex items-center justify-center cursor-pointer transition"
-                    disabled={
-                      quantity + cartQuantity >= availableStock ||
-                      quantity >= MAX_LIMIT
-                    }
+                    onClick={increase}
+                    className="w-10 h-full text-gray-800 rounded-md flex items-center justify-center cursor-pointer transition disabled:cursor-not-allowed"
+                    disabled={!canIncrease}
                   >
                     <svg
                       className="w-5 h-5"
@@ -468,9 +476,15 @@ function ProductDetail() {
                 </div>
               </div>
               <button
-                onClick={handleAddToCart}
+                onClick={() => {
+                  if (!canIncrease) {
+                    dispatch(openCartPopup());
+                  } else {
+                    handleAddToCart()
+                  }
+                }}
                 className="flex-1 btn sm:px-[1.5rem] px-[0.9rem] py-[0.9375rem] rounded-lg text-sm font-medium focus:outline-none">
-                Add to Cart
+                {!canIncrease ? "Go to Cart" : "Add to Cart"}
               </button>
             </div>
             <div className="text-xl mb-6 price-wrapper flex flex-wrap rounded-lg w-auto flex-auto gap-3.5">
