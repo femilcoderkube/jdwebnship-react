@@ -26,8 +26,6 @@ export const fetchCart = createAsyncThunk(
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ item, quantity = 1 }, { getState, rejectWithValue, dispatch }) => {
-    console.log("item", item);
-    console.log("quantity", quantity);
     try {
       const { auth } = getState();
       // If user is not logged in, add to guest cart
@@ -181,8 +179,8 @@ const cartSlice = createSlice({
         const itemId = item.id ?? item.product_id ?? item.retailer_product_id;
         return (
           (itemId === action.payload.product_id || itemId === action.payload.id) && (
-            !item.selected_variant && !action.payload.selectedVariant ||
-            item.selected_variant?.product_variation === action.payload.selectedVariant?.product_variation
+            !item.selected_variant && !action.payload.selected_variant ||
+            item.selected_variant?.product_variation === action.payload.selected_variant?.product_variation
           )
         )
       });
@@ -194,17 +192,16 @@ const cartSlice = createSlice({
       }
     },
     addToCartUser: (state, action) => {
-      console.log("addToCartUser action.payload", action.payload);
       if (!state.cartItems) state.cartItems = [];
       const existingItem = state.cartItems.find((item) => {
         if (!item) return false;
         const itemId = item.id ?? item.product_id;
         return (
-          itemId === action.payload.id && (
+          (itemId === action.payload.product_id || itemId === action.payload.id) && (
             !item.selected_variant && !action.payload.selected_variant ||
             item.selected_variant?.product_variation === action.payload.selected_variant?.product_variation
           )
-        );
+        )
       });
 
       if (existingItem) {
@@ -227,19 +224,10 @@ const cartSlice = createSlice({
           (!itemVar && !targetVar) ||
           (itemVar?.product_variation === targetVar?.product_variation);
 
-        // keep item if it does NOT match both id and variant
         return !(sameId && sameVariant);
       });
     },
-    // updateCartGuest: (state, action) => {
-    //   const { itemId, quantity } = action.payload;
-    //   const item = state.cartItems.find(item => item.id === itemId);
-    //   if (item) {
-    //     item.quantity = quantity;
-    //   }
-    // },
     updateQuantityUser: (state, action) => {
-      console.log("action.payload", action.payload);
       const { id, product_id, retailer_product_id, selected_variant, selectedVariant, quantity } = action.payload;
     
       const payloadId = id ?? product_id ?? retailer_product_id;

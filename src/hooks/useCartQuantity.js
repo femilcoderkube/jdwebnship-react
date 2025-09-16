@@ -60,24 +60,25 @@ export default function useCartQuantity(
     setQuantity(initial);
   }, [resetKey, initial]);
 
-  // 🔥 helper to update local + redux
   const updateQuantity = useCallback(
-    (newQty) => {
+    (newQty, action = null) => {
       setQuantity(newQty);
-      if (onChange) onChange(newQty); // notify redux
+      if (onChange) onChange(newQty, action);
     },
     [onChange]
   );
 
   const increase = useCallback(() => {
     updateQuantity(
-      Math.min(quantity + 1, Math.min(availableStock - cartQuantity, maxLimit))
+      Math.min(quantity + 1, Math.min(availableStock - cartQuantity, maxLimit)),
+      "increase"
     );
   }, [quantity, availableStock, cartQuantity, maxLimit, updateQuantity]);
 
   const decrease = useCallback(() => {
-    updateQuantity(Math.max(1, quantity - 1));
+    updateQuantity(Math.max(1, quantity - 1), "decrease");
   }, [quantity, updateQuantity]);
+
 
   const reset = useCallback(() => {
     updateQuantity(initial);
@@ -90,8 +91,8 @@ export default function useCartQuantity(
     decrease,
     reset,
     canIncrease:
-      quantity < Math.min(availableStock - cartQuantity, maxLimit) &&
-      quantity < availableStock,
+      quantity <= Math.min(availableStock - cartQuantity, maxLimit) &&
+      quantity <= availableStock,
     canDecrease: quantity > 1,
   };
 }

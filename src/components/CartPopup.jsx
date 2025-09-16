@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCartapi, updateQuantityGuest, updateQuantityUser } from "../redux/slices/cartSlice";
+import { addToCartGuest, addToCartUser, removeFromCartapi } from "../redux/slices/cartSlice";
 import { getProductImage } from "../utils/common";
 import useCartQuantity from "../hooks/useCartQuantity";
 
@@ -82,43 +82,33 @@ const CartPopup = ({ items = [], onClose }) => {
 
 export default CartPopup;
 
-// ----------------------
+
 // CartItem Component
-// ----------------------
 const CartItem = ({ item }) => {
 
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.auth);
 
 
-  const selectedVariant = item.selected_variant;
   const cartQuantity = item.quantity;
-  const availableStock = selectedVariant?.stock ?? item?.quantity ?? 0;
-
-  // const { quantity, increase, decrease, canIncrease, canDecrease } =
-  //   useCartQuantity(
-  //     cartQuantity || 1, // initial from cart
-  //     5, // maxLimit
-  //     availableStock, // stock from API
-  //     cartQuantity, // already in cart
-  //     `${item.id}-${selectedVariant?.id}` // resetKey
-  //   );
+  const availableStock = item?.selected_variant?.stock ?? item?.product_stock ?? 0;
 
   const { quantity, increase, decrease, canIncrease, canDecrease } =
-  useCartQuantity({
-    initial: item.quantity,
-    maxLimit: 5,
-    availableStock: item.product_stock,
-    cartQuantity: item.quantity,
-    resetKey: item.id, // reset if product changes
-    onChange: (newQty) => {
-      if (isAuthenticated) {
-        dispatch(updateQuantityUser({ ...item, quantity: newQty }));
-      } else {
-        dispatch(updateQuantityGuest({ ...item, quantity: newQty }));
+    useCartQuantity({
+      initial: item.quantity,
+      maxLimit: 5,
+      availableStock,
+      cartQuantity,
+      resetKey: item.id, // reset if product changes
+      onChange: (newQty, action) => {
+        if (isAuthenticated) {
+          dispatch(addToCartUser({ ...item, quantity: action === "increase" ? 1 : -1 }));
+        } else {
+          dispatch(addToCartGuest({ ...item, quantity: action === "increase" ? 1 : -1 }));
+        }
       }
-    },
-  });
+
+    });
 
   return (
     <div className="flex gap-4">
